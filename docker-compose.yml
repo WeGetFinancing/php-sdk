@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    restart: "no"
+    volumes:
+      - ./:/app
