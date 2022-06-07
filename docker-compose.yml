@@ -6,5 +6,7 @@ services:
       dockerfile: Dockerfile
       context: .
     restart: "no"
+    environment:
+      - XDEBUG_MODE=coverage
     volumes:
       - ./:/app

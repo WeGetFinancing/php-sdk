@@ -21,18 +21,14 @@
     "friendsofphp/php-cs-fixer": "^3",
     "phpunit/phpunit": "^9"
   },
-  "config": {
-    "optimize-autoloader": true,
-    "sort-packages": true
-  },
   "autoload": {
     "psr-4": {
-      "WeGeFinancing\\PHPSDK\\": "src/"
+      "WeGetFinancing\\PHPSDK\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "WeGeFinancing\\PHPSDK\\Tests\\": "tests/"
+      "WeGetFinancing\\PHPSDK\\Tests\\Unit\\": "tests/Unit/"
     }
   },
   "scripts": {
@@ -50,6 +46,9 @@
     ],
     "phpcs": [
       "php -d memory_limit=-1 vendor/bin/phpcs phpcs.xml src/"
+    ],
+    "test": [
+      "php vendor/bin/phpunit"
     ]
   }
 }

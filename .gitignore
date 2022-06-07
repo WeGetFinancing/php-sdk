@@ -233,7 +233,7 @@ composer.lock
 ##### Coverage and quality assurance files
 
 /coverage/
+coverage.xml
 .php-cs-fixer.cache
 .phpcs-cache
-
-
+.phpunit.result.cache
