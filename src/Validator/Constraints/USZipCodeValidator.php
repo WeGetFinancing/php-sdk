@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancing\PHPSDK\Validator\Constraints;
+namespace App\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
-use WeGetFinancing\PHPSDK\Validator\IsAValidUSZipCode;
+use App\Validator\IsAValidUSZipCode;
 
 final class USZipCodeValidator extends ConstraintValidator
 {

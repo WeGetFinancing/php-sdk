@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancing\PHPSDK\Tests\Unit;
+namespace unit;
 
 use PHPUnit\Framework\TestCase;
-use WeGetFinancing\PHPSDK\Client;
+use App\Client;
 
 final class ClientTest extends TestCase
 {

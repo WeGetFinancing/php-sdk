@@ -26,12 +26,13 @@
   },
   "autoload": {
     "psr-4": {
-      "WeGetFinancing\\PHPSDK\\": "src/"
+      "App\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "WeGetFinancing\\PHPSDK\\Tests\\Unit\\": "tests/Unit/"
+      "Unit\\": "tests/unit",
+      "Functional\\": "tests/functional"
     }
   },
   "scripts": {

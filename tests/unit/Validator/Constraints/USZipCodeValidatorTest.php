@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancing\PHPSDK\Tests\Unit\Validator\Constraints;
+namespace unit\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
-use WeGetFinancing\PHPSDK\Validator\Constraints\USZipCodeValidator;
-use WeGetFinancing\PHPSDK\Validator\IsAValidUSZipCode;
+use App\Validator\Constraints\USZipCodeValidator;
+use App\Validator\IsAValidUSZipCode;
+use \stdClass;
 
 final class USZipCodeValidatorTest extends ConstraintValidatorTestCase
 {
@@ -50,7 +51,7 @@ final class USZipCodeValidatorTest extends ConstraintValidatorTestCase
     public function testUnexpectedValueExceptionWillBeThrowForNotStringableClasses(): void
     {
         $this->expectException(UnexpectedValueException::class);
-        $this->validator->validate(new \stdClass(), new IsAValidUSZipCode());
+        $this->validator->validate(new stdClass(), new IsAValidUSZipCode());
     }
 
     /**
@@ -104,9 +105,9 @@ final class USZipCodeValidatorTest extends ConstraintValidatorTestCase
     }
 
 
-    private function getEmptyStringObject(): \stdClass
+    private function getEmptyStringObject(): stdClass
     {
-        return new class extends \stdClass
+        return new class extends stdClass
         {
             public function __toString(): string
             {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancing\PHPSDK\Entity;
+namespace App\Entity;
 
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
-use WeGetFinancing\PHPSDK\Exception\EntityValidationException;
+use App\Exception\EntityValidationException;
 
 /**
  * @Note: I'm suppressing a phpmd warning because I need the long name variable

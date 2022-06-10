@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancing\PHPSDK;
+namespace App;
 
 class Client
 {

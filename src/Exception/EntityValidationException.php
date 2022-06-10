@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancing\PHPSDK\Exception;
+namespace App\Exception;
 
 class EntityValidationException extends \Exception
 {

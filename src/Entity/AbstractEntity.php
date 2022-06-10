@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancing\PHPSDK\Entity;
+namespace App\Entity;
 
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use WeGetFinancing\PHPSDK\Exception\EntityValidationException;
+use App\Exception\EntityValidationException;
 
 abstract class AbstractEntity
 {

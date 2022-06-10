@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancing\PHPSDK\Validator;
+namespace App\Validator;
 
 use Symfony\Component\Validator\Constraint;
 

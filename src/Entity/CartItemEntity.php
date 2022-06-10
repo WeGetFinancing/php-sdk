@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancing\PHPSDK\Entity;
+namespace App\Entity;
 
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
