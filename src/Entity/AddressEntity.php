@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Validation;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Validator as WGFAssert;
+use App\Validator\Constraints as WeGetFinancingAssert;
 
 class AddressEntity extends AbstractEntity
 {
@@ -26,17 +25,16 @@ class AddressEntity extends AbstractEntity
     public string $city;
 
     /**
-     * @Assert\Length(min = 2)
+     * @Assert\Length(min = 2, max = 2)
      * @Assert\NotBlank()
      * @Assert\NotNull()
      */
     public string $state;
 
     /**
-     * @Assert\Length(min = 5)
      * @Assert\NotBlank()
      * @Assert\NotNull()
-     * @WGFAssert\IsAValidUSZipCode()
+     * @WeGetFinancingAssert\IsAValidUSZipCode()
      */
     public string $zipcode;
 
@@ -46,7 +44,7 @@ class AddressEntity extends AbstractEntity
     public static function make(): AddressEntity
     {
         return new AddressEntity(
-            Validation::createValidator(),
+            parent::getValidator(),
             new CamelCaseToSnakeCaseNameConverter()
         );
     }

@@ -8,9 +8,8 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
-use App\Validator\IsAValidUSZipCode;
 
-final class USZipCodeValidator extends ConstraintValidator
+final class IsAValidUSZipCodeValidator extends ConstraintValidator
 {
     private const PATTERN = '/^[0-9]{5}(?:-[0-9]{4})?$/';
 

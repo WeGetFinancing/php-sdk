@@ -8,17 +8,15 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
-use App\Validator\Constraints\USZipCodeValidator;
-use App\Validator\IsAValidUSZipCode;
+use App\Validator\Constraints\IsAValidUSZipCodeValidator;
+use App\Validator\Constraints\IsAValidUSZipCode;
 use \stdClass;
 
-final class USZipCodeValidatorTest extends ConstraintValidatorTestCase
+/**
+ * @unit
+ */
+final class IsAValidUSZipCodeValidatorTest extends ConstraintValidatorTestCase
 {
-    protected function createValidator(): USZipCodeValidator
-    {
-        return new USZipCodeValidator();
-    }
-
     public function testValidatorIsCorrectlyInstantiated(): void
     {
         $this->validator->validate(null, new IsAValidUSZipCode());
@@ -104,6 +102,10 @@ final class USZipCodeValidatorTest extends ConstraintValidatorTestCase
             ->assertRaised();
     }
 
+    protected function createValidator(): IsAValidUSZipCodeValidator
+    {
+        return new IsAValidUSZipCodeValidator();
+    }
 
     private function getEmptyStringObject(): stdClass
     {

@@ -15,7 +15,9 @@
     "guzzlehttp/guzzle": "^7.0",
     "symfony/validator": "^6.1",
     "doctrine/annotations": "^1.13",
-    "symfony/serializer": "^6.1"
+    "symfony/serializer": "^6.1",
+    "symfony/cache": "^6.1",
+    "symfony/dependency-injection": "^6.1"
   },
   "require-dev": {
     "phpmd/phpmd": "^2",

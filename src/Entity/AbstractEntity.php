@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Exception\EntityValidationException;
 
@@ -24,13 +25,27 @@ abstract class AbstractEntity
 
     /**
      * Factory method: return an entity instantiated with the dependencies.
-     * Since this application has not a framework, we avoid using di in favour of factories.
+     * Since this application has not a framework, we avoid using dependency injection in favour of factoriy methods.
+     * Use AbstractEntity::getValidator() to take the correctly instantiated validator.
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @return self
      */
     abstract public static function make(): self;
+
+    /**
+     * Build the validator with annotation mapping and return it.
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
+    public static function getValidator(): ValidatorInterface
+    {
+        return Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->addDefaultDoctrineAnnotationReader()
+            ->getValidator();
+    }
 
     /**
      * Set all the properties from array, where the key is the property name and the value the property value.
