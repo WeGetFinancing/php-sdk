@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Exception\EntityValidationException;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\Constraints as WeGetFinancingAssert;
@@ -11,41 +12,54 @@ use App\Validator\Constraints as WeGetFinancingAssert;
 class AddressEntity extends AbstractEntity
 {
     /**
-     * @Assert\Length(min = 3)
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage = "The value of street1 is too short. It should have {{ limit }} characters or more."
+     * )
+     * @Assert\NotBlank(message="The value of street1 should not be blank")
      */
     public string $street1;
 
     /**
-     * @Assert\Length(min = 2)
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage = "The value of city is too short. It should have {{ limit }} characters or more."
+     * )
+     * @Assert\NotBlank(message="The value of city should not be blank")
      */
     public string $city;
 
     /**
-     * @Assert\Length(min = 2, max = 2)
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 2,
+     *     exactMessage="The value of state should have exactly 2 characters."
+     * )
+     * @Assert\NotBlank(message="The value of state should not be blank")
      */
     public string $state;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
-     * @WeGetFinancingAssert\IsAValidUSZipCode()
+     * @Assert\NotBlank(message="The value of zipcode should not be blank")
+     * @WeGetFinancingAssert\IsAValidUSZipCode(
+     *     message="The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers."
+     * )
      */
     public string $zipcode;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
+     *
+     * @param null|array<string, mixed> $data
+     * @return AddressEntity
+     * @throws EntityValidationException
      */
-    public static function make(): AddressEntity
+    public static function make(array $data = null): AddressEntity
     {
         return new AddressEntity(
             parent::getValidator(),
-            new CamelCaseToSnakeCaseNameConverter()
+            new CamelCaseToSnakeCaseNameConverter(),
+            $data
         );
     }
 }

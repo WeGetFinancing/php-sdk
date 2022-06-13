@@ -8,6 +8,7 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Exception\EntityValidationException;
+use TypeError;
 
 abstract class AbstractEntity
 {
@@ -15,12 +16,29 @@ abstract class AbstractEntity
 
     protected NameConverterInterface $camelCaseToSnakeCase;
 
+    /**
+     * @param ValidatorInterface $validator
+     * @param NameConverterInterface $camelCaseToSnakeCase
+     * @param null|array<string, mixed> $data
+     * @throws EntityValidationException
+     * @throws TypeError
+     */
     public function __construct(
         ValidatorInterface $validator,
-        NameConverterInterface $camelCaseToSnakeCase
+        NameConverterInterface $camelCaseToSnakeCase,
+        array $data = null
     ) {
         $this->validator = $validator;
         $this->camelCaseToSnakeCase = $camelCaseToSnakeCase;
+        
+        if (
+            true === is_null($data) ||
+            true === empty($data)
+        ) {
+            return;
+        }
+
+        $this->initFromArray($data);
     }
 
     /**
@@ -30,9 +48,11 @@ abstract class AbstractEntity
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
+     * @param null|array<string, mixed> $data
      * @return self
+     * @throws EntityValidationException
      */
-    abstract public static function make(): self;
+    abstract public static function make(array $data = null): self;
 
     /**
      * Build the validator with annotation mapping and return it.
@@ -97,10 +117,18 @@ abstract class AbstractEntity
      */
     public function getWeGetFinancingRequest(): array
     {
-        $requestRaw = get_object_vars($this);
+        $reflection = new class {
+            /** @return array<string, mixed> */
+            function getPublicVars(AbstractEntity $object): array
+            {
+                return get_object_vars($object);
+            }
+        };
+        $publicVars = $reflection->getPublicVars($this);
 
         $request = [];
-        foreach ($requestRaw as $nameRaw => $value) {
+
+        foreach ($publicVars as $nameRaw => $value) {
             $name = $this->camelCaseToSnakeCase->normalize($nameRaw);
             $request[$name] = $value;
         }
