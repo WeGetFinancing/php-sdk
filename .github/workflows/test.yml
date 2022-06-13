@@ -1,0 +1,50 @@
+name: WeGetFinancing/PHP-SDK Test CI
+
+on:
+  push:
+    branches: [ "main", "GET-1465" ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Tests
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "7.4"
+          - "8.0"
+          - "8.1"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: xdebug
+
+
+      # We run php-cs-fixer and PHPStan in separate jobs, but the versions we use are not compatible
+      # with all the versions of PHP that we want to execute PHPUnit upon
+      - name: Trim dependency
+        run: composer remove --dev phpmd/phpmd phpstan/phpstan squizlabs/php_codesniffer friendsofphp/php-cs-fixer
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run test suite
+        run: |
+          php --version
+          composer test
