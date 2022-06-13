@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 use App\Validator\Constraints\IsAValidUSZipCodeValidator;
 use App\Validator\Constraints\IsAValidUSZipCode;
-use \stdClass;
+use stdClass;
 
 /**
  * @unit
@@ -109,8 +109,7 @@ final class IsAValidUSZipCodeValidatorTest extends ConstraintValidatorTestCase
 
     private function getEmptyStringObject(): stdClass
     {
-        return new class extends stdClass
-        {
+        return new class () extends stdClass {
             public function __toString(): string
             {
                 return '';

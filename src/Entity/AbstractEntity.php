@@ -30,7 +30,7 @@ abstract class AbstractEntity
     ) {
         $this->validator = $validator;
         $this->camelCaseToSnakeCase = $camelCaseToSnakeCase;
-        
+
         if (
             true === is_null($data) ||
             true === empty($data)
@@ -49,8 +49,8 @@ abstract class AbstractEntity
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param null|array<string, mixed> $data
-     * @return self
      * @throws EntityValidationException
+     * @return self
      */
     abstract public static function make(array $data = null): self;
 
@@ -117,9 +117,9 @@ abstract class AbstractEntity
      */
     public function getWeGetFinancingRequest(): array
     {
-        $reflection = new class {
+        $reflection = new class () {
             /** @return array<string, mixed> */
-            function getPublicVars(AbstractEntity $object): array
+            public function getPublicVars(AbstractEntity $object): array
             {
                 return get_object_vars($object);
             }

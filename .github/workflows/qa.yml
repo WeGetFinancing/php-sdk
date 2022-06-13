@@ -1,4 +1,4 @@
-name: WeGetFinancing/PHP-SDK Quality Assurance CI
+name: Quality Assurance CI
 
 on:
   push:

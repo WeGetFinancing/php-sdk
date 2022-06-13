@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace functional\Entity;
 
 use App\Entity\AddressEntity;
@@ -10,6 +12,9 @@ class AddressEntityTest extends TestCase
 {
     protected AddressEntity $sut;
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testMakeWithoutDataWillWorkAsExpected(): void
     {
         $this->sut = AddressEntity::make();
@@ -25,18 +30,20 @@ class AddressEntityTest extends TestCase
             "street1" => "15th Fantasy Street",
             "city" => "New York",
             "state" => "NY",
-            "zipcode" => "66607"
+            "zipcode" => "66607",
         ]];
         yield [[
             "street1" => "15th Fantasy Street",
             "city" => "Redmond",
             "state" => "WA",
-            "zipcode" => "55555-4444"
+            "zipcode" => "55555-4444",
         ]];
     }
 
     /**
      * @dataProvider getValidAddressEntityData
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param array<array<string, array<int|string, string>>> $data
      * @return void
@@ -76,34 +83,34 @@ class AddressEntityTest extends TestCase
                 "The value of city should not be blank",
                 "The value of state should have exactly 2 characters.",
                 "The value of state should not be blank",
-                "The value of zipcode should not be blank"
-            ]
+                "The value of zipcode should not be blank",
+            ],
         ]];
         yield [[
             "entity" => [
                 "street1" => "15th Fantasy Street",
                 "city" => "Redmond",
                 "state" => "WAA",
-                "zipcode" => "666666"
+                "zipcode" => "666666",
             ],
             "violations" => [
                 "The value of state should have exactly 2 characters.",
-                "The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers."
-            ]
+                "The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.",
+            ],
         ]];
         yield [[
             "entity" => [
                 "street1" => "1",
                 "city" => "R",
                 "state" => "W",
-                "zipcode" => "55555-55555"
+                "zipcode" => "55555-55555",
             ],
             "violations" => [
                 "The value of street1 is too short. It should have 2 characters or more.",
                 "The value of city is too short. It should have 2 characters or more.",
                 "The value of state should have exactly 2 characters.",
-                "The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers."
-            ]
+                "The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.",
+            ],
         ]];
         yield [[
             "entity" => [
@@ -112,23 +119,25 @@ class AddressEntityTest extends TestCase
             ],
             "violations" => [
                 "The value of state should not be blank",
-                "The value of zipcode should not be blank"
-            ]
+                "The value of zipcode should not be blank",
+            ],
         ]];
         yield [[
             "entity" => [
                 "state" => "NY",
-                "zipcode" => "66607"
+                "zipcode" => "66607",
             ],
             "violations" => [
                 "The value of street1 should not be blank",
-                "The value of city should not be blank"
-            ]
+                "The value of city should not be blank",
+            ],
         ]];
     }
 
     /**
      * @dataProvider getInvalidAddressEntityData
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param array<array<string, array<int|string, string>>> $data
      * @return void
@@ -152,30 +161,32 @@ class AddressEntityTest extends TestCase
             "street1" => null,
             "city" => "New York",
             "state" => "NY",
-            "zipcode" => "66607"
+            "zipcode" => "66607",
         ]];
         yield [[
             "street1" => "15th Fantasy Street",
             "city" => null,
             "state" => "NY",
-            "zipcode" => "66607"
+            "zipcode" => "66607",
         ]];
         yield [[
             "street1" => "15th Fantasy Street",
             "city" => "New York",
             "state" => null,
-            "zipcode" => "66607"
+            "zipcode" => "66607",
         ]];
         yield [[
             "street1" => "15th Fantasy Street",
             "city" => "New York",
             "state" => "NY",
-            "zipcode" => null
+            "zipcode" => null,
         ]];
     }
 
     /**
      * @dataProvider getTypeErrorAddressEntityData
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param array<string, string|null> $data
      * @return void
@@ -186,5 +197,4 @@ class AddressEntityTest extends TestCase
         $this->expectException(\TypeError::class);
         AddressEntity::make($data);
     }
-
 }
