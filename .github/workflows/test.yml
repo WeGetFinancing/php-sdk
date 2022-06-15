@@ -2,7 +2,7 @@ name: Test CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main", "GET-1465" ]
   pull_request:
     branches: [ main ]
 
