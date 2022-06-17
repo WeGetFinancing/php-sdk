@@ -83,8 +83,8 @@ abstract class AbstractEntity
             }
         } catch (TypeError $exception) {
             throw new EntityValidationException(
-                "Invalid Entity",
-                1,
+                EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
+                EntityValidationException::TYPE_ERROR_INIT_ENTITY_ABSTRACT_CODE,
                 null,
                 [ $exception->getMessage() ]
             );
@@ -113,8 +113,8 @@ abstract class AbstractEntity
         }
 
         throw new EntityValidationException(
-            "Invalid Entity",
-            2,
+            EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
+            EntityValidationException::VALIDATION_VIOLATION_INIT_ENTITY_ABSTRACT_CODE,
             null,
             $messages
         );

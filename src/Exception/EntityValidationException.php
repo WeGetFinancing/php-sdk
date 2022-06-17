@@ -6,6 +6,18 @@ namespace App\Exception;
 
 class EntityValidationException extends \Exception
 {
+    public const INVALID_ENTITY_DATA_MESSAGE = "The data supplied to initialise the entity are invalid";
+
+    public const TYPE_ERROR_INIT_ENTITY_ABSTRACT_CODE = 1;
+
+    public const VALIDATION_VIOLATION_INIT_ENTITY_ABSTRACT_CODE = 2;
+
+    public const VALIDATION_VIOLATION_INIT_MONEY_ENTITY_CODE = 3;
+
+    public const VALIDATION_VIOLATION_INIT_MONEY_ENTITY_MESSAGE = "value should not be zero.";
+
+    public const VALIDATION_VIOLATION_IS_VALID_MONEY_ENTITY_CODE = 4;
+
     /**
      * @var string[]
      */

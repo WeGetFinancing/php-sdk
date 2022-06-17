@@ -20,13 +20,16 @@ class MoneyEntity extends AbstractEntity
     /**
      * @Assert\Type(
      *     type = "numeric",
-     *     message = "The money value is not a valid {{ type }}."
+     *     message = "value is not a valid {{ type }}."
      * )
-     * @Assert\PositiveOrZero(message = "The money value should be either positive or zero.")
-     * @Assert\NotBlank(message = "The money value should not be blank.")
+     * @Assert\PositiveOrZero(message = "value should be either positive or zero if allowed.")
+     * @Assert\NotBlank(message = "value should not be blank.")
      */
     public string $value;
 
+    protected string $name = "";
+
+    protected bool $isZeroAllowed = false;
 
     /**
      * @param ValidatorInterface $validator
@@ -46,8 +49,67 @@ class MoneyEntity extends AbstractEntity
         ) {
             $data['value'] = (string)$data['value'];
         }
-
         parent::__construct($validator, $camelCaseToSnakeCase, $data);
+    }
+
+    /**
+    * @param  array<string, mixed> $data
+    * @throws EntityValidationException
+    * @return self
+    */
+    public function initFromArray(array $data): self
+    {
+        try {
+            foreach ($data as $key => $value) {
+                $propertyName = $this->camelCaseToSnakeCase->denormalize($key);
+                $this->{$propertyName} = $value;
+            }
+        } catch (TypeError $exception) {
+            throw new EntityValidationException(
+                EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
+                EntityValidationException::VALIDATION_VIOLATION_INIT_MONEY_ENTITY_CODE,
+                null,
+                [ $this->getFormattedName() . $exception->getMessage() ]
+            );
+        }
+
+        $this->isValid();
+        return $this;
+    }
+
+    /**
+     * @throws EntityValidationException
+     */
+    public function isValid(): bool
+    {
+        $violations = $this->validator->validate($this);
+
+        $messages = [];
+
+        if (count($violations) > 0) {
+            foreach ($violations as $violation) {
+                $messages[] = $this->getFormattedName() . $violation->getMessage();
+            }
+        }
+
+        if (
+            false === $this->isZeroAllowed &&
+            "0.00" === $this->getValue()
+        ) {
+            $messages[] =
+                $this->getFormattedName() . EntityValidationException::VALIDATION_VIOLATION_INIT_MONEY_ENTITY_MESSAGE;
+        }
+
+        if (true === empty($messages)) {
+            return true;
+        }
+
+        throw new EntityValidationException(
+            EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
+            EntityValidationException::VALIDATION_VIOLATION_IS_VALID_MONEY_ENTITY_CODE,
+            null,
+            $messages
+        );
     }
 
     /**
@@ -91,5 +153,12 @@ class MoneyEntity extends AbstractEntity
         return [
             'value' => $this->getValue()
         ];
+    }
+
+    private function getFormattedName(): string
+    {
+        return true === empty($this->name)
+            ? $this->name
+            : $this->name . " ";
     }
 }

@@ -28,11 +28,17 @@ class MoneyEntityTest extends TestCase
     {
         yield [[
             'expected' => '12.56',
-            'data' => [ 'value' => '12.56' ]
+            'data' => [
+                'value' => '12.56',
+                'isZeroAllowed' => false
+            ]
         ]];
         yield [[
             'expected' => '5.00',
-            'data' => [ 'value' => 5 ]
+            'data' => [
+                'value' => 5,
+                'isZeroAllowed' => true
+            ]
         ]];
         yield [[
             'expected' => '7.00',
@@ -40,7 +46,11 @@ class MoneyEntityTest extends TestCase
         ]];
         yield [[
             'expected' => '5.10',
-            'data' => [ 'value' => '5.1' ]
+
+            'data' => [
+                'value' => '5.1',
+                'isZeroAllowed' => true
+            ]
         ]];
         yield [[
             'expected' => '4.20',
@@ -52,15 +62,24 @@ class MoneyEntityTest extends TestCase
         ]];
         yield [[
             'expected' => '0.00',
-            'data' => [ 'value' => 0.0 ]
+            'data' => [
+                'value' => 0.0,
+                'isZeroAllowed' => true
+            ]
         ]];
         yield [[
             'expected' => '0.00',
-            'data' => [ 'value' => 0 ]
+            'data' => [
+                'value' => 0,
+                'isZeroAllowed' => true
+            ]
         ]];
         yield [[
             'expected' => '0.00',
-            'data' => [ 'value' => '0' ]
+            'data' => [
+                'value' => '0',
+                'isZeroAllowed' => true
+            ]
         ]];
     }
 
@@ -88,41 +107,82 @@ class MoneyEntityTest extends TestCase
     {
         yield [[
             'entity' => [ 'value' => '-12.56' ],
-            'violations' => [ 'The money value should be either positive or zero.' ]
+            'violations' => [ 'value should be either positive or zero if allowed.' ]
         ]];
         yield [[
             'entity' => [ 'value' => -9 ],
-            'violations' => [ 'The money value should be either positive or zero.' ]
+            'violations' => [ 'value should be either positive or zero if allowed.' ]
         ]];
         yield [[
             'entity' => [ 'value' => 'A' ],
-            'violations' => [ 'The money value is not a valid numeric.' ]
+            'violations' => [ 'value is not a valid numeric.' ]
         ]];
         yield [[
-            'entity' => [ 'value' => '4.b' ],
-            'violations' => [ 'The money value is not a valid numeric.' ]
+            'entity' => [
+                'name' => 'Tax',
+                'value' => '4.b'
+            ],
+            'violations' => [ 'Tax value is not a valid numeric.' ]
         ]];
         yield [[
-            'entity' => [ 'value' => '' ],
+            'entity' => [
+                'name' => 'The money',
+                'value' => ''
+            ],
             'violations' => [
                 'The money value is not a valid numeric.',
-                'The money value should be either positive or zero.',
+                'The money value should be either positive or zero if allowed.',
                 'The money value should not be blank.'
             ]
         ]];
         yield [[
-            'entity' => [ 'value' => null ],
+            'entity' => [
+                'name' => 'Unit Price',
+                'value' => null
+            ],
             'violations' => [
-                'Cannot assign null to property App\Entity\MoneyEntity::$value of type string'
+                'Unit Price Cannot assign null to property App\Entity\MoneyEntity::$value of type string'
             ]
         ]];
         yield [[
-            'entity' => [ 'value' => 'no' ],
-            'violations' => [ 'The money value is not a valid numeric.' ]
+            'entity' => [
+                'name' => 'Amount',
+                'value' => 'no'
+            ],
+            'violations' => [ 'Amount value is not a valid numeric.' ]
         ]];
         yield [[
             'entity' => [ 'value' => true ],
             'violations' => [ 'Cannot assign bool to property App\Entity\MoneyEntity::$value of type string' ]
+        ]];
+        yield [[
+            'entity' => [
+                'name' => 'NAME',
+                'value' => true
+            ],
+            'violations' => [ 'NAME Cannot assign bool to property App\Entity\MoneyEntity::$value of type string' ]
+        ]];
+        yield [[
+            'entity' => [
+                'isZeroAllowed' => false,
+                'value' => 0
+            ],
+            'violations' => [ 'value should not be zero.' ]
+        ]];
+        yield [[
+            'entity' => [
+                'isZeroAllowed' => false,
+                'name' => 'TEST',
+                'value' => 0.0
+            ],
+            'violations' => [ 'TEST value should not be zero.' ]
+        ]];
+        yield [[
+            'entity' => [
+                'isZeroAllowed' => false,
+                'value' => "0"
+            ],
+            'violations' => [ 'value should not be zero.' ]
         ]];
     }
 
