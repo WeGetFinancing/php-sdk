@@ -167,7 +167,7 @@ class MoneyEntityTest extends TestCase
                 'isZeroAllowed' => false,
                 'value' => 0
             ],
-            'violations' => [ 'value should not be zero.' ]
+            'violations' => [ 'value should not be equal or less than zero.' ]
         ]];
         yield [[
             'entity' => [
@@ -175,14 +175,14 @@ class MoneyEntityTest extends TestCase
                 'name' => 'TEST',
                 'value' => 0.0
             ],
-            'violations' => [ 'TEST value should not be zero.' ]
+            'violations' => [ 'TEST value should not be equal or less than zero.' ]
         ]];
         yield [[
             'entity' => [
                 'isZeroAllowed' => false,
                 'value' => "0"
             ],
-            'violations' => [ 'value should not be zero.' ]
+            'violations' => [ 'value should not be equal or less than zero.' ]
         ]];
     }
 

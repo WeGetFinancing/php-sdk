@@ -14,7 +14,7 @@ class EntityValidationException extends \Exception
 
     public const VALIDATION_VIOLATION_INIT_MONEY_ENTITY_CODE = 3;
 
-    public const VALIDATION_VIOLATION_INIT_MONEY_ENTITY_MESSAGE = "value should not be zero.";
+    public const VALIDATION_VIOLATION_INIT_MONEY_ENTITY_MESSAGE = "value should not be equal or less than zero.";
 
     public const VALIDATION_VIOLATION_IS_VALID_MONEY_ENTITY_CODE = 4;
 
