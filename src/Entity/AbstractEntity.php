@@ -21,7 +21,6 @@ abstract class AbstractEntity
      * @param NameConverterInterface $camelCaseToSnakeCase
      * @param null|array<string, mixed> $data
      * @throws EntityValidationException
-     * @throws TypeError
      */
     public function __construct(
         ValidatorInterface $validator,
@@ -77,9 +76,18 @@ abstract class AbstractEntity
      */
     public function initFromArray(array $data): self
     {
-        foreach ($data as $key => $value) {
-            $propertyName = $this->camelCaseToSnakeCase->denormalize($key);
-            $this->{$propertyName} = $value;
+        try {
+            foreach ($data as $key => $value) {
+                $propertyName = $this->camelCaseToSnakeCase->denormalize($key);
+                $this->{$propertyName} = $value;
+            }
+        } catch (TypeError $exception) {
+            throw new EntityValidationException(
+                "Invalid Entity",
+                1,
+                null,
+                [ $exception->getMessage() ]
+            );
         }
 
         $this->isValid();
@@ -106,7 +114,7 @@ abstract class AbstractEntity
 
         throw new EntityValidationException(
             "Invalid Entity",
-            1,
+            2,
             null,
             $messages
         );
