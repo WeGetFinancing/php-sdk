@@ -8,10 +8,16 @@ use App\Entity\CartItemEntity;
 use App\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
-class CartItemEntityTest extends TestCase
+/**
+ * @functional
+ */
+final class CartItemEntityTest extends TestCase
 {
     protected CartItemEntity $sut;
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testMakeWithoutDataWillWorkAsExpected(): void
     {
         $this->sut = CartItemEntity::make();
@@ -30,7 +36,7 @@ class CartItemEntityTest extends TestCase
                 "unitPrice" => "10.0",
                 "quantity" => 1,
                 "unitTax" => 21.0,
-                "category" => "CAT_A"
+                "category" => "CAT_A",
             ],
             "expected" => [
                 "sku" => "SKU_CODE_001",
@@ -38,8 +44,8 @@ class CartItemEntityTest extends TestCase
                 "unit_price" => "10.00",
                 "quantity" => 1,
                 "unit_tax" => "21.00",
-                "category" => "CAT_A"
-            ]
+                "category" => "CAT_A",
+            ],
         ]];
         yield [[
             "entity" => [
@@ -48,7 +54,7 @@ class CartItemEntityTest extends TestCase
                 "unitPrice" => 256,
                 "quantity" => 6,
                 "unitTax" => 0.75,
-                "category" => "CAT_A"
+                "category" => "CAT_A",
             ],
             "expected" => [
                 "sku" => "02",
@@ -56,8 +62,8 @@ class CartItemEntityTest extends TestCase
                 "unit_price" => "256.00",
                 "quantity" => 6,
                 "unit_tax" => "0.75",
-                "category" => "CAT_A"
-            ]
+                "category" => "CAT_A",
+            ],
         ]];
         yield [[
             "entity" => [
@@ -65,24 +71,26 @@ class CartItemEntityTest extends TestCase
                 "displayName" => "Cart product zero zero three",
                 "unitPrice" => 8.86432,
                 "quantity" => 9,
-                "unitTax" => 134.6
+                "unitTax" => 134.6,
             ],
             "expected" => [
                 "sku" => "ZeroThree",
                 "display_name" => "Cart product zero zero three",
                 "unit_price" => "8.86",
                 "quantity" => 9,
-                "unit_tax" => "134.60"
-            ]
+                "unit_tax" => "134.60",
+            ],
         ]];
     }
 
     /**
      * @dataProvider getValidCartItemEntityData
      *
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
      * @param array<array<string, array<int|string, string>>> $data
-     * @return void
      * @throws EntityValidationException
+     * @return void
      */
     public function testMakeWithDataWillSucceedAsExpected(array $data): void
     {
@@ -101,13 +109,13 @@ class CartItemEntityTest extends TestCase
                 'displayName' => '1',
                 'unitPrice' => '10.0',
                 'quantity' => -2,
-                'unitTax' => 0.0
+                'unitTax' => 0.0,
             ],
             'violations' => [
                 'The value of sku should not be blank.',
                 'The value of display name  is too short. It should have 2 characters or more.',
-                'The value of quantity should be positive.'
-            ]
+                'The value of quantity should be positive.',
+            ],
         ]];
         yield [[
             'entity' => [
@@ -115,11 +123,11 @@ class CartItemEntityTest extends TestCase
                 'displayName' => '1',
                 'unitPrice' => '0',
                 'quantity' => -2,
-                'unitTax' => 0.0
+                'unitTax' => 0.0,
             ],
             'violations' => [
-                'Unit Price value should not be equal or less than zero.'
-            ]
+                'Unit Price value should not be equal or less than zero.',
+            ],
         ]];
         yield [[
             'entity' => [
@@ -127,11 +135,11 @@ class CartItemEntityTest extends TestCase
                 'displayName' => '1',
                 'unitPrice' => '10',
                 'quantity' => -2,
-                'unitTax' => null
+                'unitTax' => null,
             ],
             'violations' => [
                 'Cannot assign bool to property App\Entity\CartItemEntity::$sku of type string',
-            ]
+            ],
         ]];
         yield [[
             'entity' => [
@@ -139,16 +147,18 @@ class CartItemEntityTest extends TestCase
                 'displayName' => '1',
                 'unitPrice' => '10',
                 'quantity' => -2,
-                'unitTax' => null
+                'unitTax' => null,
             ],
             'violations' => [
                 'Unit Tax Cannot assign null to property App\Entity\MoneyEntity::$value of type string',
-            ]
+            ],
         ]];
     }
 
     /**
      * @dataProvider getInvalidCartItemEntityData
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param array<array<string, array<int|string, string>>> $data
      * @return void

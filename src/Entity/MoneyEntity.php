@@ -53,10 +53,12 @@ class MoneyEntity extends AbstractEntity
     }
 
     /**
-    * @param  array<string, mixed> $data
-    * @throws EntityValidationException
-    * @return self
-    */
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
+     * @param  array<string, mixed> $data
+     * @throws EntityValidationException
+     * @return self
+     */
     public function initFromArray(array $data): self
     {
         try {
@@ -116,8 +118,8 @@ class MoneyEntity extends AbstractEntity
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param  null|array<string, mixed> $data
-     * @return MoneyEntity
      * @throws EntityValidationException
+     * @return MoneyEntity
      */
     public static function make(array $data = null): MoneyEntity
     {
@@ -151,7 +153,7 @@ class MoneyEntity extends AbstractEntity
     public function getWeGetFinancingRequest(): array
     {
         return [
-            'value' => $this->getValue()
+            'value' => $this->getValue(),
         ];
     }
 

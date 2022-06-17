@@ -70,6 +70,8 @@ class CartItemEntity extends AbstractEntity
     }
 
     /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
      * @param  array<string, mixed> $data
      * @throws EntityValidationException
      * @return self

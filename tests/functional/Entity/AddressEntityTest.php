@@ -8,7 +8,10 @@ use App\Entity\AddressEntity;
 use App\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
-class AddressEntityTest extends TestCase
+/**
+ * @functional
+ */
+final class AddressEntityTest extends TestCase
 {
     protected AddressEntity $sut;
 
@@ -46,8 +49,8 @@ class AddressEntityTest extends TestCase
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param array<array<string, array<int|string, string>>> $data
-     * @return void
      * @throws EntityValidationException
+     * @return void
      */
     public function testMakeWithDataWillSucceedAsExpected(array $data): void
     {
@@ -65,6 +68,8 @@ class AddressEntityTest extends TestCase
     }
 
     /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
      * @return iterable<int, array<array<string, array<int|string, mixed>>>>
      */
     public function getInvalidAddressEntityData(): iterable
@@ -137,10 +142,10 @@ class AddressEntityTest extends TestCase
                 'street1' => null,
                 'city' => 7.9,
                 'state' => 'NY',
-                'zipcode' => '66607'
+                'zipcode' => '66607',
             ],
             'violations' => [
-                'Cannot assign null to property App\Entity\AddressEntity::$street1 of type string'
+                'Cannot assign null to property App\Entity\AddressEntity::$street1 of type string',
             ],
         ]];
         yield [[
@@ -148,10 +153,10 @@ class AddressEntityTest extends TestCase
                 'street1' => 7.5,
                 'city' => 'New York',
                 'state' => 'NY',
-                'zipcode' => '66607'
+                'zipcode' => '66607',
             ],
             'violations' => [
-                'Cannot assign float to property App\Entity\AddressEntity::$street1 of type string'
+                'Cannot assign float to property App\Entity\AddressEntity::$street1 of type string',
             ],
         ]];
         yield [[
@@ -162,7 +167,7 @@ class AddressEntityTest extends TestCase
                 'zipcode' => '66607',
             ],
             'violations' => [
-                'Cannot assign null to property App\Entity\AddressEntity::$city of type string'
+                'Cannot assign null to property App\Entity\AddressEntity::$city of type string',
             ],
         ]];
         yield [[
@@ -173,7 +178,7 @@ class AddressEntityTest extends TestCase
                 'zipcode' => '66607',
             ],
             'violations' => [
-                'Cannot assign null to property App\Entity\AddressEntity::$state of type string'
+                'Cannot assign null to property App\Entity\AddressEntity::$state of type string',
             ],
         ]];
         yield [[
@@ -184,7 +189,7 @@ class AddressEntityTest extends TestCase
                 'zipcode' => 1,
             ],
             'violations' => [
-                'Cannot assign int to property App\Entity\AddressEntity::$zipcode of type string'
+                'Cannot assign int to property App\Entity\AddressEntity::$zipcode of type string',
             ],
         ]];
     }
