@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Entity\Request;
 
+use App\Entity\MoneyEntity;
 use App\Exception\EntityValidationException;
-use Symfony\Component\Validator\Validation;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 use TypeError;
 
-class CartItemEntity extends AbstractEntity
+class CartItemEntity extends AbstractRequestEntity
 {
     /**
      * @Assert\NotBlank(message = "The value of sku should not be blank.")
@@ -103,7 +103,7 @@ class CartItemEntity extends AbstractEntity
         } catch (TypeError $exception) {
             throw new EntityValidationException(
                 EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
-                EntityValidationException::TYPE_ERROR_INIT_ENTITY_ABSTRACT_CODE,
+                EntityValidationException::TYPE_ERROR_INIT_ENTITY_CART_ITEM_CODE,
                 null,
                 [ $exception->getMessage() ]
             );

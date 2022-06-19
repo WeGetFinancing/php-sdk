@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Entity\Request;
 
 use App\Exception\EntityValidationException;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\Constraints as WeGetFinancingAssert;
 
-class AddressEntity extends AbstractEntity
+class AddressEntity extends AbstractRequestEntity
 {
     /**
      * @Assert\Length(

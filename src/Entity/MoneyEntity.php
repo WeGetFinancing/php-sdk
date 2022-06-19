@@ -147,16 +147,6 @@ class MoneyEntity extends AbstractEntity
         return $value . substr($numberParts[1], 0, self::DECIMALS);
     }
 
-    /**
-     * @return array<string, string>
-     */
-    public function getWeGetFinancingRequest(): array
-    {
-        return [
-            'value' => $this->getValue(),
-        ];
-    }
-
     private function getFormattedName(): string
     {
         return true === empty($this->name)

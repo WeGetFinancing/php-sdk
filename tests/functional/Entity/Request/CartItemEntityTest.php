@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace functional\Entity;
+namespace functional\Entity\Request;
 
-use App\Entity\CartItemEntity;
+use App\Entity\Request\CartItemEntity;
 use App\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
@@ -138,7 +138,7 @@ final class CartItemEntityTest extends TestCase
                 'unitTax' => null,
             ],
             'violations' => [
-                'Cannot assign bool to property App\Entity\CartItemEntity::$sku of type string',
+                'Cannot assign bool to property App\Entity\Request\CartItemEntity::$sku of type string',
             ],
         ]];
         yield [[

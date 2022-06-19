@@ -18,6 +18,10 @@ class EntityValidationException extends \Exception
 
     public const VALIDATION_VIOLATION_IS_VALID_MONEY_ENTITY_CODE = 4;
 
+    public const TYPE_ERROR_INIT_ENTITY_CART_ITEM_CODE = 5;
+
+    public const TYPE_ERROR_INIT_ENTITY_LOAN_REQUEST_CODE = 6;
+
     /**
      * @var string[]
      */

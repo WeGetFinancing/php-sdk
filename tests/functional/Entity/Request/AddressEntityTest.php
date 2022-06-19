@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace functional\Entity;
+namespace functional\Entity\Request;
 
-use App\Entity\AddressEntity;
+use App\Entity\Request\AddressEntity;
 use App\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
@@ -145,7 +145,7 @@ final class AddressEntityTest extends TestCase
                 'zipcode' => '66607',
             ],
             'violations' => [
-                'Cannot assign null to property App\Entity\AddressEntity::$street1 of type string',
+                'Cannot assign null to property App\Entity\Request\AddressEntity::$street1 of type string',
             ],
         ]];
         yield [[
@@ -156,7 +156,7 @@ final class AddressEntityTest extends TestCase
                 'zipcode' => '66607',
             ],
             'violations' => [
-                'Cannot assign float to property App\Entity\AddressEntity::$street1 of type string',
+                'Cannot assign float to property App\Entity\Request\AddressEntity::$street1 of type string',
             ],
         ]];
         yield [[
@@ -167,7 +167,7 @@ final class AddressEntityTest extends TestCase
                 'zipcode' => '66607',
             ],
             'violations' => [
-                'Cannot assign null to property App\Entity\AddressEntity::$city of type string',
+                'Cannot assign null to property App\Entity\Request\AddressEntity::$city of type string',
             ],
         ]];
         yield [[
@@ -178,7 +178,7 @@ final class AddressEntityTest extends TestCase
                 'zipcode' => '66607',
             ],
             'violations' => [
-                'Cannot assign null to property App\Entity\AddressEntity::$state of type string',
+                'Cannot assign null to property App\Entity\Request\AddressEntity::$state of type string',
             ],
         ]];
         yield [[
@@ -189,7 +189,7 @@ final class AddressEntityTest extends TestCase
                 'zipcode' => 1,
             ],
             'violations' => [
-                'Cannot assign int to property App\Entity\AddressEntity::$zipcode of type string',
+                'Cannot assign int to property App\Entity\Request\AddressEntity::$zipcode of type string',
             ],
         ]];
     }

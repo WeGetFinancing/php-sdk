@@ -98,9 +98,7 @@ final class MoneyEntityTest extends TestCase
     public function testMakeWithDataWillSucceedAsExpected(array $data): void
     {
         $this->sut = MoneyEntity::make($data['data']);
-
         $this->assertSame($data['expected'], $this->sut->getValue());
-        $this->assertSame(['value' => $data['expected']], $this->sut->getWeGetFinancingRequest());
     }
 
     /**
