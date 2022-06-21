@@ -20,7 +20,7 @@ class CartItemEntity extends AbstractRequestEntity
     /**
      * @Assert\Length(
      *     min = 2,
-     *     minMessage = "The value of display name  is too short. It should have {{ limit }} characters or more."
+     *     minMessage = "The value of display name is too short. It should have {{ limit }} characters or more."
      * )
      * @Assert\NotBlank(message = "The value of display name should not be blank.")
      */

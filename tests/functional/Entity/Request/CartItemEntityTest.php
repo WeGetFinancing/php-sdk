@@ -78,7 +78,7 @@ final class CartItemEntityTest extends TestCase
         ],
         'violations' => [
             'The value of sku should not be blank.',
-            'The value of display name  is too short. It should have 2 characters or more.',
+            'The value of display name is too short. It should have 2 characters or more.',
             'The value of quantity should be positive.',
         ],
     ];
@@ -121,7 +121,6 @@ final class CartItemEntityTest extends TestCase
             'Unit Tax Cannot assign null to property App\Entity\MoneyEntity::$value of type string',
         ],
     ];
-
 
     protected CartItemEntity $sut;
 
