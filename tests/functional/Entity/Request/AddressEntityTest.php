@@ -15,32 +15,62 @@ final class AddressEntityTest extends TestCase
 {
     public const VALID_ITEM_1 = [
         'entity' => [
-            'street1' => '15th Fantasy Street',
-            'city' => 'New York',
-            'state' => 'NY',
-            'zipcode' => '66607'
+            'street1' => '6 West End Ct',
+            'city' => 'Long Branch',
+            'state' => 'NJ',
+            'zipcode' => '07740',
         ],
         'expected' => [
-            'street1' => '15th Fantasy Street',
-            'city' => 'New York',
-            'state' => 'NY',
-            'zipcode' => '66607'
-        ]
+            'street1' => '6 West End Ct',
+            'city' => 'Long Branch',
+            'state' => 'NJ',
+            'zipcode' => '07740',
+        ],
     ];
 
     public const VALID_ITEM_2 = [
         'entity' => [
+            'street1' => '2 Industrial Way West Suite 201',
+            'city' => 'Eatontown',
+            'state' => 'NJ',
+            'zipcode' => '07724',
+        ],
+        'expected' => [
+            'street1' => '2 Industrial Way West Suite 201',
+            'city' => 'Eatontown',
+            'state' => 'NJ',
+            'zipcode' => '07724',
+        ],
+    ];
+
+    public const VALID_ITEM_3 = [
+        'entity' => [
             'street1' => '15th Fantasy Street',
             'city' => 'New York',
             'state' => 'NY',
-            'zipcode' => '66607'
+            'zipcode' => '66607',
         ],
         'expected' => [
             'street1' => '15th Fantasy Street',
             'city' => 'New York',
             'state' => 'NY',
-            'zipcode' => '66607'
-        ]
+            'zipcode' => '66607',
+        ],
+    ];
+
+    public const VALID_ITEM_4 = [
+        'entity' => [
+            'street1' => '15th Fantasy Street',
+            'city' => 'New York',
+            'state' => 'NY',
+            'zipcode' => '66607',
+        ],
+        'expected' => [
+            'street1' => '15th Fantasy Street',
+            'city' => 'New York',
+            'state' => 'NY',
+            'zipcode' => '66607',
+        ],
     ];
 
     public const INVALID_ITEM_1 = [
@@ -58,7 +88,7 @@ final class AddressEntityTest extends TestCase
             'The value of state should have exactly 2 characters.',
             'The value of state should not be blank.',
             'The value of zipcode should not be blank.',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_2 = [
@@ -71,7 +101,7 @@ final class AddressEntityTest extends TestCase
         'violations' => [
             'The value of state should have exactly 2 characters.',
             'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_3 = [
@@ -86,7 +116,7 @@ final class AddressEntityTest extends TestCase
             'The value of city is too short. It should have 2 characters or more.',
             'The value of state should have exactly 2 characters.',
             'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_4 = [
@@ -97,7 +127,7 @@ final class AddressEntityTest extends TestCase
         'violations' => [
             'The value of state should not be blank.',
             'The value of zipcode should not be blank.',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_5 = [
@@ -108,7 +138,7 @@ final class AddressEntityTest extends TestCase
         'violations' => [
             'The value of street1 should not be blank.',
             'The value of city should not be blank.',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_6 = [
@@ -120,7 +150,7 @@ final class AddressEntityTest extends TestCase
         ],
         'violations' => [
             'Cannot assign null to property App\Entity\Request\AddressEntity::$street1 of type string',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_7 = [
@@ -132,7 +162,7 @@ final class AddressEntityTest extends TestCase
         ],
         'violations' => [
             'Cannot assign float to property App\Entity\Request\AddressEntity::$street1 of type string',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_8 = [
@@ -144,7 +174,7 @@ final class AddressEntityTest extends TestCase
         ],
         'violations' => [
             'Cannot assign float to property App\Entity\Request\AddressEntity::$street1 of type string',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_9 = [
@@ -156,7 +186,7 @@ final class AddressEntityTest extends TestCase
         ],
         'violations' => [
             'Cannot assign null to property App\Entity\Request\AddressEntity::$city of type string',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_10 = [
@@ -168,7 +198,7 @@ final class AddressEntityTest extends TestCase
         ],
         'violations' => [
             'Cannot assign null to property App\Entity\Request\AddressEntity::$state of type string',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_11 = [
@@ -180,7 +210,7 @@ final class AddressEntityTest extends TestCase
         ],
         'violations' => [
             'Cannot assign int to property App\Entity\Request\AddressEntity::$zipcode of type string',
-        ]
+        ],
     ];
 
     protected AddressEntity $sut;
@@ -201,6 +231,8 @@ final class AddressEntityTest extends TestCase
     {
         yield [ self::VALID_ITEM_1 ];
         yield [ self::VALID_ITEM_2 ];
+        yield [ self::VALID_ITEM_3 ];
+        yield [ self::VALID_ITEM_4 ];
     }
 
     /**

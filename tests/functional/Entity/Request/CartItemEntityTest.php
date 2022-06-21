@@ -29,7 +29,7 @@ final class CartItemEntityTest extends TestCase
             'quantity' => 1,
             'unit_tax' => '21.00',
             'category' => 'CAT_A',
-        ]
+        ],
     ];
 
     public const VALID_ITEM_2 = [
@@ -48,7 +48,7 @@ final class CartItemEntityTest extends TestCase
             'quantity' => 6,
             'unit_tax' => '0.75',
             'category' => 'CAT_A',
-        ]
+        ],
     ];
 
     public const VALID_ITEM_3 = [
@@ -65,7 +65,7 @@ final class CartItemEntityTest extends TestCase
             'unit_price' => '8.86',
             'quantity' => 9,
             'unit_tax' => '134.60',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_1 = [
@@ -80,7 +80,7 @@ final class CartItemEntityTest extends TestCase
             'The value of sku should not be blank.',
             'The value of display name  is too short. It should have 2 characters or more.',
             'The value of quantity should be positive.',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_2 = [
@@ -93,7 +93,7 @@ final class CartItemEntityTest extends TestCase
         ],
         'violations' => [
             'Unit Price value should not be equal or less than zero.',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_3 = [
@@ -106,7 +106,7 @@ final class CartItemEntityTest extends TestCase
         ],
         'violations' => [
             'Cannot assign bool to property App\Entity\Request\CartItemEntity::$sku of type string',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_4 = [
@@ -119,7 +119,7 @@ final class CartItemEntityTest extends TestCase
         ],
         'violations' => [
             'Unit Tax Cannot assign null to property App\Entity\MoneyEntity::$value of type string',
-        ]
+        ],
     ];
 
 
