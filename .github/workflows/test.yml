@@ -13,6 +13,7 @@ env: # Or as an environment variable
   TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
   TEST_MERCHANT_ID: ${{ secrets.TEST_MERCHANT_ID }}
   TEST_WEGETFINANCING_URL: ${{ secrets.TEST_WEGETFINANCING_URL }}
+  CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
 jobs:
 
@@ -23,7 +24,6 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "7.4"
           - "8.0"
           - "8.1"
     steps:
@@ -39,7 +39,14 @@ jobs:
         run: composer validate
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
-      - name: Run test suite
+      - name: Prepare for sending code coverage
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+      - name: Run test suite and send coverage
         run: |
           php --version
           composer test
+      - name: Send code coverage
+        run: ./cc-test-reporter after-build -t clover

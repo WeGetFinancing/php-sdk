@@ -2,7 +2,7 @@ name: Quality Assurance CI
 
 on:
   push:
-    branches: [ "main", "GET-1465" ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
