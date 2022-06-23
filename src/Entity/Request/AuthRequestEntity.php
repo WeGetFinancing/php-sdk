@@ -10,7 +10,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class AuthRequestEntity extends AbstractRequestEntity
 {
-    public const AUTH_REQUEST_HEADERS = [ 'Authorization' => 'Basic ' ];
+    public const AUTH_REQUEST_HEADERS = [
+        'Content-Type' => 'application/json',
+        'Accept' =>  'application/json',
+        'Authorization' => 'Basic ',
+    ];
+
+    public const LOAN_REQUEST_PATH = '/merchant/%MERCHANT_ID%/requests';
+
+    public const MERCHANT_ID_REPLACE = '%MERCHANT_ID%';
 
     /**
      * @Assert\Length(
@@ -43,8 +51,8 @@ class AuthRequestEntity extends AbstractRequestEntity
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param null|array<string, mixed> $data
+     * @throws EntityValidationException
      * @return AuthRequestEntity
-     *@throws EntityValidationException
      */
     public static function make(array $data = null): AuthRequestEntity
     {
@@ -68,5 +76,14 @@ class AuthRequestEntity extends AbstractRequestEntity
     public function getBase64Credentials(): string
     {
         return base64_encode($this->username . ':' . $this->password);
+    }
+
+    public function getRequestNewLoanPath(): string
+    {
+        return str_replace(
+            self::MERCHANT_ID_REPLACE,
+            $this->merchantId,
+            self::LOAN_REQUEST_PATH
+        );
     }
 }

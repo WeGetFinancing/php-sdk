@@ -17,7 +17,9 @@ final class AuthRequestEntityTest extends TestCase
             'merchantId' => '1234',
         ],
         'expected' => [
-            'Authorization' => 'Basic VXNlcjpwYXNzd29yZA=='
+            'Content-Type' => 'application/json',
+            'Accept' =>  'application/json',
+            'Authorization' => 'Basic VXNlcjpwYXNzd29yZA==',
         ],
     ];
 
@@ -28,7 +30,9 @@ final class AuthRequestEntityTest extends TestCase
             'merchant_id' => '5678',
         ],
         'expected' => [
-            'Authorization' => 'Basic VXNlcm5hbWUxMjM0OnBhc3MxMjM0'
+            'Content-Type' => 'application/json',
+            'Accept' =>  'application/json',
+            'Authorization' => 'Basic VXNlcm5hbWUxMjM0OnBhc3MxMjM0',
         ],
     ];
 
@@ -39,7 +43,9 @@ final class AuthRequestEntityTest extends TestCase
             'merchantId' => '9876',
         ],
         'expected' => [
-            'Authorization' => 'Basic YW5vdGhlciB1c2VybmFtZTphbm90aGVyIHBhc3N3b3Jk'
+            'Content-Type' => 'application/json',
+            'Accept' =>  'application/json',
+            'Authorization' => 'Basic YW5vdGhlciB1c2VybmFtZTphbm90aGVyIHBhc3N3b3Jk',
         ],
     ];
 
@@ -109,16 +115,25 @@ final class AuthRequestEntityTest extends TestCase
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
-     * @param array<array<string, array<int|string, string>>> $data
+     * @param array<array<string, string>> $data
      * @throws EntityValidationException
      * @return void
      */
-    public function testMakeWithDataWillSucceedAsExpected(array $data): void
+    public function testMakeWithDataWillSucceedAndEntityWillWorkAsExpected(array $data): void
     {
         $this->sut = AuthRequestEntity::make($data['entity']);
-        $this->assertSame(
+        $this->assertEquals(
             $data['expected'],
             $this->sut->getWeGetFinancingRequest()
+        );
+
+        $merchantId = (true === isset($data['entity']['merchantId']))
+            ? $data['entity']['merchantId']
+            : $data['entity']['merchant_id'];
+
+        $this->assertEquals(
+            '/merchant/' . $merchantId . '/requests',
+            $this->sut->getRequestNewLoanPath()
         );
     }
 

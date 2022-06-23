@@ -8,5 +8,7 @@ services:
     restart: "no"
     environment:
       - XDEBUG_MODE=coverage
+    env_file:
+      - .env
     volumes:
       - ./:/app

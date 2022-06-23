@@ -12,6 +12,7 @@
   ],
   "require": {
     "php": ">=7.4",
+    "ext-json": "*",
     "guzzlehttp/guzzle": "^7.0",
     "symfony/validator": "^v5.4.8",
     "doctrine/annotations": "^1.13",
@@ -33,7 +34,8 @@
   "autoload-dev": {
     "psr-4": {
       "Unit\\": "tests/unit",
-      "Functional\\": "tests/functional"
+      "Functional\\": "tests/functional",
+      "Integration\\": "tests/integration"
     }
   },
   "scripts": {

@@ -8,6 +8,12 @@ on:
 
   workflow_dispatch:
 
+env: # Or as an environment variable
+  TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+  TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+  TEST_MERCHANT_ID: ${{ secrets.TEST_MERCHANT_ID }}
+  TEST_WEGETFINANCING_URL: ${{ secrets.TEST_WEGETFINANCING_URL }}
+
 jobs:
 
   tests:
