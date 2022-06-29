@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace functional\Entity\Request;
+namespace Functional\Entity\Request;
 
 use App\Entity\Request\CartItemEntity;
 use App\Exception\EntityValidationException;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace functional\Entity;
+namespace Functional\Entity;
 
 use App\Entity\MoneyEntity;
 use App\Exception\EntityValidationException;

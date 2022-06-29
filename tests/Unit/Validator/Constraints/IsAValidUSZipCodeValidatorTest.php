@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace unit\Validator\Constraints;
+namespace Unit\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
