@@ -61,7 +61,7 @@ class LoanRequestEntity extends AbstractRequestEntity
     public AddressEntity $shippingAddress;
 
     /**
-     * @Assert\Email()
+     * @Assert\Email(message = "The value of email is not a valid email address.")
      * @Assert\NotBlank(message = "The value of email should not be blank.")
      */
     public string $email;
@@ -72,7 +72,7 @@ class LoanRequestEntity extends AbstractRequestEntity
     public array $cartItems;
 
     /**
-     * @Assert\NotBlank(message = "The value of email should not be blank.")
+     * @Assert\NotBlank(message = "The value of version should not be blank.")
      */
     public string $version;
 
@@ -95,17 +95,17 @@ class LoanRequestEntity extends AbstractRequestEntity
     public ?string $merchantTransactionId;
 
     /**
-     * @Assert\Url()
+     * @Assert\Url(message = "The value of success url is not a valid URL.")
      */
     public ?string $successUrl;
 
     /**
-     * @Assert\Url()
+     * @Assert\Url(message = "The value of failure url is not a valid URL.")
      */
     public ?string $failureUrl;
 
     /**
-     * @Assert\Url()
+     * @Assert\Url(message = "The value of postback url is not a valid URL.")
      */
     public ?string $postbackUrl;
 

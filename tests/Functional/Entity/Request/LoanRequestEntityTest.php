@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace functional\Entity\Request;
+namespace Functional\Entity\Request;
 
 use App\Entity\Request\LoanRequestEntity;
 use App\Exception\EntityValidationException;
@@ -99,12 +99,12 @@ final class LoanRequestEntityTest extends TestCase
             'last_name' => 'D',
             'shippingAmount' => 15.2,
             'version' => '1.9',
-            'email' => 'john.doe@example.com',
+            'email' => 'invalid-email',
             'phone' => '01234567890',
             'merchant_transaction_id' => '66699',
-            'success_url' => 'https://wegetfinancing.com/successurl',
-            'failure_url' => 'https://wegetfinancing.com/failureurl',
-            'postback_url' => 'https://wegetfinancing.com/postbackurl',
+            'success_url' => 'invalid-url',
+            'failure_url' => 'invalid-url',
+            'postback_url' => 'invalid-url',
             'billing_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'cartItems' => [
@@ -116,7 +116,11 @@ final class LoanRequestEntityTest extends TestCase
         'violations' => [
             'The value of first name is too short. It should have 2 characters or more.',
             'The value of last name is too short. It should have 2 characters or more.',
+            'The value of email is not a valid email address.',
             'The value of phone have to be 10 digits only.',
+            'The value of success url is not a valid URL.',
+            'The value of failure url is not a valid URL.',
+            'The value of postback url is not a valid URL.'
         ],
     ];
 
@@ -151,12 +155,12 @@ final class LoanRequestEntityTest extends TestCase
             'last_name' => 'D',
             'shippingAmount' => 15.2,
             'version' => '1.9',
-            'email' => 'john.doe@example.com',
+            'email' => 'invalid-email',
             'phone' => '01234567890',
             'merchant_transaction_id' => '66699',
-            'success_url' => 'https://wegetfinancing.com/successurl',
-            'failure_url' => 'https://wegetfinancing.com/failureurl',
-            'postback_url' => 'https://wegetfinancing.com/postbackurl',
+            'success_url' => 'invalid-url',
+            'failure_url' => 'invalid-url',
+            'postback_url' => 'invalid-url',
             'billing_address' => AddressEntityTest::INVALID_ITEM_2['entity'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'cartItems' => [
@@ -193,6 +197,37 @@ final class LoanRequestEntityTest extends TestCase
         ],
         'violations' => [
             'Cannot assign null to property App\Entity\Request\LoanRequestEntity::$firstName of type string',
+        ],
+    ];
+
+    public const INVALID_ITEM_5 = [
+        'entity' => [
+            'firstName' => '',
+            'last_name' => '',
+            'shippingAmount' => 15.2,
+            'version' => '',
+            'email' => '',
+            'phone' => '',
+            'merchant_transaction_id' => '',
+            'success_url' => '',
+            'failure_url' => '',
+            'postback_url' => '',
+            'billing_address' => AddressEntityTest::VALID_ITEM_1['entity'],
+            'shipping_address' => AddressEntityTest::VALID_ITEM_1['entity'],
+            'cartItems' => [
+                CartItemEntityTest::VALID_ITEM_1['entity'],
+                CartItemEntityTest::VALID_ITEM_2['entity'],
+                CartItemEntityTest::VALID_ITEM_3['entity'],
+            ],
+        ],
+        'violations' => [
+            'The value of first name is too short. It should have 2 characters or more.',
+            'The value of first name should not be blank.',
+            'The value of last name is too short. It should have 2 characters or more.',
+            'The value of last name should not be blank.',
+            'The value of email should not be blank.',
+            'The value of version should not be blank.',
+            'The value of merchant transaction id name is too short. It should have 2 characters or more.',
         ],
     ];
 
@@ -244,7 +279,7 @@ final class LoanRequestEntityTest extends TestCase
         yield [ self::INVALID_ITEM_2 ];
         yield [ self::INVALID_ITEM_3 ];
         yield [ self::INVALID_ITEM_4 ];
-    }
+        yield [ self::INVALID_ITEM_5 ];    }
 
     /**
      * @dataProvider getInvalidLoanRequestEntityData
