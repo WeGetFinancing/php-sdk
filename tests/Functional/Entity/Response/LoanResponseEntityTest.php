@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Functional\Entity\Response;
 
 use App\Entity\Response\ErrorResponseEntity;
@@ -14,58 +16,58 @@ final class LoanResponseEntityTest extends TestCase
         'entity' => [
             'isSuccess' => true,
             'code' => '200',
-            'response' => SuccessResponseEntityTest::VALID_ITEM_1['entity']
+            'response' => SuccessResponseEntityTest::VALID_ITEM_1['entity'],
         ],
         'expected' => [
             'isSuccess' => true,
             'code' => '200',
-            'success' => SuccessResponseEntityTest::VALID_ITEM_1['expected']
-        ]
+            'success' => SuccessResponseEntityTest::VALID_ITEM_1['expected'],
+        ],
     ];
 
     public const VALID_ITEM_2 = [
         'entity' => [
             'isSuccess' => false,
             'code' => '400',
-            'response' => ErrorResponseEntityTest::VALID_ITEM_1['entity']
+            'response' => ErrorResponseEntityTest::VALID_ITEM_1['entity'],
         ],
         'expected' => [
             'isSuccess' => false,
             'code' => '400',
-            'error' => ErrorResponseEntityTest::VALID_ITEM_1['entity']
-        ]
+            'error' => ErrorResponseEntityTest::VALID_ITEM_1['entity'],
+        ],
     ];
 
     public const VALID_ITEM_3 = [
         'entity' => [
             'isSuccess' => true,
             'code' => '201',
-            'response' => SuccessResponseEntityTest::VALID_ITEM_2['entity']
+            'response' => SuccessResponseEntityTest::VALID_ITEM_2['entity'],
         ],
         'expected' => [
             'isSuccess' => true,
             'code' => '201',
-            'success' => SuccessResponseEntityTest::VALID_ITEM_2['expected']
-        ]
+            'success' => SuccessResponseEntityTest::VALID_ITEM_2['expected'],
+        ],
     ];
 
     public const VALID_ITEM_4 = [
         'entity' => [
             'isSuccess' => false,
             'code' => '404',
-            'response' => ErrorResponseEntityTest::VALID_ITEM_2['entity']
+            'response' => ErrorResponseEntityTest::VALID_ITEM_2['entity'],
         ],
         'expected' => [
             'isSuccess' => false,
             'code' => '404',
-            'error' => ErrorResponseEntityTest::VALID_ITEM_2['entity']
-        ]
+            'error' => ErrorResponseEntityTest::VALID_ITEM_2['entity'],
+        ],
     ];
 
     public const INVALID_ITEM_1 = [
         'entity' => [
             'code' => '',
-            'response' => ErrorResponseEntityTest::VALID_ITEM_2['entity']
+            'response' => ErrorResponseEntityTest::VALID_ITEM_2['entity'],
         ],
         'violations' => [
             'The value of isSuccess should not be null.',
@@ -75,7 +77,7 @@ final class LoanResponseEntityTest extends TestCase
 
     public const INVALID_ITEM_2 = [
         'entity' => [
-            'response' => ErrorResponseEntityTest::VALID_ITEM_2['entity']
+            'response' => ErrorResponseEntityTest::VALID_ITEM_2['entity'],
         ],
         'violations' => [
             'The value of isSuccess should not be null.',
@@ -88,7 +90,7 @@ final class LoanResponseEntityTest extends TestCase
         'entity' => [
             'isSuccess' => false,
             'code' => '404',
-            'response' => ErrorResponseEntityTest::INVALID_ITEM_1['entity']
+            'response' => ErrorResponseEntityTest::INVALID_ITEM_1['entity'],
         ],
         'violations' => [
             'The value of error should not be blank.',
@@ -101,7 +103,7 @@ final class LoanResponseEntityTest extends TestCase
         'entity' => [
             'isSuccess' => true,
             'code' => '200',
-            'response' => SuccessResponseEntityTest::INVALID_ITEM_1['entity']
+            'response' => SuccessResponseEntityTest::INVALID_ITEM_1['entity'],
         ],
         'violations' => [
             'Amount value is not a valid numeric.',

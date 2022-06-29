@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Functional\Entity\Response;
 
 use App\Entity\Response\SuccessResponseEntity;
@@ -12,33 +14,33 @@ final class SuccessResponseEntityTest extends TestCase
         'entity' => [
             'amount' => '1000.00',
             'href' => 'https://wegetfinancing.com',
-            'invId' => '2da6c35d54253098f8e0099014323712'
+            'invId' => '2da6c35d54253098f8e0099014323712',
         ],
         'expected' => [
             'amount' => '1000.00',
             'href' => 'https://wegetfinancing.com',
-            'invId' => '2da6c35d54253098f8e0099014323712'
-        ]
+            'invId' => '2da6c35d54253098f8e0099014323712',
+        ],
     ];
 
     public const VALID_ITEM_2 = [
         'entity' => [
             'amount' => '999.666',
             'href' => 'https://wegetfinancing.com',
-            'inv_id' => 'd28ae0657bde808b6fce26bbbe18b690'
+            'inv_id' => 'd28ae0657bde808b6fce26bbbe18b690',
         ],
         'expected' => [
             'amount' => '999.66',
             'href' => 'https://wegetfinancing.com',
-            'invId' => 'd28ae0657bde808b6fce26bbbe18b690'
-        ]
+            'invId' => 'd28ae0657bde808b6fce26bbbe18b690',
+        ],
     ];
 
     public const INVALID_ITEM_1 = [
         'entity' => [
             'amount' => '',
             'href' => '',
-            'inv_id' => ''
+            'inv_id' => '',
         ],
         'violations' => [
             'Amount value is not a valid numeric.',
@@ -50,7 +52,7 @@ final class SuccessResponseEntityTest extends TestCase
     public const INVALID_ITEM_2 = [
         'entity' => [
             'href' => '',
-            'inv_id' => ''
+            'inv_id' => '',
         ],
         'violations' => [
             'The value of amount is not a valid MoneyEntity.',
@@ -63,7 +65,7 @@ final class SuccessResponseEntityTest extends TestCase
         'entity' => [
             'amount' => '999.666',
             'href' => 'invalid-url',
-            'inv_id' => 'd28ae0657bde808b6fce26bbbe18b690'
+            'inv_id' => 'd28ae0657bde808b6fce26bbbe18b690',
         ],
         'violations' => [
             'The value of href url is not a valid URL.',

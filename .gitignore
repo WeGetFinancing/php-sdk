@@ -233,6 +233,7 @@ composer.lock
 ##### Coverage and quality assurance files
 
 /coverage/
+clover.xml
 coverage.xml
 .php-cs-fixer.cache
 .phpcs-cache

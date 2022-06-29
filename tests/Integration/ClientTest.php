@@ -70,6 +70,7 @@ final class ClientTest extends TestCase
         $username = getenv('TEST_USERNAME');
         $password = getenv('TEST_PASSWORD');
         $merchantId = getenv('TEST_MERCHANT_ID');
+        /** @var string $url */
         $url = getenv('TEST_WEGETFINANCING_URL');
 
         $this->assertIsNotBool($username);

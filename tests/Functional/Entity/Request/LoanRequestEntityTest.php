@@ -120,7 +120,7 @@ final class LoanRequestEntityTest extends TestCase
             'The value of phone have to be 10 digits only.',
             'The value of success url is not a valid URL.',
             'The value of failure url is not a valid URL.',
-            'The value of postback url is not a valid URL.'
+            'The value of postback url is not a valid URL.',
         ],
     ];
 
@@ -279,7 +279,8 @@ final class LoanRequestEntityTest extends TestCase
         yield [ self::INVALID_ITEM_2 ];
         yield [ self::INVALID_ITEM_3 ];
         yield [ self::INVALID_ITEM_4 ];
-        yield [ self::INVALID_ITEM_5 ];    }
+        yield [ self::INVALID_ITEM_5 ];
+    }
 
     /**
      * @dataProvider getInvalidLoanRequestEntityData

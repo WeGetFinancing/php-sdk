@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Functional\Entity\Response;
 
 use App\Entity\Response\ErrorResponseEntity;
@@ -18,7 +20,7 @@ final class ErrorResponseEntityTest extends TestCase
             'subjects' => [ 'email' ],
             'reasons' => [
                 'email' => 'invalid-email',
-            ]
+            ],
         ],
     ];
 
@@ -41,7 +43,7 @@ final class ErrorResponseEntityTest extends TestCase
             'subjects' => [ 'email' ],
             'reasons' => [
                 'email' => 'invalid-email',
-            ]
+            ],
         ],
         'violations' => [
             'The value of error should not be blank.',
@@ -54,7 +56,7 @@ final class ErrorResponseEntityTest extends TestCase
             'error' => 'error',
             'message' => 'message',
             'type' => '',
-            'stamp' => ''
+            'stamp' => '',
         ],
         'violations' => [
             'The value of type should not be blank.',

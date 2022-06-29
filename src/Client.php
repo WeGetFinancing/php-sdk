@@ -48,7 +48,7 @@ class Client
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    public static function make(AuthRequestEntity $auth,string $url ): Client
+    public static function make(AuthRequestEntity $auth, string $url): Client
     {
         return new Client(
             $auth,
@@ -58,9 +58,11 @@ class Client
     }
 
     /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
      * @param LoanRequestEntity $loanRequestEntity
-     * @return LoanResponseEntity
      * @throws GuzzleException|EntityValidationException
+     * @return LoanResponseEntity
      */
     public function requestNewLoan(LoanRequestEntity $loanRequestEntity): LoanResponseEntity
     {
@@ -78,7 +80,7 @@ class Client
         $data = json_decode($content, true);
         $error = json_last_error();
 
-        if (JSON_ERROR_NONE != $error) {
+        if (JSON_ERROR_NONE !== $error) {
             return LoanResponseEntity::make([
                 'isSuccess' => false,
                 'code' => (string) $status,
@@ -87,7 +89,7 @@ class Client
                     'message' => self::DATA_CONTENT_ERROR_MESSAGE,
                     'type' => self::DATA_CONTENT_ERROR_TYPE,
                     'stamp' => self::DATA_CONTENT_ERROR_STAMP,
-                ]
+                ],
             ]);
         }
 
@@ -95,14 +97,14 @@ class Client
             return LoanResponseEntity::make([
                 'isSuccess' => true,
                 'code' => (string) $status,
-                'response' => $data
+                'response' => $data,
             ]);
         }
 
         return LoanResponseEntity::make([
             'isSuccess' => false,
             'code' => (string) $status,
-            'response' => $data
+            'response' => $data,
         ]);
     }
 }

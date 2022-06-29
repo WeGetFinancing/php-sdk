@@ -85,8 +85,8 @@ class LoanResponseEntity extends AbstractEntity
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param array<string, mixed> $data
-     * @return void
      * @throws EntityValidationException
+     * @return void
      */
     protected function setResponseEntity(array $data): void
     {

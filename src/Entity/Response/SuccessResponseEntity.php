@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity\Response;
 
 use App\Entity\AbstractEntity;
@@ -41,6 +43,8 @@ class SuccessResponseEntity extends AbstractEntity
     }
 
     /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
      * @param  array<string, mixed> $data
      * @throws EntityValidationException
      * @return self
