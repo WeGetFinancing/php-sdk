@@ -53,7 +53,7 @@ final class MoneyEntityTest extends TestCase
 
     public const VALID_ITEM_6 = [
         'entity' => [
-            'value' => 66.999999563
+            'value' => 66.999999563,
         ],
         'expected' => '66.99',
     ];
@@ -84,7 +84,7 @@ final class MoneyEntityTest extends TestCase
 
     public const INVALID_ITEM_1 = [
         'entity' => [
-            'value' => '-12.56'
+            'value' => '-12.56',
         ],
         'violations' => [
             7 => [ 'value should be either positive or zero if allowed.' ],
@@ -94,7 +94,7 @@ final class MoneyEntityTest extends TestCase
 
     public const INVALID_ITEM_2 = [
         'entity' => [
-            'value' => -9
+            'value' => -9,
         ],
         'violations' => [
             7 => [ 'value should be either positive or zero if allowed.' ],
@@ -104,7 +104,7 @@ final class MoneyEntityTest extends TestCase
 
     public const INVALID_ITEM_3 = [
         'entity' => [
-            'value' => 'A'
+            'value' => 'A',
         ],
         'violations' => [
             7 => [ 'value is not a valid numeric.' ],
@@ -165,7 +165,7 @@ final class MoneyEntityTest extends TestCase
 
     public const INVALID_ITEM_8 = [
         'entity' => [
-            'value' => true
+            'value' => true,
         ],
         'violations' => [
             7 => [ 'Typed property App\Entity\MoneyEntity::$value must be string, bool used' ],

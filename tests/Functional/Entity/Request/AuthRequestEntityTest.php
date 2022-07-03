@@ -104,7 +104,7 @@ final class AuthRequestEntityTest extends TestCase
                 'The value of password is too short. It should have 2 characters or more.',
                 'The value of merchant id is too short. It should have 2 characters or more.',
             ],
-        ]
+        ],
     ];
 
     protected AuthRequestEntity $sut;

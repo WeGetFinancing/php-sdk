@@ -96,7 +96,7 @@ final class LoanResponseEntityTest extends TestCase
                 'The value of code should not be blank.',
                 'The value of code should not be null.',
             ],
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_3 = [

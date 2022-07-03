@@ -132,7 +132,7 @@ final class LoanRequestEntityTest extends TestCase
                 'The value of failure url is not a valid URL.',
                 'The value of postback url is not a valid URL.',
             ],
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_2 = [

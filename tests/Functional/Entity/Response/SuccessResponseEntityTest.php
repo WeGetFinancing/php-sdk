@@ -52,7 +52,7 @@ final class SuccessResponseEntityTest extends TestCase
                 'Amount value should be either positive or zero if allowed.',
                 'Amount value should not be blank.',
             ],
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_2 = [
@@ -71,7 +71,7 @@ final class SuccessResponseEntityTest extends TestCase
                 'The value of href should not be blank.',
                 'The value of inv id should not be blank.',
             ],
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_3 = [

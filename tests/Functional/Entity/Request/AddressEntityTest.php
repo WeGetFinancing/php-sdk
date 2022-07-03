@@ -174,7 +174,7 @@ final class AddressEntityTest extends TestCase
             8 => [
                 'The value of street1 should not be blank.',
                 'The value of city should not be blank.',
-            ]
+            ],
         ],
     ];
 
