@@ -131,7 +131,6 @@ final class MoneyEntityTest extends TestCase
         'violations' => [
             7 => [
                 'The money value is not a valid numeric.',
-                'The money value should be either positive or zero if allowed.',
                 'The money value should not be blank.',
             ],
             8 => [

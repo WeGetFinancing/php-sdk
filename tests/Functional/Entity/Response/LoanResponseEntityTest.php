@@ -70,8 +70,14 @@ final class LoanResponseEntityTest extends TestCase
             'response' => ErrorResponseEntityTest::VALID_ITEM_2['entity'],
         ],
         'violations' => [
-            'The value of isSuccess should not be null.',
-            'The value of code should not be blank.',
+            7 => [
+                'The value of isSuccess should not be null.',
+                'The value of code should not be blank.',
+            ],
+            8 => [
+                'The value of isSuccess should not be null.',
+                'The value of code should not be blank.',
+            ],
         ],
     ];
 
@@ -80,10 +86,17 @@ final class LoanResponseEntityTest extends TestCase
             'response' => ErrorResponseEntityTest::VALID_ITEM_2['entity'],
         ],
         'violations' => [
-            'The value of isSuccess should not be null.',
-            'The value of code should not be blank.',
-            'The value of code should not be null.',
-        ],
+            7 => [
+                'The value of isSuccess should not be null.',
+                'The value of code should not be blank.',
+                'The value of code should not be null.',
+            ],
+            8 => [
+                'The value of isSuccess should not be null.',
+                'The value of code should not be blank.',
+                'The value of code should not be null.',
+            ],
+        ]
     ];
 
     public const INVALID_ITEM_3 = [
@@ -93,9 +106,14 @@ final class LoanResponseEntityTest extends TestCase
             'response' => ErrorResponseEntityTest::INVALID_ITEM_1['entity'],
         ],
         'violations' => [
-            'The value of error should not be blank.',
-            'The value of message should not be blank.',
-
+            7 => [
+                'The value of error should not be blank.',
+                'The value of message should not be blank.',
+            ],
+            8 => [
+                'The value of error should not be blank.',
+                'The value of message should not be blank.',
+            ],
         ],
     ];
 
@@ -106,9 +124,15 @@ final class LoanResponseEntityTest extends TestCase
             'response' => SuccessResponseEntityTest::INVALID_ITEM_1['entity'],
         ],
         'violations' => [
-            'Amount value is not a valid numeric.',
-            'Amount value should be either positive or zero if allowed.',
-            'Amount value should not be blank.',
+            7 => [
+                'Amount value is not a valid numeric.',
+                'Amount value should not be blank.',
+            ],
+            8 => [
+                'Amount value is not a valid numeric.',
+                'Amount value should be either positive or zero if allowed.',
+                'Amount value should not be blank.',
+            ],
         ],
     ];
 
@@ -118,7 +142,8 @@ final class LoanResponseEntityTest extends TestCase
             'code' => '200',
         ],
         'violations' => [
-            'The loan response entity needs a valid response array to be initialised.',
+            7 => [ 'The loan response entity needs a valid response array to be initialised.' ],
+            8 => [ 'The loan response entity needs a valid response array to be initialised.' ],
         ],
     ];
 
@@ -232,7 +257,7 @@ final class LoanResponseEntityTest extends TestCase
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
-     * @param array<array<string, array<int|string, string>>> $data
+     * @param mixed[] $data
      * @return void
      */
     public function testMakeWithDataWillFailAsExpected(array $data): void
@@ -240,7 +265,12 @@ final class LoanResponseEntityTest extends TestCase
         try {
             LoanResponseEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
-            $this->assertSame($data['violations'], $exception->getViolations());
+            $this->assertSame(
+                (version_compare(PHP_VERSION, '8.0.0', '<'))
+                    ? $data['violations'][7]
+                    : $data['violations'][8],
+                $exception->getViolations()
+            );
         }
     }
 }

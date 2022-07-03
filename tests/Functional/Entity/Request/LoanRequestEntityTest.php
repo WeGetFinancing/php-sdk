@@ -156,7 +156,7 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [],
+            7 => [ 'Unit Tax Typed property App\Entity\MoneyEntity::$value must be string, null used' ],
             8 => [ 'Unit Tax Cannot assign null to property App\Entity\MoneyEntity::$value of type string' ],
         ],
     ];
@@ -214,7 +214,7 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [],
+            7 => [ 'Typed property App\Entity\Request\LoanRequestEntity::$firstName must be string, null used' ],
             8 => [ 'Cannot assign null to property App\Entity\Request\LoanRequestEntity::$firstName of type string' ],
         ],
     ];

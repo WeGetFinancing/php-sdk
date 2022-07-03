@@ -43,10 +43,16 @@ final class SuccessResponseEntityTest extends TestCase
             'inv_id' => '',
         ],
         'violations' => [
-            'Amount value is not a valid numeric.',
-            'Amount value should be either positive or zero if allowed.',
-            'Amount value should not be blank.',
-        ],
+            7 => [
+                'Amount value is not a valid numeric.',
+                'Amount value should not be blank.',
+            ],
+            8 => [
+                'Amount value is not a valid numeric.',
+                'Amount value should be either positive or zero if allowed.',
+                'Amount value should not be blank.',
+            ],
+        ]
     ];
 
     public const INVALID_ITEM_2 = [
@@ -55,10 +61,17 @@ final class SuccessResponseEntityTest extends TestCase
             'inv_id' => '',
         ],
         'violations' => [
-            'The value of amount is not a valid MoneyEntity.',
-            'The value of href should not be blank.',
-            'The value of inv id should not be blank.',
-        ],
+            7 => [
+                'The value of amount is not a valid MoneyEntity.',
+                'The value of href should not be blank.',
+                'The value of inv id should not be blank.',
+            ],
+            8 => [
+                'The value of amount is not a valid MoneyEntity.',
+                'The value of href should not be blank.',
+                'The value of inv id should not be blank.',
+            ],
+        ]
     ];
 
     public const INVALID_ITEM_3 = [
@@ -68,7 +81,8 @@ final class SuccessResponseEntityTest extends TestCase
             'inv_id' => 'd28ae0657bde808b6fce26bbbe18b690',
         ],
         'violations' => [
-            'The value of href url is not a valid URL.',
+            7 => [ 'The value of href url is not a valid URL.' ],
+            8 => [ 'The value of href url is not a valid URL.' ],
         ],
     ];
 
@@ -132,7 +146,7 @@ final class SuccessResponseEntityTest extends TestCase
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
-     * @param array<array<string, array<int|string, string>>> $data
+     * @param mixed[] $data
      * @return void
      */
     public function testMakeWithDataWillFailAsExpected(array $data): void
@@ -140,7 +154,12 @@ final class SuccessResponseEntityTest extends TestCase
         try {
             SuccessResponseEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
-            $this->assertSame($data['violations'], $exception->getViolations());
+            $this->assertSame(
+                (version_compare(PHP_VERSION, '8.0.0', '<'))
+                    ? $data['violations'][7]
+                    : $data['violations'][8],
+                $exception->getViolations()
+            );
         }
     }
 }
