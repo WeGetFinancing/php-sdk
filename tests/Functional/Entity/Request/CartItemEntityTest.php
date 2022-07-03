@@ -77,9 +77,16 @@ final class CartItemEntityTest extends TestCase
             'unitTax' => 0.0,
         ],
         'violations' => [
-            'The value of sku should not be blank.',
-            'The value of display name is too short. It should have 2 characters or more.',
-            'The value of quantity should be positive.',
+            7 => [
+                'The value of sku should not be blank.',
+                'The value of display name is too short. It should have 2 characters or more.',
+                'The value of quantity should be positive.',
+            ],
+            8 => [
+                'The value of sku should not be blank.',
+                'The value of display name is too short. It should have 2 characters or more.',
+                'The value of quantity should be positive.',
+            ],
         ],
     ];
 
@@ -92,7 +99,8 @@ final class CartItemEntityTest extends TestCase
             'unitTax' => 0.0,
         ],
         'violations' => [
-            'Unit Price value should not be equal or less than zero.',
+            7 => [ 'Unit Price value should not be equal or less than zero.' ],
+            8 => [ 'Unit Price value should not be equal or less than zero.' ],
         ],
     ];
 
@@ -105,7 +113,8 @@ final class CartItemEntityTest extends TestCase
             'unitTax' => null,
         ],
         'violations' => [
-            'Cannot assign bool to property App\Entity\Request\CartItemEntity::$sku of type string',
+            7 => [ 'Typed property App\Entity\Request\CartItemEntity::$sku must be string, bool used' ],
+            8 => [ 'Cannot assign bool to property App\Entity\Request\CartItemEntity::$sku of type string' ],
         ],
     ];
 
@@ -118,7 +127,8 @@ final class CartItemEntityTest extends TestCase
             'unitTax' => null,
         ],
         'violations' => [
-            'Unit Tax Cannot assign null to property App\Entity\MoneyEntity::$value of type string',
+            7 => [ 'Unit Tax Typed property App\Entity\MoneyEntity::$value must be string, null used' ],
+            8 => [ 'Unit Tax Cannot assign null to property App\Entity\MoneyEntity::$value of type string' ],
         ],
     ];
 
@@ -174,7 +184,7 @@ final class CartItemEntityTest extends TestCase
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
-     * @param array<array<string, array<int|string, string>>> $data
+     * @param mixed[] $data
      * @return void
      */
     public function testMakeWithDataWillFailAsExpected(array $data): void
@@ -182,7 +192,12 @@ final class CartItemEntityTest extends TestCase
         try {
             CartItemEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
-            $this->assertSame($data['violations'], $exception->getViolations());
+            $this->assertSame(
+                (version_compare(PHP_VERSION, '8.0.0', '<'))
+                    ? $data['violations'][7]
+                    : $data['violations'][8],
+                $exception->getViolations()
+            );
         }
     }
 }

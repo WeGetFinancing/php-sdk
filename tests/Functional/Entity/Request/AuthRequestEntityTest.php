@@ -56,12 +56,22 @@ final class AuthRequestEntityTest extends TestCase
             'merchantId' => '',
         ],
         'violations' => [
-            'The value of username is too short. It should have 2 characters or more.',
-            'The value of username should not be blank.',
-            'The value of password is too short. It should have 2 characters or more.',
-            'The value of password should not be blank.',
-            'The value of merchant id is too short. It should have 2 characters or more.',
-            'The value of merchant id should not be blank.',
+            7 => [
+                'The value of username is too short. It should have 2 characters or more.',
+                'The value of username should not be blank.',
+                'The value of password is too short. It should have 2 characters or more.',
+                'The value of password should not be blank.',
+                'The value of merchant id is too short. It should have 2 characters or more.',
+                'The value of merchant id should not be blank.',
+            ],
+            8 => [
+                'The value of username is too short. It should have 2 characters or more.',
+                'The value of username should not be blank.',
+                'The value of password is too short. It should have 2 characters or more.',
+                'The value of password should not be blank.',
+                'The value of merchant id is too short. It should have 2 characters or more.',
+                'The value of merchant id should not be blank.',
+            ],
         ],
     ];
 
@@ -72,7 +82,8 @@ final class AuthRequestEntityTest extends TestCase
             'merchantId' => '1234',
         ],
         'violations' => [
-            'Cannot assign null to property App\Entity\Request\AuthRequestEntity::$username of type string',
+            7 => [ 'Typed property App\Entity\Request\AuthRequestEntity::$username must be string, null used' ],
+            8 => [ 'Cannot assign null to property App\Entity\Request\AuthRequestEntity::$username of type string' ],
         ],
     ];
 
@@ -83,10 +94,17 @@ final class AuthRequestEntityTest extends TestCase
             'merchantId' => '1',
         ],
         'violations' => [
-            'The value of username is too short. It should have 2 characters or more.',
-            'The value of password is too short. It should have 2 characters or more.',
-            'The value of merchant id is too short. It should have 2 characters or more.',
-        ],
+            7 => [
+                'The value of username is too short. It should have 2 characters or more.',
+                'The value of password is too short. It should have 2 characters or more.',
+                'The value of merchant id is too short. It should have 2 characters or more.',
+            ],
+            8 => [
+                'The value of username is too short. It should have 2 characters or more.',
+                'The value of password is too short. It should have 2 characters or more.',
+                'The value of merchant id is too short. It should have 2 characters or more.',
+            ],
+        ]
     ];
 
     protected AuthRequestEntity $sut;
@@ -152,7 +170,7 @@ final class AuthRequestEntityTest extends TestCase
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
-     * @param array<array<string, array<int|string, string>>> $data
+     * @param mixed[] $data
      * @return void
      */
     public function testMakeWithDataWillFailAsExpected(array $data): void
@@ -160,7 +178,12 @@ final class AuthRequestEntityTest extends TestCase
         try {
             AuthRequestEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
-            $this->assertSame($data['violations'], $exception->getViolations());
+            $this->assertSame(
+                (version_compare(PHP_VERSION, '8.0.0', '<'))
+                    ? $data['violations'][7]
+                    : $data['violations'][8],
+                $exception->getViolations()
+            );
         }
     }
 }

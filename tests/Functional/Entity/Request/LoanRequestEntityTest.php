@@ -114,14 +114,25 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            'The value of first name is too short. It should have 2 characters or more.',
-            'The value of last name is too short. It should have 2 characters or more.',
-            'The value of email is not a valid email address.',
-            'The value of phone have to be 10 digits only.',
-            'The value of success url is not a valid URL.',
-            'The value of failure url is not a valid URL.',
-            'The value of postback url is not a valid URL.',
-        ],
+            7 => [
+                'The value of first name is too short. It should have 2 characters or more.',
+                'The value of last name is too short. It should have 2 characters or more.',
+                'The value of email is not a valid email address.',
+                'The value of phone have to be 10 digits only.',
+                'The value of success url is not a valid URL.',
+                'The value of failure url is not a valid URL.',
+                'The value of postback url is not a valid URL.',
+            ],
+            8 => [
+                'The value of first name is too short. It should have 2 characters or more.',
+                'The value of last name is too short. It should have 2 characters or more.',
+                'The value of email is not a valid email address.',
+                'The value of phone have to be 10 digits only.',
+                'The value of success url is not a valid URL.',
+                'The value of failure url is not a valid URL.',
+                'The value of postback url is not a valid URL.',
+            ],
+        ]
     ];
 
     public const INVALID_ITEM_2 = [
@@ -145,7 +156,8 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            'Unit Tax Cannot assign null to property App\Entity\MoneyEntity::$value of type string',
+            7 => [],
+            8 => [ 'Unit Tax Cannot assign null to property App\Entity\MoneyEntity::$value of type string' ],
         ],
     ];
 
@@ -170,8 +182,14 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            'The value of state should have exactly 2 characters.',
-            'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
+            7 => [
+                'The value of state should have exactly 2 characters.',
+                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
+            ],
+            8 => [
+                'The value of state should have exactly 2 characters.',
+                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
+            ],
         ],
     ];
 
@@ -196,7 +214,8 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            'Cannot assign null to property App\Entity\Request\LoanRequestEntity::$firstName of type string',
+            7 => [],
+            8 => [ 'Cannot assign null to property App\Entity\Request\LoanRequestEntity::$firstName of type string' ],
         ],
     ];
 
@@ -221,13 +240,24 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            'The value of first name is too short. It should have 2 characters or more.',
-            'The value of first name should not be blank.',
-            'The value of last name is too short. It should have 2 characters or more.',
-            'The value of last name should not be blank.',
-            'The value of email should not be blank.',
-            'The value of version should not be blank.',
-            'The value of merchant transaction id name is too short. It should have 2 characters or more.',
+            7 => [
+                'The value of first name is too short. It should have 2 characters or more.',
+                'The value of first name should not be blank.',
+                'The value of last name is too short. It should have 2 characters or more.',
+                'The value of last name should not be blank.',
+                'The value of email should not be blank.',
+                'The value of version should not be blank.',
+                'The value of merchant transaction id name is too short. It should have 2 characters or more.',
+            ],
+            8 => [
+                'The value of first name is too short. It should have 2 characters or more.',
+                'The value of first name should not be blank.',
+                'The value of last name is too short. It should have 2 characters or more.',
+                'The value of last name should not be blank.',
+                'The value of email should not be blank.',
+                'The value of version should not be blank.',
+                'The value of merchant transaction id name is too short. It should have 2 characters or more.',
+            ],
         ],
     ];
 
@@ -287,7 +317,7 @@ final class LoanRequestEntityTest extends TestCase
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
-     * @param array<array<string, array<int|string, string>>> $data
+     * @param mixed[] $data
      * @return void
      */
     public function testMakeWithDataWillFailAsExpected(array $data): void
@@ -295,7 +325,12 @@ final class LoanRequestEntityTest extends TestCase
         try {
             LoanRequestEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
-            $this->assertSame($data['violations'], $exception->getViolations());
+            $this->assertSame(
+                (version_compare(PHP_VERSION, '8.0.0', '<'))
+                    ? $data['violations'][7]
+                    : $data['violations'][8],
+                $exception->getViolations()
+            );
         }
     }
 }

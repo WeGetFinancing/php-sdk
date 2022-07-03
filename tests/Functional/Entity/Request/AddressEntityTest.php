@@ -81,13 +81,24 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '',
         ],
         'violations' => [
-            'The value of street1 is too short. It should have 2 characters or more.',
-            'The value of street1 should not be blank.',
-            'The value of city is too short. It should have 2 characters or more.',
-            'The value of city should not be blank.',
-            'The value of state should have exactly 2 characters.',
-            'The value of state should not be blank.',
-            'The value of zipcode should not be blank.',
+            7 => [
+                'The value of street1 is too short. It should have 2 characters or more.',
+                'The value of street1 should not be blank.',
+                'The value of city is too short. It should have 2 characters or more.',
+                'The value of city should not be blank.',
+                'The value of state should have exactly 2 characters.',
+                'The value of state should not be blank.',
+                'The value of zipcode should not be blank.',
+            ],
+            8 => [
+                'The value of street1 is too short. It should have 2 characters or more.',
+                'The value of street1 should not be blank.',
+                'The value of city is too short. It should have 2 characters or more.',
+                'The value of city should not be blank.',
+                'The value of state should have exactly 2 characters.',
+                'The value of state should not be blank.',
+                'The value of zipcode should not be blank.',
+            ],
         ],
     ];
 
@@ -99,8 +110,14 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '666666',
         ],
         'violations' => [
-            'The value of state should have exactly 2 characters.',
-            'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
+            7 => [
+                'The value of state should have exactly 2 characters.',
+                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
+            ],
+            8 => [
+                'The value of state should have exactly 2 characters.',
+                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
+            ],
         ],
     ];
 
@@ -112,10 +129,18 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '55555-55555',
         ],
         'violations' => [
-            'The value of street1 is too short. It should have 2 characters or more.',
-            'The value of city is too short. It should have 2 characters or more.',
-            'The value of state should have exactly 2 characters.',
-            'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
+            7 => [
+                'The value of street1 is too short. It should have 2 characters or more.',
+                'The value of city is too short. It should have 2 characters or more.',
+                'The value of state should have exactly 2 characters.',
+                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
+            ],
+            8 => [
+                'The value of street1 is too short. It should have 2 characters or more.',
+                'The value of city is too short. It should have 2 characters or more.',
+                'The value of state should have exactly 2 characters.',
+                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
+            ],
         ],
     ];
 
@@ -125,8 +150,14 @@ final class AddressEntityTest extends TestCase
             'city' => 'New York',
         ],
         'violations' => [
-            'The value of state should not be blank.',
-            'The value of zipcode should not be blank.',
+            7 => [
+                'The value of state should not be blank.',
+                'The value of zipcode should not be blank.',
+            ],
+            8 => [
+                'The value of state should not be blank.',
+                'The value of zipcode should not be blank.',
+            ],
         ],
     ];
 
@@ -136,8 +167,14 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            'The value of street1 should not be blank.',
-            'The value of city should not be blank.',
+            7 => [
+                'The value of street1 should not be blank.',
+                'The value of city should not be blank.',
+            ],
+            8 => [
+                'The value of street1 should not be blank.',
+                'The value of city should not be blank.',
+            ]
         ],
     ];
 
@@ -149,7 +186,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            'Cannot assign null to property App\Entity\Request\AddressEntity::$street1 of type string',
+            7 => [ 'Typed property App\Entity\Request\AddressEntity::$street1 must be string, null used' ],
+            8 => [ 'Cannot assign null to property App\Entity\Request\AddressEntity::$street1 of type string' ],
         ],
     ];
 
@@ -161,7 +199,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            'Cannot assign float to property App\Entity\Request\AddressEntity::$street1 of type string',
+            7 => [ 'Typed property App\Entity\Request\AddressEntity::$street1 must be string, float used' ],
+            8 => [ 'Cannot assign float to property App\Entity\Request\AddressEntity::$street1 of type string' ],
         ],
     ];
 
@@ -173,7 +212,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            'Cannot assign float to property App\Entity\Request\AddressEntity::$street1 of type string',
+            7 => [ 'Typed property App\Entity\Request\AddressEntity::$street1 must be string, float used' ],
+            8 => [ 'Cannot assign float to property App\Entity\Request\AddressEntity::$street1 of type string' ],
         ],
     ];
 
@@ -185,7 +225,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            'Cannot assign null to property App\Entity\Request\AddressEntity::$city of type string',
+            7 => [ 'Typed property App\Entity\Request\AddressEntity::$city must be string, null used' ],
+            8 => [ 'Cannot assign null to property App\Entity\Request\AddressEntity::$city of type string' ],
         ],
     ];
 
@@ -197,7 +238,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            'Cannot assign null to property App\Entity\Request\AddressEntity::$state of type string',
+            7 => [ 'Typed property App\Entity\Request\AddressEntity::$state must be string, null used' ],
+            8 => [ 'Cannot assign null to property App\Entity\Request\AddressEntity::$state of type string' ],
         ],
     ];
 
@@ -209,7 +251,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => 1,
         ],
         'violations' => [
-            'Cannot assign int to property App\Entity\Request\AddressEntity::$zipcode of type string',
+            7 => [ 'Typed property App\Entity\Request\AddressEntity::$zipcode must be string, int used' ],
+            8 => [ 'Cannot assign int to property App\Entity\Request\AddressEntity::$zipcode of type string' ],
         ],
     ];
 
@@ -276,7 +319,7 @@ final class AddressEntityTest extends TestCase
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
-     * @param array<array<string, array<int|string, string>>> $data
+     * @param mixed[] $data
      * @return void
      */
     public function testMakeWithDataWillFailAsExpected(array $data): void
@@ -284,7 +327,12 @@ final class AddressEntityTest extends TestCase
         try {
             AddressEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
-            $this->assertSame($data['violations'], $exception->getViolations());
+            $this->assertSame(
+                (version_compare(PHP_VERSION, '8.0.0', '<'))
+                    ? $data['violations'][7]
+                    : $data['violations'][8],
+                $exception->getViolations()
+            );
         }
     }
 }
