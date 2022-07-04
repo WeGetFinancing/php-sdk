@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Integration;
 
-use App\Client;
-use App\Entity\Request\AuthRequestEntity;
-use App\Entity\Request\LoanRequestEntity;
-use App\Entity\Response\ErrorResponseEntity;
-use App\Entity\Response\SuccessResponseEntity;
-use App\Exception\EntityValidationException;
+use WeGetFinancingSDK\Client;
+use WeGetFinancingSDK\Entity\Request\AuthRequestEntity;
+use WeGetFinancingSDK\Entity\Request\LoanRequestEntity;
+use WeGetFinancingSDK\Entity\Response\ErrorResponseEntity;
+use WeGetFinancingSDK\Entity\Response\SuccessResponseEntity;
+use WeGetFinancingSDK\Exception\EntityValidationException;
 use Functional\Entity\Request\LoanRequestEntityTest;
 use GuzzleHttp\ClientInterface;
 use PHPUnit\Framework\TestCase;
@@ -40,11 +40,11 @@ final class ClientTest extends TestCase
             'username' => $username,
             'password' => $password,
             'merchantId' => $merchantId,
+            'url' => $url,
         ]);
         $http = new HttpClient();
         $this->sut = new Client(
             $auth,
-            (string) $url,
             $http
         );
     }
@@ -70,7 +70,6 @@ final class ClientTest extends TestCase
         $username = getenv('TEST_USERNAME');
         $password = getenv('TEST_PASSWORD');
         $merchantId = getenv('TEST_MERCHANT_ID');
-        /** @var string $url */
         $url = getenv('TEST_WEGETFINANCING_URL');
 
         $this->assertIsNotBool($username);
@@ -82,10 +81,11 @@ final class ClientTest extends TestCase
             'username' => $username,
             'password' => $password,
             'merchantId' => $merchantId,
+            'url' => $url,
         ]);
 
         $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_2['entity']);
-        $response = Client::make($auth, $url)->requestNewLoan($loanRequest);
+        $response = Client::make($auth)->requestNewLoan($loanRequest);
 
         $this->assertTrue($response->getIsSuccess());
         $this->assertSame('200', $response->getCode());
@@ -111,6 +111,7 @@ final class ClientTest extends TestCase
             'username' => $username,
             'password' => $password,
             'merchantId' => $merchantId,
+            'url' => $url,
         ]);
 
         $http = $this->createStub(ClientInterface::class);
@@ -123,7 +124,6 @@ final class ClientTest extends TestCase
 
         $this->sut = new Client(
             $auth,
-            (string) $url,
             $http
         );
 

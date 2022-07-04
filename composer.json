@@ -3,7 +3,7 @@
   "description": "The WeGetFinancing PHP SDK provides convenient access to the WeGetFinancing API from applications written in the PHP language.",
   "minimum-stability": "stable",
   "prefer-stable": true,
-  "license": "proprietary",
+  "license": "LGPL-3.0-only",
   "authors": [
     {
       "name": "Riccardo De Leo",
@@ -28,14 +28,14 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "src/"
+      "WeGetFinancingSDK\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Unit\\": "tests/Unit",
-      "Functional\\": "tests/Functional",
-      "Integration\\": "tests/Integration"
+      "WeGetFinancingSDKUnit\\": "tests/Unit",
+      "WeGetFinancingSDKFunctional\\": "tests/Functional",
+      "WeGetFinancingSDKIntegration\\": "tests/Integration"
     }
   },
   "scripts": {

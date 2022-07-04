@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Request;
+namespace WeGetFinancingSDK\Entity\Request;
 
-use App\Entity\MoneyEntity;
+use WeGetFinancingSDK\Entity\MoneyEntity;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Exception\EntityValidationException;
+use WeGetFinancingSDK\Exception\EntityValidationException;
 use TypeError;
 
 /**
@@ -38,7 +38,7 @@ class LoanRequestEntity extends AbstractRequestEntity
 
     /**
      * @Assert\Type(
-     *     type = "App\Entity\MoneyEntity",
+     *     type = "WeGetFinancingSDK\Entity\MoneyEntity",
      *     message = "The value of shipping amount is not a valid MoneyEntity."
      * )
      */
@@ -46,7 +46,7 @@ class LoanRequestEntity extends AbstractRequestEntity
 
     /**
      * @Assert\Type(
-     *     type = "App\Entity\Request\AddressEntity",
+     *     type = "WeGetFinancingSDK\Entity\Request\AddressEntity",
      *     message = "The value of billing address is not a valid AddressEntity."
      * )
      */
@@ -54,7 +54,7 @@ class LoanRequestEntity extends AbstractRequestEntity
 
     /**
      * @Assert\Type(
-     *     type = "App\Entity\Request\AddressEntity",
+     *     type = "WeGetFinancingSDK\Entity\Request\AddressEntity",
      *     message = "The value of shipping address is not a valid AddressEntity."
      * )
      */

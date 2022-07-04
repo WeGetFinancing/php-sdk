@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace WeGetFinancingSDK;
 
-use App\Entity\Request\AuthRequestEntity;
-use App\Entity\Request\LoanRequestEntity;
-use App\Entity\Response\LoanResponseEntity;
-use App\Exception\EntityValidationException;
+use WeGetFinancingSDK\Entity\Request\AuthRequestEntity;
+use WeGetFinancingSDK\Entity\Request\LoanRequestEntity;
+use WeGetFinancingSDK\Entity\Response\LoanResponseEntity;
+use WeGetFinancingSDK\Exception\EntityValidationException;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client as HttpClient;
@@ -26,33 +26,27 @@ class Client
 
     protected AuthRequestEntity $auth;
 
-    protected string $url;
-
     protected ClientInterface $httpClient;
 
     /**
      * @param AuthRequestEntity $auth
-     * @param string $url
      * @param ClientInterface $httpClient
      */
     public function __construct(
         AuthRequestEntity $auth,
-        string $url,
         ClientInterface $httpClient
     ) {
         $this->auth = $auth;
-        $this->url = $url;
         $this->httpClient = $httpClient;
     }
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    public static function make(AuthRequestEntity $auth, string $url): Client
+    public static function make(AuthRequestEntity $auth): Client
     {
         return new Client(
             $auth,
-            $url,
             new HttpClient()
         );
     }
@@ -68,7 +62,7 @@ class Client
     {
         $response = $this->httpClient->request(
             self::LOAN_REQUEST_METHOD,
-            $this->url . $this->auth->getRequestNewLoanPath(),
+            $this->auth->getRequestNewLoanUrl(),
             [
                 'http_errors' => false,
                 'headers' => $this->auth->getWeGetFinancingRequest(),

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Request;
+namespace WeGetFinancingSDK\Entity\Request;
 
-use App\Entity\AbstractEntity;
+use WeGetFinancingSDK\Entity\AbstractEntity;
 
 abstract class AbstractRequestEntity extends AbstractEntity
 {

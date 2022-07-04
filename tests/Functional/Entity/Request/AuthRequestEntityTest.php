@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Functional\Entity\Request;
 
-use App\Entity\Request\AuthRequestEntity;
-use App\Exception\EntityValidationException;
+use WeGetFinancingSDK\Entity\Request\AuthRequestEntity;
+use WeGetFinancingSDK\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
 final class AuthRequestEntityTest extends TestCase
@@ -15,6 +15,7 @@ final class AuthRequestEntityTest extends TestCase
             'username' => 'User',
             'password' => 'password',
             'merchantId' => '1234',
+            'url' => 'https://valid.url.com',
         ],
         'expected' => [
             'Content-Type' => 'application/json',
@@ -28,6 +29,7 @@ final class AuthRequestEntityTest extends TestCase
             'username' => 'Username1234',
             'password' => 'pass1234',
             'merchant_id' => '5678',
+            'url' => 'https://api.sandbox.wegetfinancing.com',
         ],
         'expected' => [
             'Content-Type' => 'application/json',
@@ -41,6 +43,7 @@ final class AuthRequestEntityTest extends TestCase
             'username' => 'another username',
             'password' => 'another password',
             'merchantId' => '9876',
+            'url' => 'https://valid.url.com',
         ],
         'expected' => [
             'Content-Type' => 'application/json',
@@ -54,6 +57,7 @@ final class AuthRequestEntityTest extends TestCase
             'username' => '',
             'password' => '',
             'merchantId' => '',
+            'url' => '',
         ],
         'violations' => [
             7 => [
@@ -63,6 +67,7 @@ final class AuthRequestEntityTest extends TestCase
                 'The value of password should not be blank.',
                 'The value of merchant id is too short. It should have 2 characters or more.',
                 'The value of merchant id should not be blank.',
+                'The value of url should not be blank.',
             ],
             8 => [
                 'The value of username is too short. It should have 2 characters or more.',
@@ -71,6 +76,7 @@ final class AuthRequestEntityTest extends TestCase
                 'The value of password should not be blank.',
                 'The value of merchant id is too short. It should have 2 characters or more.',
                 'The value of merchant id should not be blank.',
+                'The value of url should not be blank.',
             ],
         ],
     ];
@@ -82,8 +88,8 @@ final class AuthRequestEntityTest extends TestCase
             'merchantId' => '1234',
         ],
         'violations' => [
-            7 => [ 'Typed property App\Entity\Request\AuthRequestEntity::$username must be string, null used' ],
-            8 => [ 'Cannot assign null to property App\Entity\Request\AuthRequestEntity::$username of type string' ],
+            7 => [ 'Typed property WeGetFinancingSDK\Entity\Request\AuthRequestEntity::$username must be string, null used' ],
+            8 => [ 'Cannot assign null to property WeGetFinancingSDK\Entity\Request\AuthRequestEntity::$username of type string' ],
         ],
     ];
 
@@ -92,17 +98,20 @@ final class AuthRequestEntityTest extends TestCase
             'username' => 'u',
             'password' => 'p',
             'merchantId' => '1',
+            'url' => 'http://invalid.protocol.com',
         ],
         'violations' => [
             7 => [
                 'The value of username is too short. It should have 2 characters or more.',
                 'The value of password is too short. It should have 2 characters or more.',
                 'The value of merchant id is too short. It should have 2 characters or more.',
+                'The value of url is not a valid URL.',
             ],
             8 => [
                 'The value of username is too short. It should have 2 characters or more.',
                 'The value of password is too short. It should have 2 characters or more.',
                 'The value of merchant id is too short. It should have 2 characters or more.',
+                'The value of url is not a valid URL.',
             ],
         ],
     ];
@@ -150,8 +159,8 @@ final class AuthRequestEntityTest extends TestCase
             : $data['entity']['merchant_id'];
 
         $this->assertEquals(
-            '/merchant/' . $merchantId . '/requests',
-            $this->sut->getRequestNewLoanPath()
+            $data['entity']['url'] . '/merchant/' . $merchantId . '/requests',
+            $this->sut->getRequestNewLoanUrl()
         );
     }
 

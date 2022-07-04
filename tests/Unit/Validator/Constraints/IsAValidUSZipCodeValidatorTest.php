@@ -8,8 +8,8 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
-use App\Validator\Constraints\IsAValidUSZipCodeValidator;
-use App\Validator\Constraints\IsAValidUSZipCode;
+use WeGetFinancingSDK\Validator\Constraints\IsAValidUSZipCodeValidator;
+use WeGetFinancingSDK\Validator\Constraints\IsAValidUSZipCode;
 use stdClass;
 
 /**

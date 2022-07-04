@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Functional\Entity\Response;
 
-use App\Entity\Response\ErrorResponseEntity;
-use App\Entity\Response\LoanResponseEntity;
-use App\Entity\Response\SuccessResponseEntity;
-use App\Exception\EntityValidationException;
+use WeGetFinancingSDK\Entity\Response\ErrorResponseEntity;
+use WeGetFinancingSDK\Entity\Response\LoanResponseEntity;
+use WeGetFinancingSDK\Entity\Response\SuccessResponseEntity;
+use WeGetFinancingSDK\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
 final class LoanResponseEntityTest extends TestCase

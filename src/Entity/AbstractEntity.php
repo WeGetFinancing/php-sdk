@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace WeGetFinancingSDK\Entity;
 
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use App\Exception\EntityValidationException;
+use WeGetFinancingSDK\Exception\EntityValidationException;
 use TypeError;
 
 abstract class AbstractEntity

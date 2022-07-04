@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Request;
+namespace WeGetFinancingSDK\Entity\Request;
 
-use App\Exception\EntityValidationException;
+use WeGetFinancingSDK\Exception\EntityValidationException;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -48,6 +48,15 @@ class AuthRequestEntity extends AbstractRequestEntity
     public string $merchantId;
 
     /**
+     * @Assert\Url(
+     *     protocols = { "https" },
+     *     message = "The value of url is not a valid URL."
+     * )
+     * @Assert\NotBlank(message = "The value of url should not be blank.")
+     */
+    public string $url;
+
+    /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param null|array<string, mixed> $data
@@ -78,9 +87,9 @@ class AuthRequestEntity extends AbstractRequestEntity
         return base64_encode($this->username . ':' . $this->password);
     }
 
-    public function getRequestNewLoanPath(): string
+    public function getRequestNewLoanUrl(): string
     {
-        return str_replace(
+        return $this->url . str_replace(
             self::MERCHANT_ID_REPLACE,
             $this->merchantId,
             self::LOAN_REQUEST_PATH

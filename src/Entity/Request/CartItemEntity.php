@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Request;
+namespace WeGetFinancingSDK\Entity\Request;
 
-use App\Entity\MoneyEntity;
-use App\Exception\EntityValidationException;
+use WeGetFinancingSDK\Entity\MoneyEntity;
+use WeGetFinancingSDK\Exception\EntityValidationException;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 use TypeError;
@@ -28,7 +28,7 @@ class CartItemEntity extends AbstractRequestEntity
 
     /**
      * @Assert\Type(
-     *     type = "App\Entity\MoneyEntity",
+     *     type = "WeGetFinancingSDK\Entity\MoneyEntity",
      *     message = "The value of unit price is not a valid MoneyEntity."
      * )
      */
@@ -45,7 +45,7 @@ class CartItemEntity extends AbstractRequestEntity
 
     /**
      * @Assert\Type(
-     *     type = "App\Entity\MoneyEntity",
+     *     type = "WeGetFinancingSDK\Entity\MoneyEntity",
      *     message = "The value of unit tax is not a valid MoneyEntity."
      * )
      */
