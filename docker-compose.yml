@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    restart: "no"
+    environment:
+      - XDEBUG_MODE=coverage
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
