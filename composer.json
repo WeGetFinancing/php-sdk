@@ -33,9 +33,9 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "WeGetFinancingSDKUnit\\": "tests/Unit",
-      "WeGetFinancingSDKFunctional\\": "tests/Functional",
-      "WeGetFinancingSDKIntegration\\": "tests/Integration"
+      "Unit\\": "tests/Unit",
+      "Functional\\": "tests/Functional",
+      "Integration\\": "tests/Integration"
     }
   },
   "scripts": {
