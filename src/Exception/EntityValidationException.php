@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancingSDK\Exception;
+namespace WeGetFinancing\SDK\Exception;
 
 class EntityValidationException extends \Exception
 {

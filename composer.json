@@ -28,7 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "WeGetFinancingSDK\\": "src/"
+      "WeGetFinancing\\SDK\\": "src/"
     }
   },
   "autoload-dev": {

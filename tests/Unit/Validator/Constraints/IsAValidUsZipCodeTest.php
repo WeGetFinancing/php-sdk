@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Unit\Validator\Constraints;
 
-use WeGetFinancingSDK\Validator\Constraints\IsAValidUSZipCode;
+use WeGetFinancing\SDK\Validator\Constraints\IsAValidUSZipCode;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 

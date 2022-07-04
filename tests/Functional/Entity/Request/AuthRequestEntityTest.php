@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Functional\Entity\Request;
 
-use WeGetFinancingSDK\Entity\Request\AuthRequestEntity;
-use WeGetFinancingSDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Entity\Request\AuthRequestEntity;
+use WeGetFinancing\SDK\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
 final class AuthRequestEntityTest extends TestCase
@@ -88,8 +88,8 @@ final class AuthRequestEntityTest extends TestCase
             'merchantId' => '1234',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancingSDK\Entity\Request\AuthRequestEntity::$username must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancingSDK\Entity\Request\AuthRequestEntity::$username of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AuthRequestEntity::$username must be string, null used' ],
+            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\AuthRequestEntity::$username of type string' ],
         ],
     ];
 

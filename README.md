@@ -40,9 +40,9 @@ composer require `wegetfinancing/php-sdk`
     
     require 'vendor/autoload.php';
     
-    use WeGetFinancingSDK\Client;
-    use WeGetFinancingSDK\Entity\Request\AuthRequestEntity;
-    use WeGetFinancingSDK\Entity\Request\LoanRequestEntity;
+    use WeGetFinancing\SDK\Client;
+    use WeGetFinancing\SDK\Entity\Request\AuthRequestEntity;
+    use WeGetFinancing\SDK\Entity\Request\LoanRequestEntity;
     ```
 2. Make an AuthResponseEntity and use it to initialise the client
     ```php

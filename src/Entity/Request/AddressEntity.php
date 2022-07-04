@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancingSDK\Entity\Request;
+namespace WeGetFinancing\SDK\Entity\Request;
 
-use WeGetFinancingSDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Exception\EntityValidationException;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
-use WeGetFinancingSDK\Validator\Constraints as WeGetFinancingAssert;
+use WeGetFinancing\SDK\Validator\Constraints as WeGetFinancingAssert;
 
 class AddressEntity extends AbstractRequestEntity
 {

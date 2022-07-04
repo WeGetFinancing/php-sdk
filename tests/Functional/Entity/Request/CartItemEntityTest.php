@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Functional\Entity\Request;
 
-use WeGetFinancingSDK\Entity\Request\CartItemEntity;
-use WeGetFinancingSDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Entity\Request\CartItemEntity;
+use WeGetFinancing\SDK\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -113,8 +113,8 @@ final class CartItemEntityTest extends TestCase
             'unitTax' => null,
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancingSDK\Entity\Request\CartItemEntity::$sku must be string, bool used' ],
-            8 => [ 'Cannot assign bool to property WeGetFinancingSDK\Entity\Request\CartItemEntity::$sku of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\CartItemEntity::$sku must be string, bool used' ],
+            8 => [ 'Cannot assign bool to property WeGetFinancing\SDK\Entity\Request\CartItemEntity::$sku of type string' ],
         ],
     ];
 
@@ -127,8 +127,8 @@ final class CartItemEntityTest extends TestCase
             'unitTax' => null,
         ],
         'violations' => [
-            7 => [ 'Unit Tax Typed property WeGetFinancingSDK\Entity\MoneyEntity::$value must be string, null used' ],
-            8 => [ 'Unit Tax Cannot assign null to property WeGetFinancingSDK\Entity\MoneyEntity::$value of type string' ],
+            7 => [ 'Unit Tax Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, null used' ],
+            8 => [ 'Unit Tax Cannot assign null to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string' ],
         ],
     ];
 

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Integration;
 
-use WeGetFinancingSDK\Client;
-use WeGetFinancingSDK\Entity\Request\AuthRequestEntity;
-use WeGetFinancingSDK\Entity\Request\LoanRequestEntity;
-use WeGetFinancingSDK\Entity\Response\ErrorResponseEntity;
-use WeGetFinancingSDK\Entity\Response\SuccessResponseEntity;
-use WeGetFinancingSDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Client;
+use WeGetFinancing\SDK\Entity\Request\AuthRequestEntity;
+use WeGetFinancing\SDK\Entity\Request\LoanRequestEntity;
+use WeGetFinancing\SDK\Entity\Response\ErrorResponseEntity;
+use WeGetFinancing\SDK\Entity\Response\SuccessResponseEntity;
+use WeGetFinancing\SDK\Exception\EntityValidationException;
 use Functional\Entity\Request\LoanRequestEntityTest;
 use GuzzleHttp\ClientInterface;
 use PHPUnit\Framework\TestCase;

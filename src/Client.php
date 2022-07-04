@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancingSDK;
+namespace WeGetFinancing\SDK;
 
-use WeGetFinancingSDK\Entity\Request\AuthRequestEntity;
-use WeGetFinancingSDK\Entity\Request\LoanRequestEntity;
-use WeGetFinancingSDK\Entity\Response\LoanResponseEntity;
-use WeGetFinancingSDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Entity\Request\AuthRequestEntity;
+use WeGetFinancing\SDK\Entity\Request\LoanRequestEntity;
+use WeGetFinancing\SDK\Entity\Response\LoanResponseEntity;
+use WeGetFinancing\SDK\Exception\EntityValidationException;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client as HttpClient;

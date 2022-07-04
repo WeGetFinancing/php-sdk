@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Functional\Entity\Request;
 
-use WeGetFinancingSDK\Entity\Request\AddressEntity;
-use WeGetFinancingSDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Entity\Request\AddressEntity;
+use WeGetFinancing\SDK\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -186,8 +186,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancingSDK\Entity\Request\AddressEntity::$street1 must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancingSDK\Entity\Request\AddressEntity::$street1 of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 must be string, null used' ],
+            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 of type string' ],
         ],
     ];
 
@@ -199,8 +199,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancingSDK\Entity\Request\AddressEntity::$street1 must be string, float used' ],
-            8 => [ 'Cannot assign float to property WeGetFinancingSDK\Entity\Request\AddressEntity::$street1 of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 must be string, float used' ],
+            8 => [ 'Cannot assign float to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 of type string' ],
         ],
     ];
 
@@ -212,8 +212,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancingSDK\Entity\Request\AddressEntity::$street1 must be string, float used' ],
-            8 => [ 'Cannot assign float to property WeGetFinancingSDK\Entity\Request\AddressEntity::$street1 of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 must be string, float used' ],
+            8 => [ 'Cannot assign float to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 of type string' ],
         ],
     ];
 
@@ -225,8 +225,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancingSDK\Entity\Request\AddressEntity::$city must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancingSDK\Entity\Request\AddressEntity::$city of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$city must be string, null used' ],
+            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$city of type string' ],
         ],
     ];
 
@@ -238,8 +238,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancingSDK\Entity\Request\AddressEntity::$state must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancingSDK\Entity\Request\AddressEntity::$state of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$state must be string, null used' ],
+            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$state of type string' ],
         ],
     ];
 
@@ -251,8 +251,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => 1,
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancingSDK\Entity\Request\AddressEntity::$zipcode must be string, int used' ],
-            8 => [ 'Cannot assign int to property WeGetFinancingSDK\Entity\Request\AddressEntity::$zipcode of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$zipcode must be string, int used' ],
+            8 => [ 'Cannot assign int to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$zipcode of type string' ],
         ],
     ];
 

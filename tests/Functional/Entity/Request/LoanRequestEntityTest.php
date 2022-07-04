@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Functional\Entity\Request;
 
-use WeGetFinancingSDK\Entity\Request\LoanRequestEntity;
-use WeGetFinancingSDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Entity\Request\LoanRequestEntity;
+use WeGetFinancing\SDK\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -156,8 +156,8 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [ 'Unit Tax Typed property WeGetFinancingSDK\Entity\MoneyEntity::$value must be string, null used' ],
-            8 => [ 'Unit Tax Cannot assign null to property WeGetFinancingSDK\Entity\MoneyEntity::$value of type string' ],
+            7 => [ 'Unit Tax Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, null used' ],
+            8 => [ 'Unit Tax Cannot assign null to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string' ],
         ],
     ];
 
@@ -214,8 +214,8 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancingSDK\Entity\Request\LoanRequestEntity::$firstName must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancingSDK\Entity\Request\LoanRequestEntity::$firstName of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\LoanRequestEntity::$firstName must be string, null used' ],
+            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\LoanRequestEntity::$firstName of type string' ],
         ],
     ];
 

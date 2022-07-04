@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Functional\Entity\Response;
 
-use WeGetFinancingSDK\Entity\Response\SuccessResponseEntity;
-use WeGetFinancingSDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Entity\Response\SuccessResponseEntity;
+use WeGetFinancing\SDK\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
 final class SuccessResponseEntityTest extends TestCase

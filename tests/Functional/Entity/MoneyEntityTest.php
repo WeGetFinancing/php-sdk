@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Functional\Entity;
 
-use WeGetFinancingSDK\Entity\MoneyEntity;
-use WeGetFinancingSDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Entity\MoneyEntity;
+use WeGetFinancing\SDK\Exception\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -147,8 +147,8 @@ final class MoneyEntityTest extends TestCase
             'value' => null,
         ],
         'violations' => [
-            7 => [ 'Unit Price Typed property WeGetFinancingSDK\Entity\MoneyEntity::$value must be string, null used' ],
-            8 => [ 'Unit Price Cannot assign null to property WeGetFinancingSDK\Entity\MoneyEntity::$value of type string' ],
+            7 => [ 'Unit Price Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, null used' ],
+            8 => [ 'Unit Price Cannot assign null to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string' ],
         ],
     ];
 
@@ -168,8 +168,8 @@ final class MoneyEntityTest extends TestCase
             'value' => true,
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancingSDK\Entity\MoneyEntity::$value must be string, bool used' ],
-            8 => [ 'Cannot assign bool to property WeGetFinancingSDK\Entity\MoneyEntity::$value of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, bool used' ],
+            8 => [ 'Cannot assign bool to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string' ],
         ],
     ];
 
@@ -179,8 +179,8 @@ final class MoneyEntityTest extends TestCase
             'value' => true,
         ],
         'violations' => [
-            7 => [ 'NAME Typed property WeGetFinancingSDK\Entity\MoneyEntity::$value must be string, bool used' ],
-            8 => [ 'NAME Cannot assign bool to property WeGetFinancingSDK\Entity\MoneyEntity::$value of type string' ],
+            7 => [ 'NAME Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, bool used' ],
+            8 => [ 'NAME Cannot assign bool to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string' ],
         ],
     ];
 

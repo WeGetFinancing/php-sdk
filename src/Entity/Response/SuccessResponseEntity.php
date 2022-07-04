@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancingSDK\Entity\Response;
+namespace WeGetFinancing\SDK\Entity\Response;
 
-use WeGetFinancingSDK\Entity\AbstractEntity;
-use WeGetFinancingSDK\Entity\MoneyEntity;
-use WeGetFinancingSDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Entity\AbstractEntity;
+use WeGetFinancing\SDK\Entity\MoneyEntity;
+use WeGetFinancing\SDK\Exception\EntityValidationException;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 
