@@ -111,7 +111,7 @@ abstract class AbstractEntity
         foreach ($violations as $violation) {
             $messages[] = [
                 'field' => (string) $violation->getPropertyPath(),
-                'message' => $violation->getMessage()
+                'message' => $violation->getMessage(),
             ];
         }
 

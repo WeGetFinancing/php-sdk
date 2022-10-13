@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace WeGetFinancing\SDK\Exception;
 
+use Stringable;
+
 class EntityValidationException extends \Exception
 {
     public const INVALID_ENTITY_DATA_MESSAGE = "The data supplied to initialise the entity are invalid";
@@ -28,7 +30,7 @@ class EntityValidationException extends \Exception
     public const UNDEFINED_RESPONSE_KEY_LOAN_RESPONSE_CODE = 7;
 
     /**
-     * @var string[]
+     * @var array<int|string, string|mixed>
      */
     protected array $violations;
 
@@ -36,7 +38,7 @@ class EntityValidationException extends \Exception
      * @param string $message
      * @param int $code
      * @param \Throwable|null $previous
-     * @param array $violations
+     * @param array<int|string, string|mixed> $violations
      */
     public function __construct(
         string $message = "",
@@ -45,11 +47,21 @@ class EntityValidationException extends \Exception
         array $violations = []
     ) {
         parent::__construct($message, $code, $previous);
+        if (
+            true === array_key_exists('field', $violations) &&
+            true === array_key_exists('message', $violations)
+        ) {
+            $violations = [[
+                'field' => $violations['field'],
+                'message' => $violations['message'],
+            ]];
+        }
+
         $this->violations = $violations;
     }
 
     /**
-     * @return string[]
+     * @return array<int|string, string|mixed>
      */
     public function getViolations(): array
     {

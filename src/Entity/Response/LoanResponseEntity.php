@@ -73,7 +73,7 @@ class LoanResponseEntity extends AbstractEntity
                 null,
                 [[
                     'field' => 'unknown',
-                    'message' => EntityValidationException::UNDEFINED_RESPONSE_KEY_LOAN_RESPONSE_MESSAGE
+                    'message' => EntityValidationException::UNDEFINED_RESPONSE_KEY_LOAN_RESPONSE_MESSAGE,
                 ]]
             );
         }

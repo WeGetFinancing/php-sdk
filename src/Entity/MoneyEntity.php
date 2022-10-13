@@ -73,7 +73,7 @@ class MoneyEntity extends AbstractEntity
                 null,
                 [[
                     'field' => true === empty($this->name) ? 'unknown' : $this->name,
-                    'message' => $this->getFormattedName() . $exception->getMessage()
+                    'message' => $this->getFormattedName() . $exception->getMessage(),
                 ]]
             );
         }
@@ -93,9 +93,9 @@ class MoneyEntity extends AbstractEntity
 
         if (count($violations) > 0) {
             foreach ($violations as $violation) {
-                $messages[] =[
+                $messages[] = [
                     'field' => true === empty($this->name) ? 'unknown' : $this->name,
-                    'message' => $this->getFormattedName() . $violation->getMessage()
+                    'message' => $this->getFormattedName() . $violation->getMessage(),
                 ];
             }
         }
@@ -104,10 +104,10 @@ class MoneyEntity extends AbstractEntity
             false === $this->isZeroAllowed &&
             "0.00" === $this->getValue()
         ) {
-            $messages[] =[
+            $messages[] = [
                 'field' => true === empty($this->name) ? 'unknown' : $this->name,
                 'message' => $this->getFormattedName() .
-                    EntityValidationException::VALIDATION_VIOLATION_INIT_MONEY_ENTITY_MESSAGE
+                    EntityValidationException::VALIDATION_VIOLATION_INIT_MONEY_ENTITY_MESSAGE,
             ];
         }
 
