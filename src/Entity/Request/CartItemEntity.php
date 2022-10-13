@@ -105,7 +105,7 @@ class CartItemEntity extends AbstractRequestEntity
                 EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
                 EntityValidationException::TYPE_ERROR_INIT_ENTITY_CART_ITEM_CODE,
                 null,
-                [ $exception->getMessage() ]
+                [ 'field' => 'unknown', 'message' => $exception->getMessage() ]
             );
         }
 

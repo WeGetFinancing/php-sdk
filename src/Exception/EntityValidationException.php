@@ -36,7 +36,7 @@ class EntityValidationException extends \Exception
      * @param string $message
      * @param int $code
      * @param \Throwable|null $previous
-     * @param string[] $violations
+     * @param array $violations
      */
     public function __construct(
         string $message = "",

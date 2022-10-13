@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Functional\Entity\Response;
 
+use Functional\Entity\EntityValidationErrorsMapperTrait;
+use PHPUnit\Framework\TestCase;
 use WeGetFinancing\SDK\Entity\Response\ErrorResponseEntity;
 use WeGetFinancing\SDK\Exception\EntityValidationException;
-use PHPUnit\Framework\TestCase;
 
 final class ErrorResponseEntityTest extends TestCase
 {
+    use EntityValidationErrorsMapperTrait;
+
     public const VALID_ITEM_1 = [
         'entity' => [
             'error' => 'invalid_parameters',
@@ -148,7 +151,8 @@ final class ErrorResponseEntityTest extends TestCase
         try {
             ErrorResponseEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
-            $this->assertSame($data['violations'], $exception->getViolations());
+            $violations = $this->getViolationMessages($exception);
+            $this->assertSame($data['violations'], $violations);
         }
     }
 }

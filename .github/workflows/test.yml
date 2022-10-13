@@ -8,7 +8,7 @@ on:
 
   workflow_dispatch:
 
-env: # Or as an environment variable
+env:
   TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
   TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
   TEST_MERCHANT_ID: ${{ secrets.TEST_MERCHANT_ID }}
