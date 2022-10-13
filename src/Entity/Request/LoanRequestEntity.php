@@ -86,11 +86,7 @@ class LoanRequestEntity extends AbstractRequestEntity
     public ?string $phone = null;
 
     /**
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage =
-     *      "The value of merchant transaction id name is too short. It should have {{ limit }} characters or more."
-     * )
+     * @Assert\NotBlank(message = "The value of merchant transaction id should not be blank.")
      */
     public ?string $merchantTransactionId;
 
@@ -166,7 +162,7 @@ class LoanRequestEntity extends AbstractRequestEntity
                 EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
                 EntityValidationException::TYPE_ERROR_INIT_ENTITY_LOAN_REQUEST_CODE,
                 null,
-                [ $exception->getMessage() ]
+                [ 'field' => 'unknown', 'message' => $exception->getMessage() ]
             );
         }
 

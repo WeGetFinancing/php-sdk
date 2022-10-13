@@ -71,7 +71,10 @@ class LoanResponseEntity extends AbstractEntity
                 EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
                 EntityValidationException::UNDEFINED_RESPONSE_KEY_LOAN_RESPONSE_CODE,
                 null,
-                [ EntityValidationException::UNDEFINED_RESPONSE_KEY_LOAN_RESPONSE_MESSAGE ]
+                [[
+                    'field' => 'unknown',
+                    'message' => EntityValidationException::UNDEFINED_RESPONSE_KEY_LOAN_RESPONSE_MESSAGE,
+                ]]
             );
         }
         $response = $data['response'];

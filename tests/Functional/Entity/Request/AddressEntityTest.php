@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace Functional\Entity\Request;
 
+use Functional\Entity\EntityValidationErrorsMapperTrait;
+use PHPUnit\Framework\TestCase;
 use WeGetFinancing\SDK\Entity\Request\AddressEntity;
 use WeGetFinancing\SDK\Exception\EntityValidationException;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @functional
  */
 final class AddressEntityTest extends TestCase
 {
+    use EntityValidationErrorsMapperTrait;
+
     public const VALID_ITEM_1 = [
         'entity' => [
             'street1' => '6 West End Ct',
@@ -327,11 +330,12 @@ final class AddressEntityTest extends TestCase
         try {
             AddressEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
+            $violations = $this->getViolationMessages($exception);
             $this->assertSame(
                 (version_compare(PHP_VERSION, '8.0.0', '<'))
                     ? $data['violations'][7]
                     : $data['violations'][8],
-                $exception->getViolations()
+                $violations
             );
         }
     }

@@ -86,7 +86,7 @@ abstract class AbstractEntity
                 EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
                 EntityValidationException::TYPE_ERROR_INIT_ENTITY_ABSTRACT_CODE,
                 null,
-                [ $exception->getMessage() ]
+                [ 'field' => 'unknown', 'message' => $exception->getMessage() ]
             );
         }
 
@@ -109,7 +109,10 @@ abstract class AbstractEntity
 
         $messages = [];
         foreach ($violations as $violation) {
-            $messages[] = (string) $violation->getMessage();
+            $messages[] = [
+                'field' => (string) $violation->getPropertyPath(),
+                'message' => $violation->getMessage(),
+            ];
         }
 
         throw new EntityValidationException(

@@ -4,25 +4,28 @@ declare(strict_types=1);
 
 namespace Functional\Entity\Request;
 
+use Functional\Entity\EntityValidationErrorsMapperTrait;
+use PHPUnit\Framework\TestCase;
 use WeGetFinancing\SDK\Entity\Request\LoanRequestEntity;
 use WeGetFinancing\SDK\Exception\EntityValidationException;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @functional
  */
 final class LoanRequestEntityTest extends TestCase
 {
+    use EntityValidationErrorsMapperTrait;
+
     public const VALID_ITEM_1 = [
         'entity' => [
-            'firstName' => 'John',
+            'firstName' => 'Criscel',
             'last_name' => 'Doe',
             'shippingAmount' => 15.2,
             'version' => '1.9',
-            'email' => 'john.doe@example.com',
+            'email' => 'mary.doe@example.com',
             'phone' => '2223456789',
             'merchant_transaction_id' => '66699',
-            'success_url' => 'https://wegetfinancing.com/successurl',
+            'success_url' => '',
             'failure_url' => 'https://wegetfinancing.com/failureurl',
             'postback_url' => 'https://wegetfinancing.com/postbackurl',
             'billing_address' => AddressEntityTest::VALID_ITEM_1['entity'],
@@ -34,14 +37,14 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'expected' => [
-            'first_name' => 'John',
+            'first_name' => 'Criscel',
             'last_name' => 'Doe',
             'shipping_amount' => '15.20',
             'version' => '1.9',
-            'email' => 'john.doe@example.com',
+            'email' => 'mary.doe@example.com',
             'phone' => '2223456789',
             'merchant_transaction_id' => '66699',
-            'success_url' => 'https://wegetfinancing.com/successurl',
+            'success_url' => '',
             'failure_url' => 'https://wegetfinancing.com/failureurl',
             'postback_url' => 'https://wegetfinancing.com/postbackurl',
             'billing_address' => AddressEntityTest::VALID_ITEM_1['expected'],
@@ -247,7 +250,7 @@ final class LoanRequestEntityTest extends TestCase
                 'The value of last name should not be blank.',
                 'The value of email should not be blank.',
                 'The value of version should not be blank.',
-                'The value of merchant transaction id name is too short. It should have 2 characters or more.',
+                'The value of merchant transaction id should not be blank.',
             ],
             8 => [
                 'The value of first name is too short. It should have 2 characters or more.',
@@ -256,7 +259,7 @@ final class LoanRequestEntityTest extends TestCase
                 'The value of last name should not be blank.',
                 'The value of email should not be blank.',
                 'The value of version should not be blank.',
-                'The value of merchant transaction id name is too short. It should have 2 characters or more.',
+                'The value of merchant transaction id should not be blank.',
             ],
         ],
     ];
@@ -325,11 +328,12 @@ final class LoanRequestEntityTest extends TestCase
         try {
             LoanRequestEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
+            $violations = $this->getViolationMessages($exception);
             $this->assertSame(
                 (version_compare(PHP_VERSION, '8.0.0', '<'))
                     ? $data['violations'][7]
                     : $data['violations'][8],
-                $exception->getViolations()
+                $violations
             );
         }
     }
