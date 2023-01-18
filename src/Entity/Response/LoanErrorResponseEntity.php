@@ -9,7 +9,7 @@ use WeGetFinancing\SDK\Exception\EntityValidationException;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ErrorResponseEntity extends AbstractEntity
+class LoanErrorResponseEntity extends AbstractEntity
 {
     /**
      * @Assert\NotBlank(message = "The value of error should not be blank.")
@@ -47,9 +47,9 @@ class ErrorResponseEntity extends AbstractEntity
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @throws EntityValidationException
      */
-    public static function make(array $data = null): ErrorResponseEntity
+    public static function make(array $data = null): LoanErrorResponseEntity
     {
-        return new ErrorResponseEntity(
+        return new LoanErrorResponseEntity(
             self::getValidator(),
             new CamelCaseToSnakeCaseNameConverter(),
             $data
@@ -95,5 +95,21 @@ class ErrorResponseEntity extends AbstractEntity
     public function getReasons(): ?array
     {
         return $this->reasons;
+    }
+
+    /**
+     * @return array<int|string, mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'error' => $this->getError(),
+            'message' => $this->getMessage(),
+            'type' => $this->getType(),
+            'stamp' => $this->getStamp(),
+            'debug' => $this->getDebug(),
+            'subjects' => $this->getSubjects(),
+            'reasons' => $this->getReasons()
+        ];
     }
 }

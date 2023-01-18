@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Functional\Entity\Request;
+namespace Functional\Entity;
 
-use Functional\Entity\EntityValidationErrorsMapperTrait;
 use PHPUnit\Framework\TestCase;
-use WeGetFinancing\SDK\Entity\Request\AuthRequestEntity;
+use WeGetFinancing\SDK\Entity\AuthEntity;
 use WeGetFinancing\SDK\Exception\EntityValidationException;
 
-final class AuthRequestEntityTest extends TestCase
+final class AuthEntityTest extends TestCase
 {
     use EntityValidationErrorsMapperTrait;
 
@@ -21,9 +20,10 @@ final class AuthRequestEntityTest extends TestCase
             'url' => 'https://valid.url.com',
         ],
         'expected' => [
-            'Content-Type' => 'application/json',
-            'Accept' =>  'application/json',
-            'Authorization' => 'Basic VXNlcjpwYXNzd29yZA==',
+            'username' => 'User',
+            'password' => 'password',
+            'merchantId' => '1234',
+            'url' => 'https://valid.url.com',
         ],
     ];
 
@@ -35,23 +35,10 @@ final class AuthRequestEntityTest extends TestCase
             'url' => 'https://api.sandbox.wegetfinancing.com',
         ],
         'expected' => [
-            'Content-Type' => 'application/json',
-            'Accept' =>  'application/json',
-            'Authorization' => 'Basic VXNlcm5hbWUxMjM0OnBhc3MxMjM0',
-        ],
-    ];
-
-    public const VALID_ITEM_3 = [
-        'entity' => [
-            'username' => 'another username',
-            'password' => 'another password',
-            'merchantId' => '9876',
-            'url' => 'https://valid.url.com',
-        ],
-        'expected' => [
-            'Content-Type' => 'application/json',
-            'Accept' =>  'application/json',
-            'Authorization' => 'Basic YW5vdGhlciB1c2VybmFtZTphbm90aGVyIHBhc3N3b3Jk',
+            'username' => 'Username1234',
+            'password' => 'pass1234',
+            'merchantId' => '5678',
+            'url' => 'https://api.sandbox.wegetfinancing.com',
         ],
     ];
 
@@ -91,8 +78,8 @@ final class AuthRequestEntityTest extends TestCase
             'merchantId' => '1234',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AuthRequestEntity::$username must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\AuthRequestEntity::$username of type string' ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\AuthEntity::$username must be string, null used' ],
+            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\AuthEntity::$username of type string' ],
         ],
     ];
 
@@ -119,29 +106,28 @@ final class AuthRequestEntityTest extends TestCase
         ],
     ];
 
-    protected AuthRequestEntity $sut;
+    protected AuthEntity $sut;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function testMakeWithoutDataWillWorkAsExpected(): void
     {
-        $this->sut = AuthRequestEntity::make();
-        $this->assertInstanceOf(AuthRequestEntity::class, $this->sut);
+        $this->sut = AuthEntity::make();
+        $this->assertInstanceOf(AuthEntity::class, $this->sut);
     }
 
     /**
      * @return iterable<array<array<string, array<string, string>>>>
      */
-    public function getValidAuthRequestEntityData(): iterable
+    public function getValidAuthEntityData(): iterable
     {
         yield [ self::VALID_ITEM_1 ];
         yield [ self::VALID_ITEM_2 ];
-        yield [ self::VALID_ITEM_3 ];
     }
 
     /**
-     * @dataProvider getValidAuthRequestEntityData
+     * @dataProvider getValidAuthEntityData
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
@@ -151,26 +137,29 @@ final class AuthRequestEntityTest extends TestCase
      */
     public function testMakeWithDataWillSucceedAndEntityWillWorkAsExpected(array $data): void
     {
-        $this->sut = AuthRequestEntity::make($data['entity']);
+        $this->sut = AuthEntity::make($data['entity']);
         $this->assertEquals(
-            $data['expected'],
-            $this->sut->getWeGetFinancingRequest()
+            $data['expected']['username'],
+            $this->sut->getUsername()
         );
-
-        $merchantId = (true === isset($data['entity']['merchantId']))
-            ? $data['entity']['merchantId']
-            : $data['entity']['merchant_id'];
-
         $this->assertEquals(
-            $data['entity']['url'] . '/merchant/' . $merchantId . '/requests',
-            $this->sut->getRequestNewLoanUrl()
+            $data['expected']['password'],
+            $this->sut->getPassword()
+        );
+        $this->assertEquals(
+            $data['expected']['merchantId'],
+            $this->sut->getMerchantId()
+        );
+        $this->assertEquals(
+            $data['expected']['url'],
+            $this->sut->getUrl()
         );
     }
 
     /**
      * @return iterable<int, array<array<string, array<int|string, mixed>>>>
      */
-    public function getInvalidAuthRequestEntityData(): iterable
+    public function getInvalidAuthEntityData(): iterable
     {
         yield [ self::INVALID_ITEM_1 ];
         yield [ self::INVALID_ITEM_2 ];
@@ -178,7 +167,7 @@ final class AuthRequestEntityTest extends TestCase
     }
 
     /**
-     * @dataProvider getInvalidAuthRequestEntityData
+     * @dataProvider getInvalidAuthEntityData
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
@@ -188,7 +177,7 @@ final class AuthRequestEntityTest extends TestCase
     public function testMakeWithDataWillFailAsExpected(array $data): void
     {
         try {
-            AuthRequestEntity::make($data['entity']);
+            AuthEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
             $this->assertSame(

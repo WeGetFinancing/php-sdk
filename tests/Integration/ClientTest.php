@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Integration;
 
 use WeGetFinancing\SDK\Client;
-use WeGetFinancing\SDK\Entity\Request\AuthRequestEntity;
+use WeGetFinancing\SDK\Entity\AuthEntity;
 use WeGetFinancing\SDK\Entity\Request\LoanRequestEntity;
 use WeGetFinancing\SDK\Entity\Response\ErrorResponseEntity;
 use WeGetFinancing\SDK\Entity\Response\SuccessResponseEntity;
@@ -36,17 +36,14 @@ final class ClientTest extends TestCase
         $this->assertIsNotBool($merchantId);
         $this->assertIsNotBool($url);
 
-        $auth = AuthRequestEntity::make([
+        $auth = AuthEntity::make([
             'username' => $username,
             'password' => $password,
             'merchantId' => $merchantId,
             'url' => $url,
         ]);
-        $http = new HttpClient();
-        $this->sut = new Client(
-            $auth,
-            $http
-        );
+
+        $this->sut = new Client($auth);
     }
 
     /**

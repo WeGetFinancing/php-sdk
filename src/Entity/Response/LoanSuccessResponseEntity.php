@@ -10,7 +10,7 @@ use WeGetFinancing\SDK\Exception\EntityValidationException;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class SuccessResponseEntity extends AbstractEntity
+class LoanSuccessResponseEntity extends AbstractEntity implements ResponseInterface
 {
     /**
      * @Assert\NotNull(message = "The value of amount is not a valid MoneyEntity.")
@@ -33,9 +33,9 @@ class SuccessResponseEntity extends AbstractEntity
      *
      * @throws EntityValidationException
      */
-    public static function make(array $data = null): SuccessResponseEntity
+    public static function make(array $data = null): LoanSuccessResponseEntity
     {
-        return new SuccessResponseEntity(
+        return new LoanSuccessResponseEntity(
             self::getValidator(),
             new CamelCaseToSnakeCaseNameConverter(),
             $data
@@ -75,5 +75,17 @@ class SuccessResponseEntity extends AbstractEntity
     public function getInvId(): string
     {
         return $this->invId;
+    }
+
+    /**
+     * @return array<int|string, mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'amount' => $this->getAmount(),
+            'href' => $this->getHref(),
+            'invId' => $this->getInvId()
+        ];
     }
 }
