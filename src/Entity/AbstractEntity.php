@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use WeGetFinancing\SDK\Exception\EntityValidationException;
 use TypeError;
 
-abstract class AbstractEntity
+abstract class AbstractEntity implements EntityInterface
 {
     protected ValidatorInterface $validator;
 
@@ -41,19 +41,6 @@ abstract class AbstractEntity
     }
 
     /**
-     * Factory method: return an entity instantiated with the dependencies.
-     * Since this application has not a framework, we avoid using dependency injection in favour of factoriy methods.
-     * Use AbstractEntity::getValidator() to take the correctly instantiated validator.
-     *
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     *
-     * @param null|array<string, mixed> $data
-     * @throws EntityValidationException
-     * @return self
-     */
-    abstract public static function make(array $data = null): self;
-
-    /**
      * Build the validator with annotation mapping and return it.
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
@@ -67,9 +54,6 @@ abstract class AbstractEntity
     }
 
     /**
-     * Set all the properties from array, where the key is the property name and the value the property value.
-     * Execute validation at the end of the set.
-     *
      * @param  array<string, mixed> $data
      * @throws EntityValidationException
      * @return self
@@ -95,8 +79,6 @@ abstract class AbstractEntity
     }
 
     /**
-     * Throw an exception if is not valid, return true if it is.
-     *
      * @throws EntityValidationException
      */
     public function isValid(): bool
@@ -110,7 +92,7 @@ abstract class AbstractEntity
         $messages = [];
         foreach ($violations as $violation) {
             $messages[] = [
-                'field' => (string) $violation->getPropertyPath(),
+                'field' => $violation->getPropertyPath(),
                 'message' => $violation->getMessage(),
             ];
         }

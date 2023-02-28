@@ -6,10 +6,10 @@ namespace Functional\Entity\Response;
 
 use Functional\Entity\EntityValidationErrorsMapperTrait;
 use PHPUnit\Framework\TestCase;
-use WeGetFinancing\SDK\Entity\Response\SuccessResponseEntity;
+use WeGetFinancing\SDK\Entity\Response\LoanSuccessResponseEntity;
 use WeGetFinancing\SDK\Exception\EntityValidationException;
 
-final class SuccessResponseEntityTest extends TestCase
+final class LoanSuccessResponseEntityTest extends TestCase
 {
     use EntityValidationErrorsMapperTrait;
 
@@ -89,15 +89,15 @@ final class SuccessResponseEntityTest extends TestCase
         ],
     ];
 
-    protected SuccessResponseEntity $sut;
+    protected LoanSuccessResponseEntity $sut;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function testMakeWithoutDataWillWorkAsExpected(): void
     {
-        $this->sut = SuccessResponseEntity::make();
-        $this->assertInstanceOf(SuccessResponseEntity::class, $this->sut);
+        $this->sut = LoanSuccessResponseEntity::make();
+        $this->assertInstanceOf(LoanSuccessResponseEntity::class, $this->sut);
     }
 
     /**
@@ -120,7 +120,7 @@ final class SuccessResponseEntityTest extends TestCase
      */
     public function testMakeWithDataWillSucceedAsExpected(array $data): void
     {
-        $this->sut = SuccessResponseEntity::make($data['entity']);
+        $this->sut = LoanSuccessResponseEntity::make($data['entity']);
         $this->assertSame(
             $data['expected']['amount'],
             $this->sut->getAmount()
@@ -133,6 +133,7 @@ final class SuccessResponseEntityTest extends TestCase
             $data['expected']['invId'],
             $this->sut->getInvId()
         );
+        $this->assertSame($data['expected'], $this->sut->toArray());
     }
     /**
      * @return iterable<int, array<array<string, array<int|string, mixed>>>>
@@ -155,7 +156,7 @@ final class SuccessResponseEntityTest extends TestCase
     public function testMakeWithDataWillFailAsExpected(array $data): void
     {
         try {
-            SuccessResponseEntity::make($data['entity']);
+            LoanSuccessResponseEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
             $this->assertSame(

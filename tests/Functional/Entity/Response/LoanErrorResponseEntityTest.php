@@ -6,10 +6,11 @@ namespace Functional\Entity\Response;
 
 use Functional\Entity\EntityValidationErrorsMapperTrait;
 use PHPUnit\Framework\TestCase;
-use WeGetFinancing\SDK\Entity\Response\ErrorResponseEntity;
+use WeGetFinancing\SDK\Entity\Response\LoanErrorResponseEntity;
 use WeGetFinancing\SDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Service\Http\V1\HttpClientV1;
 
-final class ErrorResponseEntityTest extends TestCase
+final class LoanErrorResponseEntityTest extends TestCase
 {
     use EntityValidationErrorsMapperTrait;
 
@@ -25,14 +26,34 @@ final class ErrorResponseEntityTest extends TestCase
                 'email' => 'invalid-email',
             ],
         ],
+        'expected' => [
+            'error' => 'invalid_parameters',
+            'message' => 'InvalidParameters',
+            'type' => 'error',
+            'stamp' => '0x7f7c444253d0',
+            'debug' => 'Action post parameter(s) invalid: email: invalid-email',
+            'subjects' => [ 'email' ],
+            'reasons' => [
+                'email' => 'invalid-email',
+            ],
+        ],
     ];
 
     public const VALID_ITEM_2 = [
         'entity' => [
-            'error' => 'server_error',
-            'message' => 'UnknownError',
-            'type' => 'error',
-            'stamp' => '0x0',
+            'error' => HttpClientV1::DEFAULT_ERROR_ERROR,
+            'message' => HttpClientV1::DEFAULT_ERROR_MESSAGE,
+            'type' => HttpClientV1::DEFAULT_ERROR_TYPE,
+            'stamp' => HttpClientV1::DEFAULT_ERROR_STAMP,
+        ],
+        'expected' => [
+            'error' => HttpClientV1::DEFAULT_ERROR_ERROR,
+            'message' => HttpClientV1::DEFAULT_ERROR_MESSAGE,
+            'type' => HttpClientV1::DEFAULT_ERROR_TYPE,
+            'stamp' => HttpClientV1::DEFAULT_ERROR_STAMP,
+            'debug' => null,
+            'subjects' => null,
+            'reasons' => null,
         ],
     ];
 
@@ -67,15 +88,15 @@ final class ErrorResponseEntityTest extends TestCase
         ],
     ];
 
-    protected ErrorResponseEntity $sut;
+    protected LoanErrorResponseEntity $sut;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function testMakeWithoutDataWillWorkAsExpected(): void
     {
-        $this->sut = ErrorResponseEntity::make();
-        $this->assertInstanceOf(ErrorResponseEntity::class, $this->sut);
+        $this->sut = LoanErrorResponseEntity::make();
+        $this->assertInstanceOf(LoanErrorResponseEntity::class, $this->sut);
     }
 
     /**
@@ -98,7 +119,7 @@ final class ErrorResponseEntityTest extends TestCase
      */
     public function testMakeWithDataWillSucceedAsExpected(array $data): void
     {
-        $this->sut = ErrorResponseEntity::make($data['entity']);
+        $this->sut = LoanErrorResponseEntity::make($data['entity']);
         $this->assertSame(
             $data['entity']['error'],
             $this->sut->getError()
@@ -127,6 +148,8 @@ final class ErrorResponseEntityTest extends TestCase
             $data['entity']['reasons'] ?? null,
             $this->sut->getReasons()
         );
+
+        $this->assertSame($data['expected'], $this->sut->toArray());
     }
 
     /**
@@ -149,7 +172,7 @@ final class ErrorResponseEntityTest extends TestCase
     public function testMakeWithDataWillFailAsExpected(array $data): void
     {
         try {
-            ErrorResponseEntity::make($data['entity']);
+            LoanErrorResponseEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
             $this->assertSame($data['violations'], $violations);

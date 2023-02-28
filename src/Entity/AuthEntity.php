@@ -2,24 +2,14 @@
 
 declare(strict_types=1);
 
-namespace WeGetFinancing\SDK\Entity\Request;
+namespace WeGetFinancing\SDK\Entity;
 
 use WeGetFinancing\SDK\Exception\EntityValidationException;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AuthRequestEntity extends AbstractRequestEntity
+class AuthEntity extends AbstractEntity
 {
-    public const AUTH_REQUEST_HEADERS = [
-        'Content-Type' => 'application/json',
-        'Accept' =>  'application/json',
-        'Authorization' => 'Basic ',
-    ];
-
-    public const LOAN_REQUEST_PATH = '/merchant/%MERCHANT_ID%/requests';
-
-    public const MERCHANT_ID_REPLACE = '%MERCHANT_ID%';
-
     /**
      * @Assert\Length(
      *     min = 2,
@@ -27,7 +17,7 @@ class AuthRequestEntity extends AbstractRequestEntity
      * )
      * @Assert\NotBlank(message = "The value of username should not be blank.")
      */
-    public string $username;
+    protected string $username;
 
     /**
      * @Assert\Length(
@@ -36,7 +26,7 @@ class AuthRequestEntity extends AbstractRequestEntity
      * )
      * @Assert\NotBlank(message = "The value of password should not be blank.")
      */
-    public string $password;
+    protected string $password;
 
     /**
      * @Assert\Length(
@@ -45,7 +35,7 @@ class AuthRequestEntity extends AbstractRequestEntity
      * )
      * @Assert\NotBlank(message = "The value of merchant id should not be blank.")
      */
-    public string $merchantId;
+    protected string $merchantId;
 
     /**
      * @Assert\Url(
@@ -54,45 +44,41 @@ class AuthRequestEntity extends AbstractRequestEntity
      * )
      * @Assert\NotBlank(message = "The value of url should not be blank.")
      */
-    public string $url;
+    protected string $url;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param null|array<string, mixed> $data
      * @throws EntityValidationException
-     * @return AuthRequestEntity
+     * @return AuthEntity
      */
-    public static function make(array $data = null): AuthRequestEntity
+    public static function make(array $data = null): AuthEntity
     {
-        return new AuthRequestEntity(
+        return new AuthEntity(
             self::getValidator(),
             new CamelCaseToSnakeCaseNameConverter(),
             $data
         );
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function getWeGetFinancingRequest(): array
+    public function getUsername(): string
     {
-        $header = self::AUTH_REQUEST_HEADERS;
-        $header['Authorization'] = $header['Authorization'] . $this->getBase64Credentials();
-        return $header;
+        return $this->username;
     }
 
-    public function getBase64Credentials(): string
+    public function getPassword(): string
     {
-        return base64_encode($this->username . ':' . $this->password);
+        return $this->password;
     }
 
-    public function getRequestNewLoanUrl(): string
+    public function getMerchantId(): string
     {
-        return $this->url . str_replace(
-            self::MERCHANT_ID_REPLACE,
-            $this->merchantId,
-            self::LOAN_REQUEST_PATH
-        );
+        return $this->merchantId;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }

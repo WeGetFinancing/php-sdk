@@ -4,101 +4,42 @@ declare(strict_types=1);
 
 namespace WeGetFinancing\SDK;
 
-use WeGetFinancing\SDK\Entity\Request\AuthRequestEntity;
+use WeGetFinancing\SDK\Command\RequestNewLoanCommand;
+use WeGetFinancing\SDK\Command\UpdateShippingStatusCommand;
+use WeGetFinancing\SDK\Entity\AuthEntity;
 use WeGetFinancing\SDK\Entity\Request\LoanRequestEntity;
-use WeGetFinancing\SDK\Entity\Response\LoanResponseEntity;
-use WeGetFinancing\SDK\Exception\EntityValidationException;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Client as HttpClient;
+use WeGetFinancing\SDK\Entity\Request\UpdateShippingStatusRequestEntity;
+use WeGetFinancing\SDK\Entity\Response\ResponseEntity;
 
 class Client
 {
-    public const LOAN_REQUEST_METHOD = 'POST';
+    protected AuthEntity $authEntity;
 
-    public const DATA_CONTENT_ERROR_ERROR = 'unknown-error';
-
-    public const DATA_CONTENT_ERROR_MESSAGE = 'Impossible to decode response content.';
-
-    public const DATA_CONTENT_ERROR_STAMP = '0x0';
-
-    public const DATA_CONTENT_ERROR_TYPE = 'error';
-
-    protected AuthRequestEntity $auth;
-
-    protected ClientInterface $httpClient;
-
-    /**
-     * @param AuthRequestEntity $auth
-     * @param ClientInterface $httpClient
-     */
-    public function __construct(
-        AuthRequestEntity $auth,
-        ClientInterface $httpClient
-    ) {
-        $this->auth = $auth;
-        $this->httpClient = $httpClient;
-    }
-
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
-    public static function make(AuthRequestEntity $auth): Client
+    public function __construct(AuthEntity $authEntity)
     {
-        return new Client(
-            $auth,
-            new HttpClient()
-        );
+        $this->authEntity = $authEntity;
     }
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
-     * @param LoanRequestEntity $loanRequestEntity
-     * @throws GuzzleException|EntityValidationException
-     * @return LoanResponseEntity
+     * @param AuthEntity $authEntity
+     * @return Client
      */
-    public function requestNewLoan(LoanRequestEntity $loanRequestEntity): LoanResponseEntity
+    public static function make(AuthEntity $authEntity): Client
     {
-        $response = $this->httpClient->request(
-            self::LOAN_REQUEST_METHOD,
-            $this->auth->getRequestNewLoanUrl(),
-            [
-                'http_errors' => false,
-                'headers' => $this->auth->getWeGetFinancingRequest(),
-                'json' => $loanRequestEntity->getWeGetFinancingRequest(),
-            ]
-        );
-        $status = $response->getStatusCode();
-        $content = $response->getBody()->getContents();
-        $data = json_decode($content, true);
-        $error = json_last_error();
+        return new Client($authEntity);
+    }
 
-        if (JSON_ERROR_NONE !== $error) {
-            return LoanResponseEntity::make([
-                'isSuccess' => false,
-                'code' => (string) $status,
-                'response' => [
-                    'error' => self::DATA_CONTENT_ERROR_ERROR,
-                    'message' => self::DATA_CONTENT_ERROR_MESSAGE,
-                    'type' => self::DATA_CONTENT_ERROR_TYPE,
-                    'stamp' => self::DATA_CONTENT_ERROR_STAMP,
-                ],
-            ]);
-        }
+    public function requestNewLoan(LoanRequestEntity $requestEntity): ResponseEntity
+    {
+        $command = RequestNewLoanCommand::make($this->authEntity);
+        return $command->execute($requestEntity);
+    }
 
-        if ($status >= 200  && $status < 300) {
-            return LoanResponseEntity::make([
-                'isSuccess' => true,
-                'code' => (string) $status,
-                'response' => $data,
-            ]);
-        }
-
-        return LoanResponseEntity::make([
-            'isSuccess' => false,
-            'code' => (string) $status,
-            'response' => $data,
-        ]);
+    public function updateStatus(UpdateShippingStatusRequestEntity $requestEntity): ResponseEntity
+    {
+        $command = UpdateShippingStatusCommand::make($this->authEntity);
+        return $command->execute($requestEntity);
     }
 }

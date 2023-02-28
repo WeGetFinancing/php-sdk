@@ -96,4 +96,3 @@ composer require `wegetfinancing/php-sdk`
     ```php
     $response = $client->requestNewLoan($request);
     ```
-
