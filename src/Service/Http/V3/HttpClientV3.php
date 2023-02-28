@@ -44,7 +44,7 @@ class HttpClientV3 extends AbstractHttpClient
 
         $response = $this->httpClient->request(
             $verb,
-            $this->getUrlFromMerchantIdPath($path),
+            $this->getUrlFromPath($path),
             [
                 'http_errors' => false,
                 'headers' => $this->getAuthenticatedHeaders($token['access_token']),
@@ -53,16 +53,20 @@ class HttpClientV3 extends AbstractHttpClient
         );
         $status = $response->getStatusCode();
         $content = $response->getBody()->getContents();
-        $data = json_decode($content, true);
-        $error = json_last_error();
 
-        if (JSON_ERROR_NONE !== $error) {
-            return ResponseEntity::make([
-                'isSuccess' => false,
-                'code' => (string) $status,
-                'data' => [],
-            ]);
+        if (false === empty($content)) {
+            $data = json_decode($content, true);
+            $error = json_last_error();
+
+            if (JSON_ERROR_NONE !== $error) {
+                return ResponseEntity::make([
+                    'isSuccess' => false,
+                    'code' => (string) $status,
+                    'data' => [],
+                ]);
+            }
         }
+
 
         if ($status >= 200  && $status < 300) {
             return ResponseEntity::make([
@@ -79,11 +83,15 @@ class HttpClientV3 extends AbstractHttpClient
         ]);
     }
 
+    /**
+     * @throws GuzzleException
+     * @throws EntityValidationException
+     */
     public function getToken(): mixed
     {
         $response = $this->httpClient->request(
             'POST',
-            '/v3/auth',
+            $this->getUrlFromPath('/v3/auth'),
             [
                 'http_errors' => false,
                 'headers' => self::HEADERS,
@@ -107,7 +115,7 @@ class HttpClientV3 extends AbstractHttpClient
             ]);
         }
 
-        if (204 === $status) {
+        if (200 === $status) {
             return $data;
         }
 
@@ -116,10 +124,12 @@ class HttpClientV3 extends AbstractHttpClient
             'code' => (string) $status,
             'data' => $data,
         ]);
-
-
     }
 
+    /**
+     * @param string $token
+     * @return array<string, mixed>
+     */
     protected function getAuthenticatedHeaders(string $token): array
     {
         $header = self::HEADERS;

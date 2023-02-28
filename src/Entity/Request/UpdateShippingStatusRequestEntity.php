@@ -45,6 +45,11 @@ class UpdateShippingStatusRequestEntity extends AbstractRequestEntity
     public null|string $deliveryDate;
 
     /**
+     * @Assert\NotNull(message = "The value of invId should not be null.")
+     */
+    protected null|string $invId;
+
+    /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param null|array<string, mixed> $data
@@ -58,5 +63,10 @@ class UpdateShippingStatusRequestEntity extends AbstractRequestEntity
             new CamelCaseToSnakeCaseNameConverter(),
             $data
         );
+    }
+
+    public function getInvId(): null|string
+    {
+        return $this->invId;
     }
 }

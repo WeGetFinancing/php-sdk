@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 namespace Integration;
 
+use Functional\Entity\Request\UpdateShippingStatusRequestEntityTest;
 use WeGetFinancing\SDK\Client;
 use WeGetFinancing\SDK\Entity\AuthEntity;
 use WeGetFinancing\SDK\Entity\Request\LoanRequestEntity;
-use WeGetFinancing\SDK\Entity\Response\ErrorResponseEntity;
-use WeGetFinancing\SDK\Entity\Response\SuccessResponseEntity;
-use WeGetFinancing\SDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Entity\Request\UpdateShippingStatusRequestEntity;
 use Functional\Entity\Request\LoanRequestEntityTest;
-use GuzzleHttp\ClientInterface;
 use PHPUnit\Framework\TestCase;
-use GuzzleHttp\Client as HttpClient;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 
 final class ClientTest extends TestCase
 {
@@ -49,100 +44,93 @@ final class ClientTest extends TestCase
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    public function testSuccessfullyIntegrationCall(): void
+    public function testSuccessfullyRequestNewLoanCall(): void
     {
         $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);
         $response = $this->sut->requestNewLoan($loanRequest);
 
         $this->assertTrue($response->getIsSuccess());
         $this->assertSame('200', $response->getCode());
-        $this->assertInstanceOf(SuccessResponseEntity::class, $response->getSuccess());
+
+        $data = $response->getData();
+        $this->assertArrayHasKey('invId', $data);
+        $this->assertArrayHasKey('href', $data);
+        $this->assertArrayHasKey('amount', $data);
+        $this->assertSame('1640.94', $data['amount']);
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
-    public function testSuccessfullyIntegrationCallFromMake(): void
+    public function testUnsuccessfullyV3Auth(): void
     {
         $username = getenv('TEST_USERNAME');
-        $password = getenv('TEST_PASSWORD');
+        $password = 'wrong_password';
         $merchantId = getenv('TEST_MERCHANT_ID');
-        $url = getenv('TEST_WEGETFINANCING_URL');
+        $url = getenv('TEST_WEGETFINANCING_URL_V3');
 
         $this->assertIsNotBool($username);
         $this->assertIsNotBool($password);
         $this->assertIsNotBool($merchantId);
         $this->assertIsNotBool($url);
 
-        $auth = AuthRequestEntity::make([
+        $auth = AuthEntity::make([
             'username' => $username,
             'password' => $password,
             'merchantId' => $merchantId,
             'url' => $url,
         ]);
 
-        $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_2['entity']);
-        $response = Client::make($auth)->requestNewLoan($loanRequest);
+        $this->sut = new Client($auth);
 
-        $this->assertTrue($response->getIsSuccess());
-        $this->assertSame('200', $response->getCode());
-        $this->assertInstanceOf(SuccessResponseEntity::class, $response->getSuccess());
-    }
-
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
-    public function testUnsuccessfullyIntegrationCallWithServerError(): void
-    {
-        $username = getenv('TEST_USERNAME');
-        $password = getenv('TEST_PASSWORD');
-        $merchantId = getenv('TEST_MERCHANT_ID');
-        $url = getenv('TEST_WEGETFINANCING_URL');
-
-        $this->assertIsNotBool($username);
-        $this->assertIsNotBool($password);
-        $this->assertIsNotBool($merchantId);
-        $this->assertIsNotBool($url);
-
-        $auth = AuthRequestEntity::make([
-            'username' => $username,
-            'password' => $password,
-            'merchantId' => $merchantId,
-            'url' => $url,
-        ]);
-
-        $http = $this->createStub(ClientInterface::class);
-        $response = $this->createStub(ResponseInterface::class);
-        $response->method('getStatusCode')->willReturn(500);
-        $stream = $this->createStub(StreamInterface::class);
-        $stream->method('getContents')->willReturn('<');
-        $response->method('getBody')->willReturn($stream);
-        $http->method('request')->willReturn($response);
-
-        $this->sut = new Client(
-            $auth,
-            $http
+        $updateRequest = UpdateShippingStatusRequestEntity::make(
+            UpdateShippingStatusRequestEntityTest::VALID_ITEM_1['entity']
         );
 
-        $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_2['entity']);
-        $response = $this->sut->requestNewLoan($loanRequest);
+        $response = $this->sut->updateStatus($updateRequest);
+        $data = $response->getData();
 
         $this->assertFalse($response->getIsSuccess());
-        $this->assertSame('500', $response->getCode());
-        $this->assertInstanceOf(ErrorResponseEntity::class, $response->getError());
+        $this->assertArrayHasKey('created_at', $data);
+        $this->assertArrayHasKey('error_type', $data);
+        $this->assertArrayHasKey('messages', $data);
+        $this->assertSame('AuthenticationError', $data['error_type']);
+        $this->assertArrayHasKey('Invalid or missing credentials', $data['messages'][0]);
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
-    public function testUnsuccessfullyIntegrationCall(): void
+    public function testSuccessfullyUpdateShippingStatus(): void
     {
         $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);
-        $loanRequest->email = 'invalid-email';
-        $response = $this->sut->requestNewLoan($loanRequest);
+        $loanResponse = $this->sut->requestNewLoan($loanRequest);
+        $this->assertTrue($loanResponse->getIsSuccess());
 
-        $this->assertFalse($response->getIsSuccess());
-        $this->assertSame('400', $response->getCode());
-        $this->assertInstanceOf(ErrorResponseEntity::class, $response->getError());
+        $username = getenv('TEST_USERNAME');
+        $password = getenv('TEST_PASSWORD');
+        $merchantId = getenv('TEST_MERCHANT_ID');
+        $url = getenv('TEST_WEGETFINANCING_URL_V3');
+
+        $this->assertIsNotBool($username);
+        $this->assertIsNotBool($password);
+        $this->assertIsNotBool($merchantId);
+        $this->assertIsNotBool($url);
+
+        $auth = AuthEntity::make([
+            'username' => $username,
+            'password' => $password,
+            'merchantId' => $merchantId,
+            'url' => $url,
+        ]);
+
+        $this->sut = new Client($auth);
+
+        $this->assertArrayHasKey('invId', $loanResponse->getData());
+
+        $data = UpdateShippingStatusRequestEntityTest::VALID_ITEM_1['entity'];
+        $data['invId'] = $loanResponse->getData()['invId'];
+
+        $updateRequest = UpdateShippingStatusRequestEntity::make($data);
+
+        $response = $this->sut->updateStatus($updateRequest);
+
+        $this->assertTrue($response->getIsSuccess());
+
+        $this->assertEquals(204, $response->getCode());
     }
 }

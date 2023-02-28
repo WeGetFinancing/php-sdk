@@ -18,13 +18,14 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             'shippingStatus' => UpdateShippingStatusRequestEntity::STATUS_SHIPPED,
             'trackingId' => '1234',
             'trackingCompany' => 'WeGetFinancing',
-            'deliveryDate' => '2022-12-31',
+            'deliveryDate' => '2023-03-03',
+            'invId' => '1'
         ],
         'expected' => [
             'shipping_status' => UpdateShippingStatusRequestEntity::STATUS_SHIPPED,
             'tracking_id' => '1234',
             'tracking_company' => 'WeGetFinancing',
-            'delivery_date' => '2022-12-31',
+            'delivery_date' => '2023-03-03',
         ]
     ];
 
@@ -34,6 +35,7 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             'trackingId' => 'testsomehowlongtexttrackingid',
             'trackingCompany' => 'Test company',
             'deliveryDate' => '2022-12-31',
+            'invId' => '2'
         ],
         'expected' => [
             'shipping_status' => UpdateShippingStatusRequestEntity::STATUS_SHORTAGE,
@@ -49,6 +51,7 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             'trackingId' => 'track1234',
             'trackingCompany' => 'another company',
             'deliveryDate' => '2022-02-10',
+            'invId' => '3'
         ],
         'expected' => [
             'shipping_status' => UpdateShippingStatusRequestEntity::STATUS_DELIVERED,
@@ -64,19 +67,22 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             'trackingId' => null,
             'trackingCompany' => null,
             'deliveryDate' => null,
+            'invId' => null
         ],
         'violations' => [
             7 => [
                 'The value of shipment status should not be null.',
                 'The value of tracking id status should not be null.',
                 'The value of tracking company should not be null.',
-                'The value of delivery date should not be null.'
+                'The value of delivery date should not be null.',
+                'The value of invId should not be null.'
             ],
             8 => [
                 'The value of shipment status should not be null.',
                 'The value of tracking id status should not be null.',
                 'The value of tracking company should not be null.',
-                'The value of delivery date should not be null.'
+                'The value of delivery date should not be null.',
+                'The value of invId should not be null.'
             ],
         ],
     ];
@@ -87,6 +93,7 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             'trackingId' => null,
             'trackingCompany' => null,
             'deliveryDate' => null,
+            'invId' => 'valid'
         ],
         'violations' => [
             7 => [
@@ -114,11 +121,13 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
         'violations' => [
             7 => [
                 'Choose a valid shipment status.',
-                'The value of delivery date is not a valid Date with format YYYY-MM-DD.'
+                'The value of delivery date is not a valid Date with format YYYY-MM-DD.',
+                'The value of invId should not be null.'
             ],
             8 => [
                 'Choose a valid shipment status.',
-                'The value of delivery date is not a valid Date with format YYYY-MM-DD.'
+                'The value of delivery date is not a valid Date with format YYYY-MM-DD.',
+                'The value of invId should not be null.'
             ],
         ],
     ];
