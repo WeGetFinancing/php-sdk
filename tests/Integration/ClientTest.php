@@ -46,8 +46,6 @@ final class ClientTest extends TestCase
         $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);
         $response = $this->sut->requestNewLoan($loanRequest);
 
-        print_r($response->getData());
-
         $this->assertTrue($response->getIsSuccess());
         $this->assertSame('200', $response->getCode());
 

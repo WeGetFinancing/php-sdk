@@ -67,7 +67,7 @@ class UpdateShippingStatusRequestEntity extends AbstractRequestEntity
         );
     }
 
-    public function getInvId(): null|string
+    public function getInvId(): ?string
     {
         return $this->invId;
     }
