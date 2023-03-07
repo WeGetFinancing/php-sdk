@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeGetFinancing\SDK\Entity\Response;
 
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
@@ -21,7 +23,7 @@ class ResponseEntity extends AbstractEntity implements ResponseInterface
     protected string $code;
 
     /**
-     * @var array<int|string, mixed>
+     * @var array<string, mixed>
      */
     protected array $data = [];
 
@@ -49,7 +51,7 @@ class ResponseEntity extends AbstractEntity implements ResponseInterface
     }
 
     /**
-     * @return array<int|string, mixed>
+     * @return array<string, mixed>
      */
     public function getData(): array
     {
@@ -57,7 +59,7 @@ class ResponseEntity extends AbstractEntity implements ResponseInterface
     }
 
     /**
-     * @param array<int|string, mixed> $data
+     * @param array<string, mixed> $data
      * @return $this
      */
     public function setData(array $data): self
@@ -74,8 +76,7 @@ class ResponseEntity extends AbstractEntity implements ResponseInterface
         return [
             'isSuccess' => $this->isSuccess,
             'code' => $this->code,
-            'data' => $this->data
+            'data' => $this->data,
         ];
     }
-
 }

@@ -28,6 +28,9 @@ final class LoanRequestEntityTest extends TestCase
             'success_url' => '',
             'failure_url' => 'https://wegetfinancing.com/failureurl',
             'postback_url' => 'https://wegetfinancing.com/postbackurl',
+            'softwareName' => 'Magento',
+            'softwareVersion' => '2.4.5',
+            'softwarePluginVersion' => '1.3',
             'billing_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'cartItems' => [
@@ -47,6 +50,9 @@ final class LoanRequestEntityTest extends TestCase
             'success_url' => '',
             'failure_url' => 'https://wegetfinancing.com/failureurl',
             'postback_url' => 'https://wegetfinancing.com/postbackurl',
+            'software_name' => 'Magento',
+            'software_version' => '2.4.5',
+//            'software_plugin_version' => '1.3',
             'billing_address' => AddressEntityTest::VALID_ITEM_1['expected'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_1['expected'],
             'cart_items' => [
@@ -69,6 +75,9 @@ final class LoanRequestEntityTest extends TestCase
             'success_url' => 'https://wegetfinancing.com/successurl',
             'failure_url' => 'https://wegetfinancing.com/failureurl',
             'postback_url' => 'https://wegetfinancing.com/postbackurl',
+            'software_name' => 'WordPress',
+            'software_version' => '6',
+            'software_plugin_version' => '1',
             'billing_address' => AddressEntityTest::VALID_ITEM_2['entity'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_2['entity'],
             'cartItems' => [
@@ -87,6 +96,9 @@ final class LoanRequestEntityTest extends TestCase
             'success_url' => 'https://wegetfinancing.com/successurl',
             'failure_url' => 'https://wegetfinancing.com/failureurl',
             'postback_url' => 'https://wegetfinancing.com/postbackurl',
+            'software_name' => 'WordPress',
+            'software_version' => '6',
+//            'software_plugin_version' => '1',
             'billing_address' => AddressEntityTest::VALID_ITEM_2['expected'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_2['expected'],
             'cart_items' => [
@@ -108,6 +120,9 @@ final class LoanRequestEntityTest extends TestCase
             'success_url' => 'invalid-url',
             'failure_url' => 'invalid-url',
             'postback_url' => 'invalid-url',
+            'software_name' => null,
+            'software_version' => null,
+            'software_plugin_version' => null,
             'billing_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'cartItems' => [
@@ -125,6 +140,9 @@ final class LoanRequestEntityTest extends TestCase
                 'The value of success url is not a valid URL.',
                 'The value of failure url is not a valid URL.',
                 'The value of postback url is not a valid URL.',
+                'The value of software name should not be blank.',
+                'The value of software version should not be blank.',
+                'The value of software plugin version should not be blank.',
             ],
             8 => [
                 'The value of first name is too short. It should have 2 characters or more.',
@@ -134,6 +152,9 @@ final class LoanRequestEntityTest extends TestCase
                 'The value of success url is not a valid URL.',
                 'The value of failure url is not a valid URL.',
                 'The value of postback url is not a valid URL.',
+                'The value of software name should not be blank.',
+                'The value of software version should not be blank.',
+                'The value of software plugin version should not be blank.',
             ],
         ],
     ];
@@ -150,6 +171,9 @@ final class LoanRequestEntityTest extends TestCase
             'success_url' => 'https://wegetfinancing.com/successurl',
             'failure_url' => 'https://wegetfinancing.com/failureurl',
             'postback_url' => 'https://wegetfinancing.com/postbackurl',
+            'software_name' => 'WordPress',
+            'software_version' => '6',
+            'software_plugin_version' => '1',
             'billing_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'cartItems' => [
@@ -208,6 +232,9 @@ final class LoanRequestEntityTest extends TestCase
             'success_url' => 'https://wegetfinancing.com/successurl',
             'failure_url' => 'https://wegetfinancing.com/failureurl',
             'postback_url' => 'https://wegetfinancing.com/postbackurl',
+            'software_name' => 'Magento',
+            'software_version' => '2.4.5',
+            'software_plugin_version' => '1.3',
             'billing_address' => AddressEntityTest::INVALID_ITEM_2['entity'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'cartItems' => [
@@ -236,6 +263,9 @@ final class LoanRequestEntityTest extends TestCase
             'postback_url' => '',
             'billing_address' => AddressEntityTest::VALID_ITEM_1['entity'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_1['entity'],
+            'software_name' => 'Magento',
+            'software_version' => '2.4.5',
+            'software_plugin_version' => '1.3',
             'cartItems' => [
                 CartItemEntityTest::VALID_ITEM_1['entity'],
                 CartItemEntityTest::VALID_ITEM_2['entity'],
@@ -260,6 +290,42 @@ final class LoanRequestEntityTest extends TestCase
                 'The value of email should not be blank.',
                 'The value of version should not be blank.',
                 'The value of merchant transaction id should not be blank.',
+            ],
+        ],
+    ];
+
+    public const INVALID_ITEM_6 = [
+        'entity' => [
+            'firstName' => 'Riccardo',
+            'last_name' => 'De Leo',
+            'shippingAmount' => 1900.210004,
+            'version' => '1.9',
+            'email' => 'riccardo.deleo@example.com',
+            'phone' => '2223456789',
+            'merchant_transaction_id' => '12345',
+            'success_url' => 'https://wegetfinancing.com/successurl',
+            'failure_url' => 'https://wegetfinancing.com/failureurl',
+            'postback_url' => 'https://wegetfinancing.com/postbackurl',
+            'software_name' => '',
+            'software_version' => '',
+            'software_plugin_version' => '',
+            'billing_address' => AddressEntityTest::VALID_ITEM_2['entity'],
+            'shipping_address' => AddressEntityTest::VALID_ITEM_2['entity'],
+            'cartItems' => [
+                CartItemEntityTest::VALID_ITEM_1['entity'],
+                CartItemEntityTest::VALID_ITEM_3['entity'],
+            ],
+        ],
+        'violations' => [
+            7 => [
+                'The value of software name should not be blank.',
+                'The value of software version should not be blank.',
+                'The value of software plugin version should not be blank.',
+            ],
+            8 => [
+                'The value of software name should not be blank.',
+                'The value of software version should not be blank.',
+                'The value of software plugin version should not be blank.',
             ],
         ],
     ];
@@ -313,6 +379,7 @@ final class LoanRequestEntityTest extends TestCase
         yield [ self::INVALID_ITEM_3 ];
         yield [ self::INVALID_ITEM_4 ];
         yield [ self::INVALID_ITEM_5 ];
+        yield [ self::INVALID_ITEM_6 ];
     }
 
     /**

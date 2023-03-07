@@ -66,23 +66,23 @@ final class ResponseEntityTest extends TestCase
 
     public const INVALID_ITEM_1 = [
         'entity' => [
-            'isSuccess' => false
+            'isSuccess' => false,
         ],
         'violations' => [
             7 => [
                 'The value of code should not be blank.',
-                'The value of code should not be null.'
+                'The value of code should not be null.',
             ],
             8 => [
                 'The value of code should not be blank.',
-                'The value of code should not be null.'
+                'The value of code should not be null.',
             ],
         ],
     ];
 
     public const INVALID_ITEM_2 = [
         'entity' => [
-            'code' => '500'
+            'code' => '500',
         ],
         'violations' => [
             7 => [

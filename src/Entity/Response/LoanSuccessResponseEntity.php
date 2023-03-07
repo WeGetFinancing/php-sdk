@@ -78,14 +78,14 @@ class LoanSuccessResponseEntity extends AbstractEntity implements ResponseInterf
     }
 
     /**
-     * @return array<int|string, mixed>
+     * @return array<string, mixed>
      */
     public function toArray(): array
     {
         return [
             'amount' => $this->getAmount(),
             'href' => $this->getHref(),
-            'invId' => $this->getInvId()
+            'invId' => $this->getInvId(),
         ];
     }
 }

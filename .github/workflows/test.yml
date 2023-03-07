@@ -13,6 +13,7 @@ env:
   TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
   TEST_MERCHANT_ID: ${{ secrets.TEST_MERCHANT_ID }}
   TEST_WEGETFINANCING_URL: ${{ secrets.TEST_WEGETFINANCING_URL }}
+  TEST_WEGETFINANCING_URL_V3: ${{ secrets.TEST_WEGETFINANCING_URL_V3 }}
   CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
 jobs:
@@ -27,6 +28,7 @@ jobs:
           - "7.4"
           - "8.0"
           - "8.1"
+          - "8.2"
     steps:
       - uses: actions/checkout@v3
       - name: Setup PHP

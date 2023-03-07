@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeGetFinancing\SDK\Service\Http;
 
 use GuzzleHttp\ClientInterface;

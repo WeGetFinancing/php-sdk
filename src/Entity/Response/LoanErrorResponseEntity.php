@@ -45,6 +45,7 @@ class LoanErrorResponseEntity extends AbstractEntity
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
+     * @param $data null|array<string, mixed>
      * @throws EntityValidationException
      */
     public static function make(array $data = null): LoanErrorResponseEntity
@@ -98,7 +99,7 @@ class LoanErrorResponseEntity extends AbstractEntity
     }
 
     /**
-     * @return array<int|string, mixed>
+     * @return array<string, mixed>
      */
     public function toArray(): array
     {
@@ -109,7 +110,7 @@ class LoanErrorResponseEntity extends AbstractEntity
             'stamp' => $this->getStamp(),
             'debug' => $this->getDebug(),
             'subjects' => $this->getSubjects(),
-            'reasons' => $this->getReasons()
+            'reasons' => $this->getReasons(),
         ];
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeGetFinancing\SDK\Command;
 
 use Exception;
@@ -20,8 +22,8 @@ interface CommandInterface
      * Exceptions management.
      *
      * @param AbstractRequestEntity $requestEntity
-     * @return mixed
      * @throws Exception
+     * @return mixed
      */
     public function execute(AbstractRequestEntity $requestEntity): mixed;
 }

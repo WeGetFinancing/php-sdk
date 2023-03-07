@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeGetFinancing\SDK\Entity\Request;
 
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
@@ -16,7 +18,7 @@ class UpdateShippingStatusRequestEntity extends AbstractRequestEntity
         self::STATUS_SHIPPED,
         self::STATUS_STOCKED,
         self::STATUS_SHORTAGE,
-        self::STATUS_DELIVERED
+        self::STATUS_DELIVERED,
     ];
 
     /**
