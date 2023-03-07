@@ -28,28 +28,28 @@ class UpdateShippingStatusRequestEntity extends AbstractRequestEntity
      *      message = "Choose a valid shipment status."
      * )
      */
-    public null|string $shippingStatus;
+    public ?string $shippingStatus;
 
     /**
      * @Assert\NotNull(message = "The value of tracking id status should not be null.")
      */
-    public null|string $trackingId;
+    public ?string $trackingId;
 
     /**
      * @Assert\NotNull(message = "The value of tracking company should not be null.")
      */
-    public null|string $trackingCompany;
+    public ?string $trackingCompany;
 
     /**
      * @Assert\NotNull(message = "The value of delivery date should not be null.")
      * @Assert\Date(message = "The value of delivery date is not a valid Date with format YYYY-MM-DD.")
      */
-    public null|string $deliveryDate;
+    public ?string $deliveryDate;
 
     /**
      * @Assert\NotNull(message = "The value of invId should not be null.")
      */
-    protected null|string $invId;
+    protected ?string $invId;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)

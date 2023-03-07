@@ -36,8 +36,8 @@ class Client
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param LoanRequestEntity $requestEntity
-     * @return ResponseEntity
      * @throws EntityValidationException
+     * @return ResponseEntity
      */
     public function requestNewLoan(LoanRequestEntity $requestEntity): ResponseEntity
     {
