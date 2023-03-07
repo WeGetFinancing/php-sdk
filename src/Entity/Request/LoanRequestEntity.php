@@ -15,6 +15,7 @@ use TypeError;
  * "$merchantTransactionId" to match the request format.
  *
  * @SuppressWarnings(PHPMD.LongVariable)
+ * @SuppressWarnings(PHPMD.TooManyFields)
  */
 class LoanRequestEntity extends AbstractRequestEntity
 {
@@ -104,6 +105,21 @@ class LoanRequestEntity extends AbstractRequestEntity
      * @Assert\Url(message = "The value of postback url is not a valid URL.")
      */
     public ?string $postbackUrl;
+
+    /**
+     * @Assert\NotBlank(message = "The value of software name should not be blank.")
+     */
+    public ?string $softwareName;
+
+    /**
+     * @Assert\NotBlank(message = "The value of software version should not be blank.")
+     */
+    public ?string $softwareVersion;
+
+    /**
+     * @Assert\NotBlank(message = "The value of software plugin version should not be blank.")
+     */
+    protected ?string $softwarePluginVersion;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)

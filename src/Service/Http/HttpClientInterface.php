@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeGetFinancing\SDK\Service\Http;
 
 use WeGetFinancing\SDK\Entity\Response\ResponseEntity;

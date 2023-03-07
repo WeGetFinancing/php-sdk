@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use WeGetFinancing\SDK\Entity\Request\UpdateShippingStatusRequestEntity;
 use WeGetFinancing\SDK\Exception\EntityValidationException;
 
-class UpdateShippingStatusRequestEntityTest  extends TestCase
+class UpdateShippingStatusRequestEntityTest extends TestCase
 {
     use EntityValidationErrorsMapperTrait;
 
@@ -19,14 +19,14 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             'trackingId' => '1234',
             'trackingCompany' => 'WeGetFinancing',
             'deliveryDate' => '2023-03-03',
-            'invId' => '1'
+            'invId' => '1',
         ],
         'expected' => [
             'shipping_status' => UpdateShippingStatusRequestEntity::STATUS_SHIPPED,
             'tracking_id' => '1234',
             'tracking_company' => 'WeGetFinancing',
             'delivery_date' => '2023-03-03',
-        ]
+        ],
     ];
 
     public const VALID_ITEM_2 = [
@@ -35,14 +35,14 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             'trackingId' => 'testsomehowlongtexttrackingid',
             'trackingCompany' => 'Test company',
             'deliveryDate' => '2022-12-31',
-            'invId' => '2'
+            'invId' => '2',
         ],
         'expected' => [
             'shipping_status' => UpdateShippingStatusRequestEntity::STATUS_SHORTAGE,
             'tracking_id' => 'testsomehowlongtexttrackingid',
             'tracking_company' => 'Test company',
             'delivery_date' => '2022-12-31',
-        ]
+        ],
     ];
 
     public const VALID_ITEM_3 = [
@@ -51,14 +51,14 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             'trackingId' => 'track1234',
             'trackingCompany' => 'another company',
             'deliveryDate' => '2022-02-10',
-            'invId' => '3'
+            'invId' => '3',
         ],
         'expected' => [
             'shipping_status' => UpdateShippingStatusRequestEntity::STATUS_DELIVERED,
             'tracking_id' => 'track1234',
             'tracking_company' => 'another company',
             'delivery_date' => '2022-02-10',
-        ]
+        ],
     ];
 
     public const INVALID_ITEM_1 = [
@@ -67,7 +67,7 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             'trackingId' => null,
             'trackingCompany' => null,
             'deliveryDate' => null,
-            'invId' => null
+            'invId' => null,
         ],
         'violations' => [
             7 => [
@@ -75,14 +75,14 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
                 'The value of tracking id status should not be null.',
                 'The value of tracking company should not be null.',
                 'The value of delivery date should not be null.',
-                'The value of invId should not be null.'
+                'The value of invId should not be null.',
             ],
             8 => [
                 'The value of shipment status should not be null.',
                 'The value of tracking id status should not be null.',
                 'The value of tracking company should not be null.',
                 'The value of delivery date should not be null.',
-                'The value of invId should not be null.'
+                'The value of invId should not be null.',
             ],
         ],
     ];
@@ -93,20 +93,20 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             'trackingId' => null,
             'trackingCompany' => null,
             'deliveryDate' => null,
-            'invId' => 'valid'
+            'invId' => 'valid',
         ],
         'violations' => [
             7 => [
                 'Choose a valid shipment status.',
                 'The value of tracking id status should not be null.',
                 'The value of tracking company should not be null.',
-                'The value of delivery date should not be null.'
+                'The value of delivery date should not be null.',
             ],
             8 => [
                 'Choose a valid shipment status.',
                 'The value of tracking id status should not be null.',
                 'The value of tracking company should not be null.',
-                'The value of delivery date should not be null.'
+                'The value of delivery date should not be null.',
             ],
         ],
     ];
@@ -122,12 +122,12 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             7 => [
                 'Choose a valid shipment status.',
                 'The value of delivery date is not a valid Date with format YYYY-MM-DD.',
-                'The value of invId should not be null.'
+                'The value of invId should not be null.',
             ],
             8 => [
                 'Choose a valid shipment status.',
                 'The value of delivery date is not a valid Date with format YYYY-MM-DD.',
-                'The value of invId should not be null.'
+                'The value of invId should not be null.',
             ],
         ],
     ];
@@ -141,10 +141,10 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
         ],
         'violations' => [
             7 => [
-                'Choose a valid shipment status.'
+                'Choose a valid shipment status.',
             ],
             8 => [
-                'Choose a valid shipment status.'
+                'Choose a valid shipment status.',
             ],
         ],
     ];
@@ -222,5 +222,4 @@ class UpdateShippingStatusRequestEntityTest  extends TestCase
             );
         }
     }
-
 }

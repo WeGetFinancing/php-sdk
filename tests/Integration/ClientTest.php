@@ -12,13 +12,13 @@ use WeGetFinancing\SDK\Entity\Request\UpdateShippingStatusRequestEntity;
 use Functional\Entity\Request\LoanRequestEntityTest;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 final class ClientTest extends TestCase
 {
     private Client $sut;
 
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
     public function setUp(): void
     {
         $username = getenv('TEST_USERNAME');
@@ -41,9 +41,6 @@ final class ClientTest extends TestCase
         $this->sut = new Client($auth);
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
     public function testSuccessfullyRequestNewLoanCall(): void
     {
         $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);

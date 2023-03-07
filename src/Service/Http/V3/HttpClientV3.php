@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeGetFinancing\SDK\Service\Http\V3;
 
 use GuzzleHttp\Client;
@@ -13,7 +15,7 @@ class HttpClientV3 extends AbstractHttpClient
 {
     public const HEADERS = [
         'Content-Type' => 'application/json',
-        'Accept' =>  'application/json'
+        'Accept' =>  'application/json',
     ];
 
     /**
@@ -31,6 +33,8 @@ class HttpClientV3 extends AbstractHttpClient
     }
 
     /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
      * @throws GuzzleException
      * @throws EntityValidationException
      */
@@ -84,6 +88,8 @@ class HttpClientV3 extends AbstractHttpClient
     }
 
     /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
      * @throws GuzzleException
      * @throws EntityValidationException
      */
@@ -97,7 +103,7 @@ class HttpClientV3 extends AbstractHttpClient
                 'headers' => self::HEADERS,
                 'json' => [
                     'client_id' => $this->authEntity->getUsername(),
-                    'client_secret' => $this->authEntity->getPassword()
+                    'client_secret' => $this->authEntity->getPassword(),
                 ],
             ]
         );

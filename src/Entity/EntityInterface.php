@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeGetFinancing\SDK\Entity;
 
 use WeGetFinancing\SDK\Exception\EntityValidationException;
@@ -19,7 +21,7 @@ interface EntityInterface
      *
      * @SuppressWarnings(PHPMD.StaticAccess)
      *
-     * @param null|array<int|string, mixed> $data
+     * @param null|array<string, mixed> $data
      * @throws EntityValidationException
      * @return self
      */

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WeGetFinancing\SDK\Service\Http\V1;
 
 use GuzzleHttp\Client;
@@ -40,6 +42,8 @@ class HttpClientV1 extends AbstractHttpClient
     }
 
     /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
      * @throws GuzzleException
      * @throws EntityValidationException
      */
