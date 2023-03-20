@@ -8,8 +8,6 @@ use WeGetFinancing\SDK\Entity\AuthEntity;
 use WeGetFinancing\SDK\Entity\Request\AbstractRequestEntity;
 use WeGetFinancing\SDK\Entity\Request\UpdateShippingStatusRequestEntity;
 use WeGetFinancing\SDK\Entity\Response\ResponseEntity;
-use WeGetFinancing\SDK\Exception\EntityValidationException;
-use WeGetFinancing\SDK\Service\Http\HttpClientInterface;
 use WeGetFinancing\SDK\Service\Http\V3\HttpClientV3;
 
 class UpdateShippingStatusCommand extends AbstractCommand

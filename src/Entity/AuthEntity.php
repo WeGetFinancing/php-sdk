@@ -37,14 +37,7 @@ class AuthEntity extends AbstractEntity
      */
     protected string $merchantId;
 
-    /**
-     * @Assert\Url(
-     *     protocols = { "https" },
-     *     message = "The value of url is not a valid URL."
-     * )
-     * @Assert\NotBlank(message = "The value of url should not be blank.")
-     */
-    protected string $url;
+    protected bool $prod = false;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
@@ -77,8 +70,8 @@ class AuthEntity extends AbstractEntity
         return $this->merchantId;
     }
 
-    public function getUrl(): string
+    public function isProd(): bool
     {
-        return $this->url;
+        return $this->prod;
     }
 }

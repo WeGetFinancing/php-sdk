@@ -17,13 +17,13 @@ final class AuthEntityTest extends TestCase
             'username' => 'User',
             'password' => 'password',
             'merchantId' => '1234',
-            'url' => 'https://valid.url.com',
+            'prod' => false,
         ],
         'expected' => [
             'username' => 'User',
             'password' => 'password',
             'merchantId' => '1234',
-            'url' => 'https://valid.url.com',
+            'prod' => false,
         ],
     ];
 
@@ -32,13 +32,27 @@ final class AuthEntityTest extends TestCase
             'username' => 'Username1234',
             'password' => 'pass1234',
             'merchant_id' => '5678',
-            'url' => 'https://api.sandbox.wegetfinancing.com',
+            'prod' => true,
         ],
         'expected' => [
             'username' => 'Username1234',
             'password' => 'pass1234',
             'merchantId' => '5678',
-            'url' => 'https://api.sandbox.wegetfinancing.com',
+            'prod' => true,
+        ],
+    ];
+
+    public const VALID_ITEM_3 = [
+        'entity' => [
+            'username' => 'Username1234',
+            'password' => 'pass1234',
+            'merchant_id' => '5678',
+        ],
+        'expected' => [
+            'username' => 'Username1234',
+            'password' => 'pass1234',
+            'merchantId' => '5678',
+            'prod' => false,
         ],
     ];
 
@@ -47,7 +61,6 @@ final class AuthEntityTest extends TestCase
             'username' => '',
             'password' => '',
             'merchantId' => '',
-            'url' => '',
         ],
         'violations' => [
             7 => [
@@ -57,7 +70,6 @@ final class AuthEntityTest extends TestCase
                 'The value of password should not be blank.',
                 'The value of merchant id is too short. It should have 2 characters or more.',
                 'The value of merchant id should not be blank.',
-                'The value of url should not be blank.',
             ],
             8 => [
                 'The value of username is too short. It should have 2 characters or more.',
@@ -66,7 +78,6 @@ final class AuthEntityTest extends TestCase
                 'The value of password should not be blank.',
                 'The value of merchant id is too short. It should have 2 characters or more.',
                 'The value of merchant id should not be blank.',
-                'The value of url should not be blank.',
             ],
         ],
     ];
@@ -88,21 +99,11 @@ final class AuthEntityTest extends TestCase
             'username' => 'u',
             'password' => 'p',
             'merchantId' => '1',
-            'url' => 'http://invalid.protocol.com',
+            'prod' => 'http://invalid.protocol.com',
         ],
         'violations' => [
-            7 => [
-                'The value of username is too short. It should have 2 characters or more.',
-                'The value of password is too short. It should have 2 characters or more.',
-                'The value of merchant id is too short. It should have 2 characters or more.',
-                'The value of url is not a valid URL.',
-            ],
-            8 => [
-                'The value of username is too short. It should have 2 characters or more.',
-                'The value of password is too short. It should have 2 characters or more.',
-                'The value of merchant id is too short. It should have 2 characters or more.',
-                'The value of url is not a valid URL.',
-            ],
+            7 => [ 'Typed property WeGetFinancing\SDK\Entity\AuthEntity::$prod must be bool, string used' ],
+            8 => [ 'Cannot assign string to property WeGetFinancing\SDK\Entity\AuthEntity::$prod of type bool' ],
         ],
     ];
 
@@ -118,12 +119,13 @@ final class AuthEntityTest extends TestCase
     }
 
     /**
-     * @return iterable<array<array<string, array<string, string>>>>
+     * @return iterable<array<array<string, array<string, bool|string>>>>
      */
     public function getValidAuthEntityData(): iterable
     {
         yield [ self::VALID_ITEM_1 ];
         yield [ self::VALID_ITEM_2 ];
+        yield [ self::VALID_ITEM_3 ];
     }
 
     /**
@@ -151,8 +153,8 @@ final class AuthEntityTest extends TestCase
             $this->sut->getMerchantId()
         );
         $this->assertEquals(
-            $data['expected']['url'],
-            $this->sut->getUrl()
+            $data['expected']['prod'],
+            $this->sut->isProd()
         );
     }
 

@@ -14,13 +14,9 @@ use WeGetFinancing\SDK\Service\Http\AbstractHttpClient;
 class HttpClientV1 extends AbstractHttpClient
 {
     public const DEFAULT_ERROR_ERROR = 'unknown-error';
-
     public const DEFAULT_ERROR_MESSAGE = 'Impossible to decode response content.';
-
     public const DEFAULT_ERROR_STAMP = '0x0';
-
     public const DEFAULT_ERROR_TYPE = 'error';
-
     public const HEADERS = [
         'Content-Type' => 'application/json',
         'Accept' =>  'application/json',
@@ -51,7 +47,7 @@ class HttpClientV1 extends AbstractHttpClient
     {
         $response = $this->httpClient->request(
             $verb,
-            $this->getUrlFromMerchantIdPath($path),
+            $this->getUrlApiV1FromMerchantIdPath($path),
             [
                 'http_errors' => false,
                 'headers' => $this->getHeaders(),

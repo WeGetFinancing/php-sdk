@@ -14,11 +14,9 @@ use WeGetFinancing\SDK\Exception\EntityValidationException;
 
 class Client
 {
-    protected AuthEntity $authEntity;
-
-    public function __construct(AuthEntity $authEntity)
-    {
-        $this->authEntity = $authEntity;
+    public function __construct(
+        protected AuthEntity $authEntity
+    ) {
     }
 
     /**

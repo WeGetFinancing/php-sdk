@@ -24,18 +24,15 @@ final class ClientTest extends TestCase
         $username = getenv('TEST_USERNAME');
         $password = getenv('TEST_PASSWORD');
         $merchantId = getenv('TEST_MERCHANT_ID');
-        $url = getenv('TEST_WEGETFINANCING_URL');
 
         $this->assertIsNotBool($username);
         $this->assertIsNotBool($password);
         $this->assertIsNotBool($merchantId);
-        $this->assertIsNotBool($url);
 
         $auth = AuthEntity::make([
             'username' => $username,
             'password' => $password,
             'merchantId' => $merchantId,
-            'url' => $url,
         ]);
 
         $this->sut = new Client($auth);
@@ -61,18 +58,15 @@ final class ClientTest extends TestCase
         $username = getenv('TEST_USERNAME');
         $password = 'wrong_password';
         $merchantId = getenv('TEST_MERCHANT_ID');
-        $url = getenv('TEST_WEGETFINANCING_URL_V3');
 
         $this->assertIsNotBool($username);
         $this->assertIsNotBool($password);
         $this->assertIsNotBool($merchantId);
-        $this->assertIsNotBool($url);
 
         $auth = AuthEntity::make([
             'username' => $username,
             'password' => $password,
             'merchantId' => $merchantId,
-            'url' => $url,
         ]);
 
         $this->sut = new Client($auth);
@@ -97,25 +91,6 @@ final class ClientTest extends TestCase
         $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);
         $loanResponse = $this->sut->requestNewLoan($loanRequest);
         $this->assertTrue($loanResponse->getIsSuccess());
-
-        $username = getenv('TEST_USERNAME');
-        $password = getenv('TEST_PASSWORD');
-        $merchantId = getenv('TEST_MERCHANT_ID');
-        $url = getenv('TEST_WEGETFINANCING_URL_V3');
-
-        $this->assertIsNotBool($username);
-        $this->assertIsNotBool($password);
-        $this->assertIsNotBool($merchantId);
-        $this->assertIsNotBool($url);
-
-        $auth = AuthEntity::make([
-            'username' => $username,
-            'password' => $password,
-            'merchantId' => $merchantId,
-            'url' => $url,
-        ]);
-
-        $this->sut = new Client($auth);
 
         $this->assertArrayHasKey('invId', $loanResponse->getData());
 

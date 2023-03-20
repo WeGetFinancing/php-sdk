@@ -12,10 +12,6 @@ use TypeError;
 
 abstract class AbstractEntity implements EntityInterface
 {
-    protected ValidatorInterface $validator;
-
-    protected NameConverterInterface $camelCaseToSnakeCase;
-
     /**
      * @param ValidatorInterface $validator
      * @param NameConverterInterface $camelCaseToSnakeCase
@@ -23,17 +19,11 @@ abstract class AbstractEntity implements EntityInterface
      * @throws EntityValidationException
      */
     public function __construct(
-        ValidatorInterface $validator,
-        NameConverterInterface $camelCaseToSnakeCase,
+        protected ValidatorInterface $validator,
+        protected NameConverterInterface $camelCaseToSnakeCase,
         array $data = null
     ) {
-        $this->validator = $validator;
-        $this->camelCaseToSnakeCase = $camelCaseToSnakeCase;
-
-        if (
-            true === is_null($data) ||
-            true === empty($data)
-        ) {
+        if (true === is_null($data) || true === empty($data)) {
             return;
         }
 

@@ -48,7 +48,7 @@ class HttpClientV3 extends AbstractHttpClient
 
         $response = $this->httpClient->request(
             $verb,
-            $this->getUrlFromPath($path),
+            $this->getUrlApiV3FromPath($path),
             [
                 'http_errors' => false,
                 'headers' => $this->getAuthenticatedHeaders($token['access_token']),
@@ -97,7 +97,7 @@ class HttpClientV3 extends AbstractHttpClient
     {
         $response = $this->httpClient->request(
             'POST',
-            $this->getUrlFromPath('/v3/auth'),
+            $this->getUrlApiV3FromPath('/v3/auth'),
             [
                 'http_errors' => false,
                 'headers' => self::HEADERS,
