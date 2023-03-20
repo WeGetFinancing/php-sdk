@@ -21,7 +21,8 @@ abstract class AbstractHttpClient implements HttpClientInterface
     public function __construct(
         public AuthEntity $authEntity,
         protected ClientInterface $httpClient
-    ) { }
+    ) {
+    }
 
     protected function getBaseUrlApiV1(): string
     {

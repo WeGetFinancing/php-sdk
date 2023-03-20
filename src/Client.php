@@ -16,7 +16,8 @@ class Client
 {
     public function __construct(
         protected AuthEntity $authEntity
-    ) { }
+    ) {
+    }
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)

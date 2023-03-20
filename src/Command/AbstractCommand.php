@@ -9,5 +9,6 @@ use WeGetFinancing\SDK\Service\Http\HttpClientInterface;
 abstract class AbstractCommand implements CommandInterface
 {
     public function __construct(protected HttpClientInterface $httpClient)
-    { }
+    {
+    }
 }
