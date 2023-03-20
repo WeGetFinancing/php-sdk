@@ -16,7 +16,6 @@ use WeGetFinancing\SDK\Service\Http\V1\HttpClientV1;
 class RequestNewLoanCommand extends AbstractCommand
 {
     public const LOAN_REQUEST_VERB = 'POST';
-
     public const LOAN_REQUEST_PATH = '/merchant/' . HttpClientInterface::MERCHANT_ID_REPLACE . '/requests';
 
     /**
