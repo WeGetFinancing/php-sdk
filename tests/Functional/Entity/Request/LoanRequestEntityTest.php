@@ -52,7 +52,7 @@ final class LoanRequestEntityTest extends TestCase
             'postback_url' => 'https://wegetfinancing.com/postbackurl',
             'software_name' => 'Magento',
             'software_version' => '2.4.5',
-//            'software_plugin_version' => '1.3',
+            'software_plugin_version' => '1.3',
             'billing_address' => AddressEntityTest::VALID_ITEM_1['expected'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_1['expected'],
             'cart_items' => [
@@ -98,7 +98,7 @@ final class LoanRequestEntityTest extends TestCase
             'postback_url' => 'https://wegetfinancing.com/postbackurl',
             'software_name' => 'WordPress',
             'software_version' => '6',
-//            'software_plugin_version' => '1',
+            'software_plugin_version' => '1',
             'billing_address' => AddressEntityTest::VALID_ITEM_2['expected'],
             'shipping_address' => AddressEntityTest::VALID_ITEM_2['expected'],
             'cart_items' => [
