@@ -119,7 +119,7 @@ class LoanRequestEntity extends AbstractRequestEntity
     /**
      * @Assert\NotBlank(message = "The value of software plugin version should not be blank.")
      */
-    protected ?string $softwarePluginVersion;
+    public ?string $softwarePluginVersion;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
