@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WeGetFinancing\SDK;
 
+use GuzzleHttp\Exception\GuzzleException;
 use WeGetFinancing\SDK\Command\RequestNewLoanCommand;
 use WeGetFinancing\SDK\Command\UpdateShippingStatusCommand;
 use WeGetFinancing\SDK\Entity\AuthEntity;
@@ -11,6 +12,7 @@ use WeGetFinancing\SDK\Entity\Request\LoanRequestEntity;
 use WeGetFinancing\SDK\Entity\Request\UpdateShippingStatusRequestEntity;
 use WeGetFinancing\SDK\Entity\Response\ResponseEntity;
 use WeGetFinancing\SDK\Exception\EntityValidationException;
+use WeGetFinancing\SDK\Service\PpeClient;
 
 class Client
 {
@@ -53,5 +55,18 @@ class Client
     {
         $command = UpdateShippingStatusCommand::make($this->authEntity);
         return $command->execute($requestEntity);
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
+     * @param string $merchantToken
+     * @throws GuzzleException
+     * @return array<string, string>
+     */
+    public function testPpe(string $merchantToken): array
+    {
+        $command = PpeClient::make($merchantToken, $this->authEntity->isProd());
+        return $command->testPpe();
     }
 }

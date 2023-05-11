@@ -11,6 +11,7 @@ use WeGetFinancing\SDK\Entity\Request\LoanRequestEntity;
 use WeGetFinancing\SDK\Entity\Request\UpdateShippingStatusRequestEntity;
 use Functional\Entity\Request\LoanRequestEntityTest;
 use PHPUnit\Framework\TestCase;
+use WeGetFinancing\SDK\Service\PpeClient;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
@@ -104,5 +105,24 @@ final class ClientTest extends TestCase
         $this->assertTrue($response->getIsSuccess());
 
         $this->assertEquals(204, $response->getCode());
+    }
+
+    public function testEmptyPpe(): void
+    {
+        $response = $this->sut->testPpe((string)getenv('MERCHANT_TOKEN_EMPTY'));
+        $this->assertEquals(PpeClient::TEST_EMPTY_RESPONSE, $response['status']);
+        $this->assertEquals(PpeClient::EMPTY_LENDERS_MESSAGE, $response['message']);
+    }
+
+    public function testErrorPpe(): void
+    {
+        $response = $this->sut->testPpe((string)getenv('MERCHANT_TOKEN_ERROR'));
+        $this->assertEquals(PpeClient::TEST_ERROR_RESPONSE, $response['status']);
+    }
+
+    public function testSuccessPpe(): void
+    {
+        $response = $this->sut->testPpe((string)getenv('MERCHANT_TOKEN_SUCCESS'));
+        $this->assertEquals(PpeClient::TEST_SUCCESS_RESPONSE, $response['status']);
     }
 }
