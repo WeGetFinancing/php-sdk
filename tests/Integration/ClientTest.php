@@ -39,73 +39,73 @@ final class ClientTest extends TestCase
         $this->sut = new Client($auth);
     }
 
-//    public function testSuccessfullyRequestNewLoanCall(): void
-//    {
-//        $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);
-//        $response = $this->sut->requestNewLoan($loanRequest);
-//
-//        $this->assertTrue($response->getIsSuccess());
-//        $this->assertSame('200', $response->getCode());
-//
-//        $data = $response->getData();
-//        $this->assertArrayHasKey('invId', $data);
-//        $this->assertArrayHasKey('href', $data);
-//        $this->assertArrayHasKey('amount', $data);
-//        $this->assertSame('1640.94', $data['amount']);
-//    }
-//
-//    public function testUnsuccessfullyV3Auth(): void
-//    {
-//        $username = getenv('TEST_USERNAME');
-//        $password = 'wrong_password';
-//        $merchantId = getenv('TEST_MERCHANT_ID');
-//
-//        $this->assertIsNotBool($username);
-//        $this->assertIsNotBool($password);
-//        $this->assertIsNotBool($merchantId);
-//
-//        $auth = AuthEntity::make([
-//            'username' => $username,
-//            'password' => $password,
-//            'merchantId' => $merchantId,
-//        ]);
-//
-//        $this->sut = new Client($auth);
-//
-//        $updateRequest = UpdateShippingStatusRequestEntity::make(
-//            UpdateShippingStatusRequestEntityTest::VALID_ITEM_1['entity']
-//        );
-//
-//        $response = $this->sut->updateStatus($updateRequest);
-//        $data = $response->getData();
-//
-//        $this->assertFalse($response->getIsSuccess());
-//        $this->assertArrayHasKey('created_at', $data);
-//        $this->assertArrayHasKey('error_type', $data);
-//        $this->assertArrayHasKey('messages', $data);
-//        $this->assertSame('AuthenticationError', $data['error_type']);
-//        $this->assertArrayHasKey('Invalid or missing credentials', $data['messages'][0]);
-//    }
-//
-//    public function testSuccessfullyUpdateShippingStatus(): void
-//    {
-//        $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);
-//        $loanResponse = $this->sut->requestNewLoan($loanRequest);
-//        $this->assertTrue($loanResponse->getIsSuccess());
-//
-//        $this->assertArrayHasKey('invId', $loanResponse->getData());
-//
-//        $data = UpdateShippingStatusRequestEntityTest::VALID_ITEM_1['entity'];
-//        $data['invId'] = $loanResponse->getData()['invId'];
-//
-//        $updateRequest = UpdateShippingStatusRequestEntity::make($data);
-//
-//        $response = $this->sut->updateStatus($updateRequest);
-//
-//        $this->assertTrue($response->getIsSuccess());
-//
-//        $this->assertEquals(204, $response->getCode());
-//    }
+    public function testSuccessfullyRequestNewLoanCall(): void
+    {
+        $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);
+        $response = $this->sut->requestNewLoan($loanRequest);
+
+        $this->assertTrue($response->getIsSuccess());
+        $this->assertSame('200', $response->getCode());
+
+        $data = $response->getData();
+        $this->assertArrayHasKey('invId', $data);
+        $this->assertArrayHasKey('href', $data);
+        $this->assertArrayHasKey('amount', $data);
+        $this->assertSame('1640.94', $data['amount']);
+    }
+
+    public function testUnsuccessfullyV3Auth(): void
+    {
+        $username = getenv('TEST_USERNAME');
+        $password = 'wrong_password';
+        $merchantId = getenv('TEST_MERCHANT_ID');
+
+        $this->assertIsNotBool($username);
+        $this->assertIsNotBool($password);
+        $this->assertIsNotBool($merchantId);
+
+        $auth = AuthEntity::make([
+            'username' => $username,
+            'password' => $password,
+            'merchantId' => $merchantId,
+        ]);
+
+        $this->sut = new Client($auth);
+
+        $updateRequest = UpdateShippingStatusRequestEntity::make(
+            UpdateShippingStatusRequestEntityTest::VALID_ITEM_1['entity']
+        );
+
+        $response = $this->sut->updateStatus($updateRequest);
+        $data = $response->getData();
+
+        $this->assertFalse($response->getIsSuccess());
+        $this->assertArrayHasKey('created_at', $data);
+        $this->assertArrayHasKey('error_type', $data);
+        $this->assertArrayHasKey('messages', $data);
+        $this->assertSame('AuthenticationError', $data['error_type']);
+        $this->assertArrayHasKey('Invalid or missing credentials', $data['messages'][0]);
+    }
+
+    public function testSuccessfullyUpdateShippingStatus(): void
+    {
+        $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);
+        $loanResponse = $this->sut->requestNewLoan($loanRequest);
+        $this->assertTrue($loanResponse->getIsSuccess());
+
+        $this->assertArrayHasKey('invId', $loanResponse->getData());
+
+        $data = UpdateShippingStatusRequestEntityTest::VALID_ITEM_1['entity'];
+        $data['invId'] = $loanResponse->getData()['invId'];
+
+        $updateRequest = UpdateShippingStatusRequestEntity::make($data);
+
+        $response = $this->sut->updateStatus($updateRequest);
+
+        $this->assertTrue($response->getIsSuccess());
+
+        $this->assertEquals(204, $response->getCode());
+    }
 
     public function testEmptyPpe(): void
     {

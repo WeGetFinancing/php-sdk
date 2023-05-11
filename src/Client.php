@@ -58,6 +58,8 @@ class Client
     }
 
     /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
      * @param string $merchantToken
      * @throws GuzzleException
      * @return array<string, string>
