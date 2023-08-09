@@ -133,8 +133,14 @@ final class LoanRequestEntityTest extends TestCase
         ],
         'violations' => [
             7 => [
-                'The value of first name is too short. It should have 2 characters or more.',
-                'The value of last name is too short. It should have 2 characters or more.',
+                "The first name provided in your billing/shipping details seems a bit brief. " .
+                "Would you kindly revisit and update your billing/shipping details, ensuring that the first " .
+                "name contains 2 or more characters? Once you've made this adjustment, please proceed to " .
+                "reselect WeGetFinancing as your preferred payment method.",
+                "The last name provided in your billing/shipping details seems a bit brief. " .
+                "Would you kindly revisit and update your billing/shipping details, ensuring that the last " .
+                "name contains 2 or more characters? Once you've made this adjustment, please proceed to " .
+                "reselect WeGetFinancing as your preferred payment method.",
                 'The value of email is not a valid email address.',
                 'The value of phone have to be 10 digits only.',
                 'The value of success url is not a valid URL.',
@@ -145,8 +151,8 @@ final class LoanRequestEntityTest extends TestCase
                 'The value of software plugin version should not be blank.',
             ],
             8 => [
-                'The value of first name is too short. It should have 2 characters or more.',
-                'The value of last name is too short. It should have 2 characters or more.',
+                "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
+                "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
                 'The value of email is not a valid email address.',
                 'The value of phone have to be 10 digits only.',
                 'The value of success url is not a valid URL.',
@@ -184,7 +190,9 @@ final class LoanRequestEntityTest extends TestCase
         ],
         'violations' => [
             7 => [ 'Unit Tax Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, null used' ],
-            8 => [ 'Unit Tax Cannot assign null to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string' ],
+            8 => [
+                'Unit Tax Cannot assign null to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string',
+            ],
         ],
     ];
 
@@ -244,8 +252,14 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\LoanRequestEntity::$firstName must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\LoanRequestEntity::$firstName of type string' ],
+            7 => [
+                'Typed property WeGetFinancing\SDK\Entity\Request\LoanRequestEntity::$firstName must be string, ' .
+                'null used',
+            ],
+            8 => [
+                'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\LoanRequestEntity::$firstName ' .
+                'of type string',
+            ],
         ],
     ];
 
@@ -274,18 +288,18 @@ final class LoanRequestEntityTest extends TestCase
         ],
         'violations' => [
             7 => [
-                'The value of first name is too short. It should have 2 characters or more.',
+                "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
                 'The value of first name should not be blank.',
-                'The value of last name is too short. It should have 2 characters or more.',
+                "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
                 'The value of last name should not be blank.',
                 'The value of email should not be blank.',
                 'The value of version should not be blank.',
                 'The value of merchant transaction id should not be blank.',
             ],
             8 => [
-                'The value of first name is too short. It should have 2 characters or more.',
+                "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
                 'The value of first name should not be blank.',
-                'The value of last name is too short. It should have 2 characters or more.',
+                "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
                 'The value of last name should not be blank.',
                 'The value of email should not be blank.',
                 'The value of version should not be blank.',

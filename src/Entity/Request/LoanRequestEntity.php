@@ -19,10 +19,11 @@ use TypeError;
  */
 class LoanRequestEntity extends AbstractRequestEntity
 {
+    // @codingStandardsIgnoreStart
     /**
      * @Assert\Length(
      *     min = 2,
-     *     minMessage = "The value of first name is too short. It should have {{ limit }} characters or more."
+     *     minMessage = "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains {{ limit }} or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method."
      * )
      * @Assert\NotBlank(message = "The value of first name should not be blank.")
      */
@@ -31,11 +32,12 @@ class LoanRequestEntity extends AbstractRequestEntity
     /**
      * @Assert\Length(
      *     min = 2,
-     *     minMessage = "The value of last name is too short. It should have {{ limit }} characters or more."
+     *     minMessage = "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains {{ limit }} or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method."
      * )
      * @Assert\NotBlank(message = "The value of last name should not be blank.")
      */
     public string $lastName;
+    // @codingStandardsIgnoreEnd
 
     /**
      * @Assert\Type(
