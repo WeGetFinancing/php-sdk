@@ -15,10 +15,10 @@
     "php": ">=8.0",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^7.0",
-    "symfony/validator": "6.3.7",
+    "symfony/validator": "5.4.8",
     "doctrine/annotations": "^1.14.3",
-    "symfony/serializer": "6.3.7",
-    "symfony/cache": "6.3.6"
+    "symfony/serializer": "v4.4.47",
+    "symfony/cache": "v5.4.9"
   },
   "require-dev": {
     "phpmd/phpmd": "^2",
