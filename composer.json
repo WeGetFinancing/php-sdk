@@ -18,7 +18,7 @@
     "symfony/validator": "5.4.8",
     "doctrine/annotations": "^1.14.3",
     "symfony/serializer": "v4.4.47",
-    "symfony/cache": "v5.4.9"
+    "symfony/cache": "v6.3.8"
   },
   "require-dev": {
     "phpmd/phpmd": "^2",
