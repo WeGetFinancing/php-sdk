@@ -1,7 +1,6 @@
 {
   "name": "wegetfinancing/php-sdk",
   "description": "The WeGetFinancing PHP SDK provides convenient access to the WeGetFinancing API from applications written in the PHP language.",
-  "minimum-stability": "stable",
   "prefer-stable": true,
   "license": "LGPL-3.0-only",
   "version": "2.4.1",
