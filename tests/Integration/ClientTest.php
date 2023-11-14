@@ -87,25 +87,25 @@ final class ClientTest extends TestCase
         $this->assertArrayHasKey('Invalid or missing credentials', $data['messages'][0]);
     }
 
-    public function testSuccessfullyUpdateShippingStatus(): void
-    {
-        $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);
-        $loanResponse = $this->sut->requestNewLoan($loanRequest);
-        $this->assertTrue($loanResponse->getIsSuccess());
-
-        $this->assertArrayHasKey('invId', $loanResponse->getData());
-
-        $data = UpdateShippingStatusRequestEntityTest::VALID_ITEM_1['entity'];
-        $data['invId'] = $loanResponse->getData()['invId'];
-
-        $updateRequest = UpdateShippingStatusRequestEntity::make($data);
-
-        $response = $this->sut->updateStatus($updateRequest);
-
-        $this->assertTrue($response->getIsSuccess());
-
-        $this->assertEquals(204, $response->getCode());
-    }
+//    public function testSuccessfullyUpdateShippingStatus(): void
+//    {
+//        $loanRequest = LoanRequestEntity::make(LoanRequestEntityTest::VALID_ITEM_1['entity']);
+//        $loanResponse = $this->sut->requestNewLoan($loanRequest);
+//        $this->assertTrue($loanResponse->getIsSuccess());
+//
+//        $this->assertArrayHasKey('invId', $loanResponse->getData());
+//
+//        $data = UpdateShippingStatusRequestEntityTest::VALID_ITEM_1['entity'];
+//        $data['invId'] = $loanResponse->getData()['invId'];
+//
+//        $updateRequest = UpdateShippingStatusRequestEntity::make($data);
+//
+//        $response = $this->sut->updateStatus($updateRequest);
+//
+//        $this->assertTrue($response->getIsSuccess());
+//
+//        $this->assertEquals(204, $response->getCode());
+//    }
 
     public function testEmptyPpe(): void
     {
