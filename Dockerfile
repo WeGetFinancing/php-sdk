@@ -1,32 +1,41 @@
-FROM php:8.0-fpm-alpine
+FROM php:8.2-fpm
 
-RUN apk add --no-cache \
-      libzip-dev \
-      zip \
-    && docker-php-ext-install zip
+RUN apt-get -y update \
+    && apt-get -y install curl
 
-RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
-  && pecl install xdebug \
-  && docker-php-ext-enable xdebug \
-  && apk del pcre-dev ${PHPIZE_DEPS}
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
 
-RUN set -xe \
-    && apk add --update \
-        icu \
-    && apk add --no-cache --virtual .php-deps \
-        make \
-    && apk add --no-cache --virtual .build-deps \
-        $PHPIZE_DEPS \
-        zlib-dev \
-        icu-dev \
-        g++ \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install \
-        intl \
-    && docker-php-ext-enable intl \
-    && { find /usr/local/lib -type f -print0 | xargs -0r strip --strip-all -p 2>/dev/null || true; } \
-    && apk del .build-deps \
-    && rm -rf /tmp/* /usr/local/lib/php/doc/* /var/cache/apk/*
+RUN apt-get -y install \
+        libzip-dev \
+        zip \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+        libicu-dev \
+        libxml2-dev \
+        libxslt-dev \
+        libpq-dev \
+        symfony-cli \
+    && apt-get -y clean
+
+RUN docker-php-ext-install zip
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
+
+RUN docker-php-ext-configure intl \
+    && docker-php-ext-install intl
+
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pgsql pdo_pgsql pdo
+
+RUN docker-php-ext-install soap
+
+RUN docker-php-ext-install xsl
+
+RUN docker-php-ext-install sockets
+
+RUN docker-php-ext-install bcmath
 
 # Install composer
 COPY --from=composer/composer:2 /usr/bin/composer /usr/bin/composer

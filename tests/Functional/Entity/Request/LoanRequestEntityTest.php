@@ -132,36 +132,13 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [
-                "The first name provided in your billing/shipping details seems a bit brief. " .
-                "Would you kindly revisit and update your billing/shipping details, ensuring that the first " .
-                "name contains 2 or more characters? Once you've made this adjustment, please proceed to " .
-                "reselect WeGetFinancing as your preferred payment method.",
-                "The last name provided in your billing/shipping details seems a bit brief. " .
-                "Would you kindly revisit and update your billing/shipping details, ensuring that the last " .
-                "name contains 2 or more characters? Once you've made this adjustment, please proceed to " .
-                "reselect WeGetFinancing as your preferred payment method.",
-                'The value of email is not a valid email address.',
-                'The value of phone have to be 10 digits only.',
-                'The value of success url is not a valid URL.',
-                'The value of failure url is not a valid URL.',
-                'The value of postback url is not a valid URL.',
-                'The value of software name should not be blank.',
-                'The value of software version should not be blank.',
-                'The value of software plugin version should not be blank.',
-            ],
-            8 => [
-                "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
-                "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
-                'The value of email is not a valid email address.',
-                'The value of phone have to be 10 digits only.',
-                'The value of success url is not a valid URL.',
-                'The value of failure url is not a valid URL.',
-                'The value of postback url is not a valid URL.',
-                'The value of software name should not be blank.',
-                'The value of software version should not be blank.',
-                'The value of software plugin version should not be blank.',
-            ],
+            "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
+            "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
+            "The value of email is not a valid email address.",
+            "The value of phone have to be 10 digits only.",
+            "The value of success url is not a valid URL.",
+            "The value of failure url is not a valid URL.",
+            "The value of postback url is not a valid URL.",
         ],
     ];
 
@@ -189,10 +166,13 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [ 'Unit Tax Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, null used' ],
-            8 => [
-                'Unit Tax Cannot assign null to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string',
-            ],
+            "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
+            "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
+            "The value of phone have to be 10 digits only.",
+            "The value of display name is too short. It should have 2 characters or more.",
+            "The value of quantity should be positive.",
+            "The value of unit tax should not be null.",
+            "The money entity named Unit Tax generated an error, The value should not be null.",
         ],
     ];
 
@@ -217,14 +197,20 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [
-                'The value of state should have exactly 2 characters.',
-                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
-            ],
-            8 => [
-                'The value of state should have exactly 2 characters.',
-                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
-            ],
+            "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
+            "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
+            "The value of billing address should not be null.",
+            "The value of email is not a valid email address.",
+            "The value of phone have to be 10 digits only.",
+            "The value of success url is not a valid URL.",
+            "The value of failure url is not a valid URL.",
+            "The value of postback url is not a valid URL.",
+            "The value of state should have exactly 2 characters.",
+            "The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.",
+            "The value of display name is too short. It should have 2 characters or more.",
+            "The value of quantity should be positive.",
+            "The value of unit tax should not be null.",
+            "The money entity named Unit Tax generated an error, The value should not be null.",
         ],
     ];
 
@@ -252,14 +238,17 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [
-                'Typed property WeGetFinancing\SDK\Entity\Request\LoanRequestEntity::$firstName must be string, ' .
-                'null used',
-            ],
-            8 => [
-                'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\LoanRequestEntity::$firstName ' .
-                'of type string',
-            ],
+            "The value of first name should not be null.",
+            "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
+            "The value of billing address should not be null.",
+            "The value of email is not a valid email address.",
+            "The value of phone have to be 10 digits only.",
+            "The value of state should have exactly 2 characters.",
+            "The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.",
+            "The value of display name is too short. It should have 2 characters or more.",
+            "The value of quantity should be positive.",
+            "The value of unit tax should not be null.",
+            "The money entity named Unit Tax generated an error, The value should not be null.",
         ],
     ];
 
@@ -287,24 +276,13 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [
-                "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
-                'The value of first name should not be blank.',
-                "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
-                'The value of last name should not be blank.',
-                'The value of email should not be blank.',
-                'The value of version should not be blank.',
-                'The value of merchant transaction id should not be blank.',
-            ],
-            8 => [
-                "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
-                'The value of first name should not be blank.',
-                "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
-                'The value of last name should not be blank.',
-                'The value of email should not be blank.',
-                'The value of version should not be blank.',
-                'The value of merchant transaction id should not be blank.',
-            ],
+            "The value of first name should not be blank.",
+            "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
+            "The value of last name should not be blank.",
+            "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains 2 or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method.",
+            "The value of email should not be blank.",
+            "The value of version should not be blank.",
+            "The value of merchant transaction id should not be blank.",
         ],
     ];
 
@@ -331,16 +309,9 @@ final class LoanRequestEntityTest extends TestCase
             ],
         ],
         'violations' => [
-            7 => [
-                'The value of software name should not be blank.',
-                'The value of software version should not be blank.',
-                'The value of software plugin version should not be blank.',
-            ],
-            8 => [
-                'The value of software name should not be blank.',
-                'The value of software version should not be blank.',
-                'The value of software plugin version should not be blank.',
-            ],
+            'The value of software name should not be blank.',
+            'The value of software version should not be blank.',
+            'The value of software plugin version should not be blank.',
         ],
     ];
 
@@ -410,12 +381,7 @@ final class LoanRequestEntityTest extends TestCase
             LoanRequestEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
-            $this->assertSame(
-                (version_compare(PHP_VERSION, '8.0.0', '<'))
-                    ? $data['violations'][7]
-                    : $data['violations'][8],
-                $violations
-            );
+            $this->assertSame($data['violations'], $violations);
         }
     }
 }

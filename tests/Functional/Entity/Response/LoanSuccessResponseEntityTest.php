@@ -46,15 +46,11 @@ final class LoanSuccessResponseEntityTest extends TestCase
             'inv_id' => '',
         ],
         'violations' => [
-            7 => [
-                'Amount value is not a valid numeric.',
-                'Amount value should not be blank.',
-            ],
-            8 => [
-                'Amount value is not a valid numeric.',
-                'Amount value should be either positive or zero if allowed.',
-                'Amount value should not be blank.',
-            ],
+            'The money entity named Amount generated an error, The value "" is not a valid numeric.',
+            'The money entity named Amount generated an error, The value should be either positive or zero if allowed.',
+            'The money entity named Amount generated an error, The value should not be blank.',
+            'The money entity named Amount generated an error, value should not be equal or less than zero.',
+
         ],
     ];
 
@@ -64,16 +60,9 @@ final class LoanSuccessResponseEntityTest extends TestCase
             'inv_id' => '',
         ],
         'violations' => [
-            7 => [
-                'The value of amount is not a valid MoneyEntity.',
-                'The value of href should not be blank.',
-                'The value of inv id should not be blank.',
-            ],
-            8 => [
-                'The value of amount is not a valid MoneyEntity.',
-                'The value of href should not be blank.',
-                'The value of inv id should not be blank.',
-            ],
+            'The value of amount should not be null.',
+            'The value of href should not be blank.',
+            'The value of inv id should not be blank.',
         ],
     ];
 
@@ -84,8 +73,7 @@ final class LoanSuccessResponseEntityTest extends TestCase
             'inv_id' => 'd28ae0657bde808b6fce26bbbe18b690',
         ],
         'violations' => [
-            7 => [ 'The value of href url is not a valid URL.' ],
-            8 => [ 'The value of href url is not a valid URL.' ],
+            'The value of href url is not a valid URL.'
         ],
     ];
 
@@ -159,12 +147,7 @@ final class LoanSuccessResponseEntityTest extends TestCase
             LoanSuccessResponseEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
-            $this->assertSame(
-                (version_compare(PHP_VERSION, '8.0.0', '<'))
-                    ? $data['violations'][7]
-                    : $data['violations'][8],
-                $violations
-            );
+            $this->assertSame($data['violations'], $violations);
         }
     }
 }

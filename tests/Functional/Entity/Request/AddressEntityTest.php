@@ -84,24 +84,13 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '',
         ],
         'violations' => [
-            7 => [
-                'The value of street1 is too short. It should have 2 characters or more.',
-                'The value of street1 should not be blank.',
-                'The value of city is too short. It should have 2 characters or more.',
-                'The value of city should not be blank.',
-                'The value of state should have exactly 2 characters.',
-                'The value of state should not be blank.',
-                'The value of zipcode should not be blank.',
-            ],
-            8 => [
-                'The value of street1 is too short. It should have 2 characters or more.',
-                'The value of street1 should not be blank.',
-                'The value of city is too short. It should have 2 characters or more.',
-                'The value of city should not be blank.',
-                'The value of state should have exactly 2 characters.',
-                'The value of state should not be blank.',
-                'The value of zipcode should not be blank.',
-            ],
+            'The value of street1 should not be blank.',
+            'The value of street1 is too short. It should have 2 characters or more.',
+            'The value of city should not be blank.',
+            'The value of city is too short. It should have 2 characters or more.',
+            'The value of state should not be blank.',
+            'The value of state should have exactly 2 characters.',
+            'The value of zipcode should not be blank.'
         ],
     ];
 
@@ -113,14 +102,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '666666',
         ],
         'violations' => [
-            7 => [
-                'The value of state should have exactly 2 characters.',
-                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
-            ],
-            8 => [
-                'The value of state should have exactly 2 characters.',
-                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
-            ],
+            'The value of state should have exactly 2 characters.',
+            'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
         ],
     ];
 
@@ -132,18 +115,10 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '55555-55555',
         ],
         'violations' => [
-            7 => [
-                'The value of street1 is too short. It should have 2 characters or more.',
-                'The value of city is too short. It should have 2 characters or more.',
-                'The value of state should have exactly 2 characters.',
-                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
-            ],
-            8 => [
-                'The value of street1 is too short. It should have 2 characters or more.',
-                'The value of city is too short. It should have 2 characters or more.',
-                'The value of state should have exactly 2 characters.',
-                'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
-            ],
+            'The value of street1 is too short. It should have 2 characters or more.',
+            'The value of city is too short. It should have 2 characters or more.',
+            'The value of state should have exactly 2 characters.',
+            'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
         ],
     ];
 
@@ -153,14 +128,8 @@ final class AddressEntityTest extends TestCase
             'city' => 'New York',
         ],
         'violations' => [
-            7 => [
-                'The value of state should not be blank.',
-                'The value of zipcode should not be blank.',
-            ],
-            8 => [
-                'The value of state should not be blank.',
-                'The value of zipcode should not be blank.',
-            ],
+            'The value of state should not be null.',
+            'The value of zipcode should not be null.',
         ],
     ];
 
@@ -170,14 +139,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [
-                'The value of street1 should not be blank.',
-                'The value of city should not be blank.',
-            ],
-            8 => [
-                'The value of street1 should not be blank.',
-                'The value of city should not be blank.',
-            ],
+            'The value of street1 should not be null.',
+            'The value of city should not be null.',
         ],
     ];
 
@@ -189,8 +152,8 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 of type string' ],
+            'The value of street1 should not be null.',
+            'The value of city - 7.9 - is not a valid string.'
         ],
     ];
 
@@ -202,8 +165,7 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 must be string, float used' ],
-            8 => [ 'Cannot assign float to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 of type string' ],
+            'The value of street1 - 7.5 - is not a valid string.'
         ],
     ];
 
@@ -215,8 +177,7 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 must be string, float used' ],
-            8 => [ 'Cannot assign float to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$street1 of type string' ],
+            'The value of street1 - 7.5 - is not a valid string.'
         ],
     ];
 
@@ -228,8 +189,7 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$city must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$city of type string' ],
+            'The value of city should not be null.'
         ],
     ];
 
@@ -241,21 +201,26 @@ final class AddressEntityTest extends TestCase
             'zipcode' => '66607',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$state must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$state of type string' ],
+            'The value of state should not be null.'
         ],
     ];
 
     public const INVALID_ITEM_11 = [
         'entity' => [
-            'street1' => '15th Fantasy Street',
-            'city' => 'New York',
-            'state' => 'NY',
+            'street1' => 1,
+            'city' => 1,
+            'state' => 1,
             'zipcode' => 1,
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\AddressEntity::$zipcode must be string, int used' ],
-            8 => [ 'Cannot assign int to property WeGetFinancing\SDK\Entity\Request\AddressEntity::$zipcode of type string' ],
+            'The value of street1 is too short. It should have 2 characters or more.',
+            'The value of street1 - 1 - is not a valid string.',
+            'The value of city is too short. It should have 2 characters or more.',
+            'The value of city - 1 - is not a valid string.',
+            'The value of state should have exactly 2 characters.',
+            'The value of state - 1 - is not a valid string.',
+            'The value of zipcode should contain only 5 numbers optionally followed by a dash and 4 numbers.',
+            'The value of zipcode - 1 - is not a valid string.'
         ],
     ];
 
@@ -331,12 +296,7 @@ final class AddressEntityTest extends TestCase
             AddressEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
-            $this->assertSame(
-                (version_compare(PHP_VERSION, '8.0.0', '<'))
-                    ? $data['violations'][7]
-                    : $data['violations'][8],
-                $violations
-            );
+            $this->assertSame($data['violations'], $violations);
         }
     }
 }

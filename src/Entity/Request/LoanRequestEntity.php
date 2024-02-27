@@ -8,7 +8,6 @@ use WeGetFinancing\SDK\Entity\MoneyEntity;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\Constraints as Assert;
 use WeGetFinancing\SDK\Exception\EntityValidationException;
-use TypeError;
 
 /**
  * Note: I'm suppressing a phpmd warning because I need the long name variable
@@ -20,107 +19,96 @@ use TypeError;
 class LoanRequestEntity extends AbstractRequestEntity
 {
     // @codingStandardsIgnoreStart
-    /**
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage = "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains {{ limit }} or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method."
-     * )
-     * @Assert\NotBlank(message = "The value of first name should not be blank.")
-     */
-    public string $firstName;
+    #[Assert\NotBlank(message: "The value of first name should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of first name should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of first name - {{ value }} - is not a valid {{ type }}.")]
+    #[Assert\Length(
+        min: 2,
+        minMessage: "The first name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the first name contains {{ limit }} or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method."
+    )]
+    public mixed $firstName;
 
-    /**
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage = "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains {{ limit }} or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method."
-     * )
-     * @Assert\NotBlank(message = "The value of last name should not be blank.")
-     */
-    public string $lastName;
+    #[Assert\NotBlank(message: "The value of last name should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of last name should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of last name - {{ value }} - is not a valid {{ type }}.")]
+    #[Assert\Length(
+        min: 2,
+        minMessage: "The last name provided in your billing/shipping details seems a bit brief. Would you kindly revisit and update your billing/shipping details, ensuring that the last name contains {{ limit }} or more characters? Once you've made this adjustment, please proceed to reselect WeGetFinancing as your preferred payment method."
+    )]
+    public mixed $lastName;
     // @codingStandardsIgnoreEnd
 
-    /**
-     * @Assert\Type(
-     *     type = "WeGetFinancing\SDK\Entity\MoneyEntity",
-     *     message = "The value of shipping amount is not a valid MoneyEntity."
-     * )
-     */
+    #[Assert\NotNull(message: "The value of shipping amount should not be null.")]
+    #[Assert\Type(type: MoneyEntity::class, message: "The value of shipping amount is not a valid MoneyEntity.")]
     public MoneyEntity $shippingAmount;
 
-    /**
-     * @Assert\Type(
-     *     type = "WeGetFinancing\SDK\Entity\Request\AddressEntity",
-     *     message = "The value of billing address is not a valid AddressEntity."
-     * )
-     */
+    #[Assert\NotNull(message: "The value of billing address should not be null.")]
+    #[Assert\Type(type: AddressEntity::class, message: "The value of billing address is not a valid AddressEntity.")]
     public AddressEntity $billingAddress;
 
-    /**
-     * @Assert\Type(
-     *     type = "WeGetFinancing\SDK\Entity\Request\AddressEntity",
-     *     message = "The value of shipping address is not a valid AddressEntity."
-     * )
-     */
+    #[Assert\NotNull(message: "The value of shipping address should not be null.")]
+    #[Assert\Type(type: AddressEntity::class, message: "The value of shipping address is not a valid AddressEntity.")]
     public AddressEntity $shippingAddress;
 
-    /**
-     * @Assert\Email(message = "The value of email is not a valid email address.")
-     * @Assert\NotBlank(message = "The value of email should not be blank.")
-     */
-    public string $email;
+    #[Assert\NotBlank(message: "The value of email should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of email should not be null.")]
+    #[Assert\Email(message: "The value of email is not a valid email address.")]
+    public mixed $email;
 
     /**
      * @var CartItemEntity[]
      */
     public array $cartItems;
 
-    /**
-     * @Assert\NotBlank(message = "The value of version should not be blank.")
-     */
-    public string $version;
+    #[Assert\NotBlank(message: "The value of version should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of version should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of version - {{ value }} - is not a valid {{ type }}.")]
+    public mixed $version;
 
-    /**
-     * @Assert\Regex(
-     *     pattern = "/^[0-9]{10}$/",
-     *     match = true,
-     *     message = "The value of phone have to be 10 digits only."
-     * )
-     */
-    public ?string $phone = null;
+    #[Assert\Type(type: "string", message: "The value of version - {{ value }} - is not a valid {{ type }}.")]
+    #[Assert\Regex(
+        pattern: "/^[0-9]{10}$/",
+        message: "The value of phone have to be 10 digits only.",
+        match: true
+    )]
+    public mixed $phone = null;
 
     /**
      * @Assert\NotBlank(message = "The value of merchant transaction id should not be blank.")
      */
-    public ?string $merchantTransactionId;
+    #[Assert\NotBlank(message: "The value of merchant transaction id should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of merchant transaction id should not be null.")]
+    #[Assert\Type(
+        type: "string",
+        message: "The value of merchant transaction id - {{ value }} - is not a valid {{ type }}."
+    )]
+    public mixed $merchantTransactionId;
 
-    /**
-     * @Assert\Url(message = "The value of success url is not a valid URL.")
-     */
-    public ?string $successUrl;
+    #[Assert\Type(type: "string", message: "The value of success url - {{ value }} - is not a valid {{ type }}.")]
+    #[Assert\Url(message: "The value of success url is not a valid URL.")]
+    public mixed $successUrl;
 
-    /**
-     * @Assert\Url(message = "The value of failure url is not a valid URL.")
-     */
-    public ?string $failureUrl;
+    #[Assert\Type(type: "string", message: "The value of failure url - {{ value }} - is not a valid {{ type }}.")]
+    #[Assert\Url(message: "The value of failure url is not a valid URL.")]
+    public mixed $failureUrl;
 
-    /**
-     * @Assert\Url(message = "The value of postback url is not a valid URL.")
-     */
+    #[Assert\Type(type: "string", message: "The value of postback url - {{ value }} - is not a valid {{ type }}.")]
+    #[Assert\Url(message: "The value of postback url is not a valid URL.")]
     public ?string $postbackUrl;
 
-    /**
-     * @Assert\NotBlank(message = "The value of software name should not be blank.")
-     */
-    public ?string $softwareName;
+    #[Assert\NotBlank(message: "The value of software name should not be blank.", allowNull: true)]
+    #[Assert\Type(type: "string", message: "The value of software name - {{ value }} - is not a valid {{ type }}.")]
+    public mixed $softwareName;
 
-    /**
-     * @Assert\NotBlank(message = "The value of software version should not be blank.")
-     */
-    public ?string $softwareVersion;
+    #[Assert\NotBlank(message: "The value of software version should not be blank.", allowNull: true)]
+    #[Assert\Type(type: "string", message: "The value of software version - {{ value }} - is not a valid {{ type }}.")]
+    public mixed $softwareVersion;
 
-    /**
-     * @Assert\NotBlank(message = "The value of software plugin version should not be blank.")
-     */
+    #[Assert\NotBlank(message: "The value of software plugin version should not be blank.", allowNull: true)]
+    #[Assert\Type(
+        type: "string",
+        message: "The value of software plugin version - {{ value }} - is not a valid {{ type }}."
+    )]
     public ?string $softwarePluginVersion;
 
     /**
@@ -148,8 +136,10 @@ class LoanRequestEntity extends AbstractRequestEntity
      */
     public function initFromArray(array $data): self
     {
-        try {
-            foreach ($data as $key => $value) {
+        $errors = [];
+
+        foreach ($data as $key => $value) {
+            try {
                 $denormalizedProp = $this->camelCaseToSnakeCase->denormalize($key);
 
                 if ("shippingAmount" === $denormalizedProp) {
@@ -174,18 +164,12 @@ class LoanRequestEntity extends AbstractRequestEntity
                 }
 
                 $this->{$denormalizedProp} = $value;
+            } catch (EntityValidationException $exception) {
+                $errors = array_merge($errors, $exception->getViolations());
             }
-        } catch (TypeError $exception) {
-            throw new EntityValidationException(
-                EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
-                EntityValidationException::TYPE_ERROR_INIT_ENTITY_LOAN_REQUEST_CODE,
-                null,
-                [ 'field' => 'unknown', 'message' => $exception->getMessage() ]
-            );
         }
 
-        $this->isValid();
-        return $this;
+        return $this->compositeIsValid($errors);
     }
 
     /**

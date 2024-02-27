@@ -90,9 +90,7 @@ final class IsAValidUSZipCodeValidatorTest extends ConstraintValidatorTestCase
      */
     public function testInvalidDateIntervals(string $zipCode): void
     {
-        $constraint = new IsAValidUSZipCode([
-            'message' => 'myMessage',
-        ]);
+        $constraint = new IsAValidUSZipCode(message: 'myMessage');
 
         $this->validator->validate($zipCode, $constraint);
 

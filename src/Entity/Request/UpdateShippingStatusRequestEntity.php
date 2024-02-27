@@ -21,35 +21,31 @@ class UpdateShippingStatusRequestEntity extends AbstractRequestEntity
         self::STATUS_DELIVERED,
     ];
 
-    /**
-     * @Assert\NotNull(message = "The value of shipment status should not be null.")
-     * @Assert\Choice(
-     *      choices = UpdateShippingStatusRequestEntity::VALID_STATUSES,
-     *      message = "Choose a valid shipment status."
-     * )
-     */
-    public ?string $shippingStatus;
+    #[Assert\NotBlank(message: "The value of shipment status should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of shipment status should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of shipment status - {{ value }} - is not a valid {{ type }}.")]
+    #[Assert\Choice(
+        choices: UpdateShippingStatusRequestEntity::VALID_STATUSES,
+        message: "Choose a valid shipment status."
+    )]
+    public mixed $shippingStatus;
 
-    /**
-     * @Assert\NotNull(message = "The value of tracking id status should not be null.")
-     */
-    public ?string $trackingId;
+    #[Assert\NotNull(message: "The value of tracking id should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of tracking id - {{ value }} - is not a valid {{ type }}.")]
+    public mixed $trackingId;
 
-    /**
-     * @Assert\NotNull(message = "The value of tracking company should not be null.")
-     */
-    public ?string $trackingCompany;
+    #[Assert\NotNull(message: "The value of tracking company should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of tracking company - {{ value }} - is not a valid {{ type }}.")]
+    public mixed $trackingCompany;
 
-    /**
-     * @Assert\NotNull(message = "The value of delivery date should not be null.")
-     * @Assert\Date(message = "The value of delivery date is not a valid Date with format YYYY-MM-DD.")
-     */
-    public ?string $deliveryDate;
+    #[Assert\NotNull(message: "The value of delivery date should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of delivery date - {{ value }} - is not a valid {{ type }}.")]
+    #[Assert\Date(message: "The value of delivery date is not a valid Date with format YYYY-MM-DD.")]
+    public mixed $deliveryDate;
 
-    /**
-     * @Assert\NotNull(message = "The value of invId should not be null.")
-     */
-    protected ?string $invId;
+    #[Assert\NotNull(message: "The value of inv id should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of inv id - {{ value }} - is not a valid {{ type }}.")]
+    protected mixed $invId;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)

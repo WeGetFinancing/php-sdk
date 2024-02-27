@@ -69,14 +69,8 @@ final class ResponseEntityTest extends TestCase
             'isSuccess' => false,
         ],
         'violations' => [
-            7 => [
-                'The value of code should not be blank.',
-                'The value of code should not be null.',
-            ],
-            8 => [
-                'The value of code should not be blank.',
-                'The value of code should not be null.',
-            ],
+            'The value of code should not be blank.',
+            'The value of code should not be null.',
         ],
     ];
 
@@ -85,12 +79,7 @@ final class ResponseEntityTest extends TestCase
             'code' => '500',
         ],
         'violations' => [
-            7 => [
-                'The value of isSuccess should not be null.',
-            ],
-            8 => [
-                'The value of isSuccess should not be null.',
-            ],
+            'The value of isSuccess should not be null.',
         ],
     ];
 
@@ -163,12 +152,7 @@ final class ResponseEntityTest extends TestCase
             ResponseEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
-            $this->assertSame(
-                (version_compare(PHP_VERSION, '8.0.0', '<'))
-                    ? $data['violations'][7]
-                    : $data['violations'][8],
-                $violations
-            );
+            $this->assertSame($data['violations'], $violations);
         }
     }
 }

@@ -70,20 +70,11 @@ class UpdateShippingStatusRequestEntityTest extends TestCase
             'invId' => null,
         ],
         'violations' => [
-            7 => [
-                'The value of shipment status should not be null.',
-                'The value of tracking id status should not be null.',
-                'The value of tracking company should not be null.',
-                'The value of delivery date should not be null.',
-                'The value of invId should not be null.',
-            ],
-            8 => [
-                'The value of shipment status should not be null.',
-                'The value of tracking id status should not be null.',
-                'The value of tracking company should not be null.',
-                'The value of delivery date should not be null.',
-                'The value of invId should not be null.',
-            ],
+            'The value of shipment status should not be null.',
+            'The value of tracking id should not be null.',
+            'The value of tracking company should not be null.',
+            'The value of delivery date should not be null.',
+            'The value of inv id should not be null.',
         ],
     ];
 
@@ -96,18 +87,10 @@ class UpdateShippingStatusRequestEntityTest extends TestCase
             'invId' => 'valid',
         ],
         'violations' => [
-            7 => [
-                'Choose a valid shipment status.',
-                'The value of tracking id status should not be null.',
-                'The value of tracking company should not be null.',
-                'The value of delivery date should not be null.',
-            ],
-            8 => [
-                'Choose a valid shipment status.',
-                'The value of tracking id status should not be null.',
-                'The value of tracking company should not be null.',
-                'The value of delivery date should not be null.',
-            ],
+            'Choose a valid shipment status.',
+            'The value of tracking id should not be null.',
+            'The value of tracking company should not be null.',
+            'The value of delivery date should not be null.',
         ],
     ];
 
@@ -119,16 +102,9 @@ class UpdateShippingStatusRequestEntityTest extends TestCase
             'deliveryDate' => 'invalid',
         ],
         'violations' => [
-            7 => [
-                'Choose a valid shipment status.',
-                'The value of delivery date is not a valid Date with format YYYY-MM-DD.',
-                'The value of invId should not be null.',
-            ],
-            8 => [
-                'Choose a valid shipment status.',
-                'The value of delivery date is not a valid Date with format YYYY-MM-DD.',
-                'The value of invId should not be null.',
-            ],
+            'Choose a valid shipment status.',
+            'The value of delivery date is not a valid Date with format YYYY-MM-DD.',
+            'The value of inv id should not be null.',
         ],
     ];
 
@@ -140,12 +116,7 @@ class UpdateShippingStatusRequestEntityTest extends TestCase
             'deliveryDate' => 'invalid',
         ],
         'violations' => [
-            7 => [
-                'Choose a valid shipment status.',
-            ],
-            8 => [
-                'Choose a valid shipment status.',
-            ],
+            'Choose a valid shipment status.',
         ],
     ];
 
@@ -214,12 +185,7 @@ class UpdateShippingStatusRequestEntityTest extends TestCase
             UpdateShippingStatusRequestEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
-            $this->assertSame(
-                (version_compare(PHP_VERSION, '8.0.0', '<'))
-                    ? $data['violations'][7]
-                    : $data['violations'][8],
-                $violations
-            );
+            $this->assertSame($data['violations'], $violations);
         }
     }
 }

@@ -89,8 +89,7 @@ final class MoneyEntityTest extends TestCase
             'value' => '-12.56',
         ],
         'violations' => [
-            7 => [ 'value should be either positive or zero if allowed.' ],
-            8 => [ 'value should be either positive or zero if allowed.' ],
+            'The money entity named unknown generated an error, The value should be either positive or zero if allowed.'
         ],
     ];
 
@@ -99,8 +98,7 @@ final class MoneyEntityTest extends TestCase
             'value' => -9,
         ],
         'violations' => [
-            7 => [ 'value should be either positive or zero if allowed.' ],
-            8 => [ 'value should be either positive or zero if allowed.' ],
+            'The money entity named unknown generated an error, The value should be either positive or zero if allowed.'
         ],
     ];
 
@@ -109,8 +107,8 @@ final class MoneyEntityTest extends TestCase
             'value' => 'A',
         ],
         'violations' => [
-            7 => [ 'value is not a valid numeric.' ],
-            8 => [ 'value is not a valid numeric.' ],
+            'The money entity named unknown generated an error, The value "A" is not a valid numeric.',
+            'The money entity named unknown generated an error, value should not be equal or less than zero.'
         ],
     ];
 
@@ -120,8 +118,8 @@ final class MoneyEntityTest extends TestCase
             'value' => '4.b',
         ],
         'violations' => [
-            7 => [ 'Tax value is not a valid numeric.' ],
-            8 => [ 'Tax value is not a valid numeric.' ],
+            'The money entity named Tax generated an error, The value "4.b" is not a valid numeric.',
+            'The money entity named Tax generated an error, value should not be equal or less than zero.'
         ],
     ];
 
@@ -131,15 +129,10 @@ final class MoneyEntityTest extends TestCase
             'value' => '',
         ],
         'violations' => [
-            7 => [
-                'The money value is not a valid numeric.',
-                'The money value should not be blank.',
-            ],
-            8 => [
-                'The money value is not a valid numeric.',
-                'The money value should be either positive or zero if allowed.',
-                'The money value should not be blank.',
-            ],
+            'The money entity named The money generated an error, The value "" is not a valid numeric.',
+            'The money entity named The money generated an error, The value should be either positive or zero if allowed.',
+            'The money entity named The money generated an error, The value should not be blank.',
+            'The money entity named The money generated an error, value should not be equal or less than zero.'
         ],
     ];
 
@@ -149,8 +142,8 @@ final class MoneyEntityTest extends TestCase
             'value' => null,
         ],
         'violations' => [
-            7 => [ 'Unit Price Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, null used' ],
-            8 => [ 'Unit Price Cannot assign null to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string' ],
+            'The money entity named Unit Price generated an error, The value should not be null.',
+            'The money entity named Unit Price generated an error, value should not be equal or less than zero.'
         ],
     ];
 
@@ -160,8 +153,8 @@ final class MoneyEntityTest extends TestCase
             'value' => 'no',
         ],
         'violations' => [
-            7 => [ 'Amount value is not a valid numeric.' ],
-            8 => [ 'Amount value is not a valid numeric.' ],
+            'The money entity named Amount generated an error, The value "no" is not a valid numeric.',
+            'The money entity named Amount generated an error, value should not be equal or less than zero.'
         ],
     ];
 
@@ -170,8 +163,8 @@ final class MoneyEntityTest extends TestCase
             'value' => true,
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, bool used' ],
-            8 => [ 'Cannot assign bool to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string' ],
+            'The money entity named unknown generated an error, The value true is not a valid numeric.',
+            'The money entity named unknown generated an error, value should not be equal or less than zero.'
         ],
     ];
 
@@ -181,8 +174,8 @@ final class MoneyEntityTest extends TestCase
             'value' => true,
         ],
         'violations' => [
-            7 => [ 'NAME Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, bool used' ],
-            8 => [ 'NAME Cannot assign bool to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string' ],
+            'The money entity named NAME generated an error, The value true is not a valid numeric.',
+            'The money entity named NAME generated an error, value should not be equal or less than zero.'
         ],
     ];
 
@@ -192,8 +185,7 @@ final class MoneyEntityTest extends TestCase
             'value' => 0,
         ],
         'violations' => [
-            7 => [ 'value should not be equal or less than zero.' ],
-            8 => [ 'value should not be equal or less than zero.' ],
+            'The money entity named unknown generated an error, value should not be equal or less than zero.'
         ],
     ];
 
@@ -204,8 +196,7 @@ final class MoneyEntityTest extends TestCase
             'value' => 0.0,
         ],
         'violations' => [
-            7 => [ 'TEST value should not be equal or less than zero.' ],
-            8 => [ 'TEST value should not be equal or less than zero.' ],
+            'The money entity named TEST generated an error, value should not be equal or less than zero.'
         ],
     ];
 
@@ -215,8 +206,7 @@ final class MoneyEntityTest extends TestCase
             'value' => "0",
         ],
         'violations' => [
-            7 => [ 'value should not be equal or less than zero.' ],
-            8 => [ 'value should not be equal or less than zero.' ],
+            'The money entity named unknown generated an error, value should not be equal or less than zero.'
         ],
     ];
 
@@ -295,12 +285,7 @@ final class MoneyEntityTest extends TestCase
             MoneyEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
-            $this->assertSame(
-                (version_compare(PHP_VERSION, '8.0.0', '<'))
-                    ? $data['violations'][7]
-                    : $data['violations'][8],
-                $violations
-            );
+            $this->assertSame($data['violations'], $violations);
         }
     }
 }

@@ -10,34 +10,36 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class AuthEntity extends AbstractEntity
 {
-    /**
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage = "The value of username is too short. It should have {{ limit }} characters or more."
-     * )
-     * @Assert\NotBlank(message = "The value of username should not be blank.")
-     */
-    protected string $username;
+    #[Assert\Type(type: "string", message: "The value {{ value }} is not a valid {{ type }}.")]
+    #[Assert\NotBlank(message: "The value of username should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of username should not be null.")]
+    #[Assert\Length(
+        min: 2,
+        minMessage: "The value of username is too short. It should have {{ limit }} characters or more."
+    )]
+    protected mixed $username;
 
-    /**
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage = "The value of password is too short. It should have {{ limit }} characters or more."
-     * )
-     * @Assert\NotBlank(message = "The value of password should not be blank.")
-     */
-    protected string $password;
+    #[Assert\Type(type: "string", message: "The value {{ value }} is not a valid {{ type }}.")]
+    #[Assert\NotBlank(message: "The value of password should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of password should not be null.")]
+    #[Assert\Length(
+        min: 2,
+        minMessage: "The value of password is too short. It should have {{ limit }} characters or more."
+    )]
+    protected mixed $password;
 
-    /**
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage = "The value of merchant id is too short. It should have {{ limit }} characters or more."
-     * )
-     * @Assert\NotBlank(message = "The value of merchant id should not be blank.")
-     */
-    protected string $merchantId;
+    #[Assert\Type(type: "string", message: "The value {{ value }} is not a valid {{ type }}.")]
+    #[Assert\NotBlank(message: "The value of merchant id should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of merchant id should not be null.")]
+    #[Assert\Length(
+        min: 2,
+        minMessage: "The value of merchant id is too short. It should have {{ limit }} characters or more."
+    )]
+    protected mixed $merchantId;
 
-    protected bool $prod = false;
+    #[Assert\NotNull(message: "The value of prod should not be null.")]
+    #[Assert\Type(type: "bool", message: "The value {{ value }} is not a valid {{ type }}.")]
+    protected mixed $prod = false;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)

@@ -12,46 +12,34 @@ use TypeError;
 
 class CartItemEntity extends AbstractRequestEntity
 {
-    /**
-     * @Assert\NotBlank(message = "The value of sku should not be blank.")
-     */
-    public string $sku;
+    #[Assert\NotBlank(message: "The value of sku should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of sku should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of sku - {{ value }} - is not a valid {{ type }}.")]
+    public mixed $sku;
 
-    /**
-     * @Assert\Length(
-     *     min = 2,
-     *     minMessage = "The value of display name is too short. It should have {{ limit }} characters or more."
-     * )
-     * @Assert\NotBlank(message = "The value of display name should not be blank.")
-     */
-    public string $displayName;
+    #[Assert\NotBlank(message: "The value of display name should not be blank.", allowNull: true)]
+    #[Assert\NotNull(message: "The value of display name should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of display name - {{ value }} - is not a valid {{ type }}.")]
+    #[Assert\Length(
+        min: 2,
+        minMessage: "The value of display name is too short. It should have {{ limit }} characters or more."
+    )]
+    public mixed $displayName;
 
-    /**
-     * @Assert\Type(
-     *     type = "WeGetFinancing\SDK\Entity\MoneyEntity",
-     *     message = "The value of unit price is not a valid MoneyEntity."
-     * )
-     */
+    #[Assert\NotNull(message: "The value of unit price should not be null.")]
+    #[Assert\Type(type: MoneyEntity::class, message: "The value of unit price is not a valid MoneyEntity.")]
     public MoneyEntity $unitPrice;
 
-    /**
-     * @Assert\Type(
-     *     type="integer",
-     *     message="The value of quantity is not a valid {{ type }}."
-     * )
-     * @Assert\Positive(message = "The value of quantity should be positive.")
-     */
-    public int $quantity;
+    #[Assert\Positive(message: "The value of quantity should be positive.")]
+    #[Assert\Type(type: "integer", message: "The value of quantity - {{ value }} - is not a valid {{ type }}.")]
+    public mixed $quantity;
 
-    /**
-     * @Assert\Type(
-     *     type = "WeGetFinancing\SDK\Entity\MoneyEntity",
-     *     message = "The value of unit tax is not a valid MoneyEntity."
-     * )
-     */
+    #[Assert\NotNull(message: "The value of unit tax should not be null.")]
+    #[Assert\Type(type: MoneyEntity::class, message: "The value of unit tax is not a valid MoneyEntity.")]
     public MoneyEntity $unitTax;
 
-    public string $category;
+    #[Assert\Type(type: "string", message: "The value of category - {{ value }} - is not a valid {{ type }}.")]
+    public mixed $category;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
@@ -78,8 +66,9 @@ class CartItemEntity extends AbstractRequestEntity
      */
     public function initFromArray(array $data): self
     {
-        try {
-            foreach ($data as $key => $value) {
+        $errors = [];
+        foreach ($data as $key => $value) {
+            try {
                 $denormalizedProp = $this->camelCaseToSnakeCase->denormalize($key);
 
                 if ("unitPrice" === $denormalizedProp) {
@@ -99,18 +88,12 @@ class CartItemEntity extends AbstractRequestEntity
                 }
 
                 $this->{$denormalizedProp} = $value;
+            } catch (EntityValidationException $exception) {
+                $errors = array_merge($errors, $exception->getViolations());
             }
-        } catch (TypeError $exception) {
-            throw new EntityValidationException(
-                EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
-                EntityValidationException::TYPE_ERROR_INIT_ENTITY_CART_ITEM_CODE,
-                null,
-                [ 'field' => 'unknown', 'message' => $exception->getMessage() ]
-            );
         }
 
-        $this->isValid();
-        return $this;
+        return $this->compositeIsValid($errors);
     }
 
     /**
