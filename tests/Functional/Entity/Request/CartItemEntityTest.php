@@ -74,36 +74,45 @@ final class CartItemEntityTest extends TestCase
     public const INVALID_ITEM_1 = [
         'entity' => [
             'sku' => '',
-            'displayName' => '1',
-            'unitPrice' => '10.0',
-            'quantity' => -2,
-            'unitTax' => 0.0,
+            'displayName' => '',
+            'unitPrice' => '',
+            'quantity' => '',
+            'unitTax' => '',
         ],
         'violations' => [
-            7 => [
-                'The value of sku should not be blank.',
-                'The value of display name is too short. It should have 2 characters or more.',
-                'The value of quantity should be positive.',
-            ],
-            8 => [
-                'The value of sku should not be blank.',
-                'The value of display name is too short. It should have 2 characters or more.',
-                'The value of quantity should be positive.',
-            ],
+            'The value of sku should not be blank.',
+            'The value of display name should not be blank.',
+            'The value of display name is too short. It should have 2 characters or more.',
+            'The value of unit price should not be null.',
+            'The value of quantity should be positive.',
+            'The value of quantity - "" - is not a valid integer.',
+            'The value of unit tax should not be null.',
+            'The money entity named Unit Price generated an error, The value "" is not a valid numeric.',
+            'The money entity named Unit Price generated an error, The value should be either positive or zero if allowed.',
+            'The money entity named Unit Price generated an error, The value should not be blank.',
+            'The money entity named Unit Price generated an error, value should not be equal or less than zero.',
+            'The money entity named Unit Tax generated an error, The value "" is not a valid numeric.',
+            'The money entity named Unit Tax generated an error, The value should be either positive or zero if allowed.',
+            'The money entity named Unit Tax generated an error, The value should not be blank.',
         ],
     ];
 
     public const INVALID_ITEM_2 = [
         'entity' => [
-            'sku' => '',
-            'displayName' => '1',
-            'unitPrice' => '0',
-            'quantity' => -2,
-            'unitTax' => 0.0,
+            'sku' => null,
+            'displayName' => null,
+            'unitPrice' => null,
+            'quantity' => null,
+            'unitTax' => null,
         ],
         'violations' => [
-            7 => [ 'Unit Price value should not be equal or less than zero.' ],
-            8 => [ 'Unit Price value should not be equal or less than zero.' ],
+            'The value of sku should not be null.',
+            'The value of display name should not be null.',
+            'The value of unit price should not be null.',
+            'The value of unit tax should not be null.',
+            'The money entity named Unit Price generated an error, The value should not be null.',
+            'The money entity named Unit Price generated an error, value should not be equal or less than zero.',
+            'The money entity named Unit Tax generated an error, The value should not be null.',
         ],
     ];
 
@@ -116,8 +125,12 @@ final class CartItemEntityTest extends TestCase
             'unitTax' => null,
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\Request\CartItemEntity::$sku must be string, bool used' ],
-            8 => [ 'Cannot assign bool to property WeGetFinancing\SDK\Entity\Request\CartItemEntity::$sku of type string' ],
+            'The value of sku should not be blank.',
+            'The value of sku - false - is not a valid string.',
+            'The value of display name is too short. It should have 2 characters or more.',
+            'The value of quantity should be positive.',
+            'The value of unit tax should not be null.',
+            'The money entity named Unit Tax generated an error, The value should not be null.',
         ],
     ];
 
@@ -130,8 +143,42 @@ final class CartItemEntityTest extends TestCase
             'unitTax' => null,
         ],
         'violations' => [
-            7 => [ 'Unit Tax Typed property WeGetFinancing\SDK\Entity\MoneyEntity::$value must be string, null used' ],
-            8 => [ 'Unit Tax Cannot assign null to property WeGetFinancing\SDK\Entity\MoneyEntity::$value of type string' ],
+            'The value of display name is too short. It should have 2 characters or more.',
+            'The value of quantity should be positive.',
+            'The value of unit tax should not be null.',
+            'The money entity named Unit Tax generated an error, The value should not be null.',
+        ],
+    ];
+
+    public const INVALID_ITEM_5 = [
+        'entity' => [
+            'sku' => '',
+            'displayName' => '1',
+            'unitPrice' => '10.0',
+            'quantity' => -2,
+            'unitTax' => 0.0,
+        ],
+        'violations' => [
+                'The value of sku should not be blank.',
+                'The value of display name is too short. It should have 2 characters or more.',
+                'The value of quantity should be positive.',
+        ],
+    ];
+
+    public const INVALID_ITEM_6 = [
+        'entity' => [
+            'sku' => '',
+            'displayName' => '1',
+            'unitPrice' => '0',
+            'quantity' => -2,
+            'unitTax' => 0.0,
+        ],
+        'violations' => [
+            'The value of sku should not be blank.',
+            'The value of display name is too short. It should have 2 characters or more.',
+            'The value of unit price should not be null.',
+            'The value of quantity should be positive.',
+            'The money entity named Unit Price generated an error, value should not be equal or less than zero.',
         ],
     ];
 
@@ -180,6 +227,8 @@ final class CartItemEntityTest extends TestCase
         yield [ self::INVALID_ITEM_2 ];
         yield [ self::INVALID_ITEM_3 ];
         yield [ self::INVALID_ITEM_4 ];
+        yield [ self::INVALID_ITEM_5 ];
+        yield [ self::INVALID_ITEM_6 ];
     }
 
     /**
@@ -196,12 +245,7 @@ final class CartItemEntityTest extends TestCase
             CartItemEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
-            $this->assertSame(
-                (version_compare(PHP_VERSION, '8.0.0', '<'))
-                    ? $data['violations'][7]
-                    : $data['violations'][8],
-                $violations
-            );
+            $this->assertSame($data['violations'], $violations);
         }
     }
 }

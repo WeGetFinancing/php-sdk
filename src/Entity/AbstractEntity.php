@@ -38,8 +38,7 @@ abstract class AbstractEntity implements EntityInterface
     public static function getValidator(): ValidatorInterface
     {
         return Validation::createValidatorBuilder()
-            ->enableAnnotationMapping()
-            ->addDefaultDoctrineAnnotationReader()
+            ->enableAttributeMapping()
             ->getValidator();
     }
 
@@ -50,18 +49,9 @@ abstract class AbstractEntity implements EntityInterface
      */
     public function initFromArray(array $data): self
     {
-        try {
-            foreach ($data as $key => $value) {
-                $propertyName = $this->camelCaseToSnakeCase->denormalize($key);
-                $this->{$propertyName} = $value;
-            }
-        } catch (TypeError $exception) {
-            throw new EntityValidationException(
-                EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
-                EntityValidationException::TYPE_ERROR_INIT_ENTITY_ABSTRACT_CODE,
-                null,
-                [ 'field' => 'unknown', 'message' => $exception->getMessage() ]
-            );
+        foreach ($data as $key => $value) {
+            $propertyName = $this->camelCaseToSnakeCase->denormalize($key);
+            $this->{$propertyName} = $value;
         }
 
         $this->isValid();
@@ -93,5 +83,35 @@ abstract class AbstractEntity implements EntityInterface
             null,
             $messages
         );
+    }
+
+    /**
+     * @param array $errors
+     * @return $this
+     * @throws EntityValidationException
+     */
+    protected function compositeIsValid(array $errors): static
+    {
+        try {
+            $this->isValid();
+        } catch (EntityValidationException $exception) {
+            throw new EntityValidationException(
+                EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
+                EntityValidationException::VALIDATION_VIOLATION_INIT_ENTITY_ABSTRACT_CODE,
+                null,
+                array_merge($exception->getViolations(), $errors)
+            );
+        }
+
+        if (false === empty($errors)) {
+            throw new EntityValidationException(
+                EntityValidationException::INVALID_ENTITY_DATA_MESSAGE,
+                EntityValidationException::VALIDATION_VIOLATION_INIT_ENTITY_ABSTRACT_CODE,
+                null,
+                $errors
+            );
+        }
+
+        return $this;
     }
 }

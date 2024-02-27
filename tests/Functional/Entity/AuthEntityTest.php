@@ -63,34 +63,27 @@ final class AuthEntityTest extends TestCase
             'merchantId' => '',
         ],
         'violations' => [
-            7 => [
-                'The value of username is too short. It should have 2 characters or more.',
-                'The value of username should not be blank.',
-                'The value of password is too short. It should have 2 characters or more.',
-                'The value of password should not be blank.',
-                'The value of merchant id is too short. It should have 2 characters or more.',
-                'The value of merchant id should not be blank.',
-            ],
-            8 => [
-                'The value of username is too short. It should have 2 characters or more.',
-                'The value of username should not be blank.',
-                'The value of password is too short. It should have 2 characters or more.',
-                'The value of password should not be blank.',
-                'The value of merchant id is too short. It should have 2 characters or more.',
-                'The value of merchant id should not be blank.',
-            ],
+            'The value of username should not be blank.',
+            'The value of username is too short. It should have 2 characters or more.',
+            'The value of password should not be blank.',
+            'The value of password is too short. It should have 2 characters or more.',
+            'The value of merchant id should not be blank.',
+            'The value of merchant id is too short. It should have 2 characters or more.',
         ],
     ];
 
     public const INVALID_ITEM_2 = [
         'entity' => [
             'username' => null,
-            'password' => 'password',
-            'merchantId' => '1234',
+            'password' => null,
+            'merchantId' => null,
+            'prod' => null,
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\AuthEntity::$username must be string, null used' ],
-            8 => [ 'Cannot assign null to property WeGetFinancing\SDK\Entity\AuthEntity::$username of type string' ],
+            'The value of username should not be null.',
+            'The value of password should not be null.',
+            'The value of merchant id should not be null.',
+            'The value of prod should not be null.',
         ],
     ];
 
@@ -102,8 +95,10 @@ final class AuthEntityTest extends TestCase
             'prod' => 'http://invalid.protocol.com',
         ],
         'violations' => [
-            7 => [ 'Typed property WeGetFinancing\SDK\Entity\AuthEntity::$prod must be bool, string used' ],
-            8 => [ 'Cannot assign string to property WeGetFinancing\SDK\Entity\AuthEntity::$prod of type bool' ],
+            'The value of username is too short. It should have 2 characters or more.',
+            'The value of password is too short. It should have 2 characters or more.',
+            'The value of merchant id is too short. It should have 2 characters or more.',
+            'The value "http://invalid.protocol.com" is not a valid bool.',
         ],
     ];
 
@@ -182,12 +177,7 @@ final class AuthEntityTest extends TestCase
             AuthEntity::make($data['entity']);
         } catch (EntityValidationException $exception) {
             $violations = $this->getViolationMessages($exception);
-            $this->assertSame(
-                (version_compare(PHP_VERSION, '8.0.0', '<'))
-                    ? $data['violations'][7]
-                    : $data['violations'][8],
-                $violations
-            );
+            $this->assertSame($data['violations'], $violations);
         }
     }
 }

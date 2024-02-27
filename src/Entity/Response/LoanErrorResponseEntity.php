@@ -11,25 +11,25 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class LoanErrorResponseEntity extends AbstractEntity
 {
-    /**
-     * @Assert\NotBlank(message = "The value of error should not be blank.")
-     */
-    protected string $error;
+    #[Assert\NotBlank(message: "The value of error should not be blank.")]
+    #[Assert\NotNull(message: "The value of error should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of error - {{ value }} - is not a valid {{ type }}.")]
+    protected mixed $error;
 
-    /**
-     * @Assert\NotBlank(message = "The value of message should not be blank.")
-     */
-    protected string $message;
+    #[Assert\NotBlank(message: "The value of message should not be blank.")]
+    #[Assert\NotNull(message: "The value of message should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of message - {{ value }} - is not a valid {{ type }}.")]
+    protected mixed $message;
 
-    /**
-     * @Assert\NotBlank(message = "The value of type should not be blank.")
-     */
-    protected string $type;
+    #[Assert\NotBlank(message: "The value of type should not be blank.")]
+    #[Assert\NotNull(message: "The value of type should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of type - {{ value }} - is not a valid {{ type }}.")]
+    protected mixed $type;
 
-    /**
-     * @Assert\NotBlank(message = "The value of stamp should not be blank.")
-     */
-    protected string $stamp;
+    #[Assert\NotBlank(message: "The value of stamp should not be blank.")]
+    #[Assert\NotNull(message: "The value of stamp should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of stamp - {{ value }} - is not a valid {{ type }}.")]
+    protected mixed $stamp;
 
     protected ?string $debug = null;
 

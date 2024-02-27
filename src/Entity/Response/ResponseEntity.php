@@ -11,15 +11,11 @@ use WeGetFinancing\SDK\Exception\EntityValidationException;
 
 class ResponseEntity extends AbstractEntity implements ResponseInterface
 {
-    /**
-     * @Assert\NotNull(message = "The value of isSuccess should not be null.")
-     */
+    #[Assert\NotNull(message: "The value of isSuccess should not be null.")]
     protected bool $isSuccess;
 
-    /**
-     * @Assert\NotBlank(message = "The value of code should not be blank.")
-     * @Assert\NotNull(message = "The value of code should not be null.")
-     */
+    #[Assert\NotBlank(message: "The value of code should not be blank.")]
+    #[Assert\NotNull(message: "The value of code should not be null.")]
     protected string $code;
 
     /**

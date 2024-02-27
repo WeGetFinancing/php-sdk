@@ -12,21 +12,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class LoanSuccessResponseEntity extends AbstractEntity implements ResponseInterface
 {
-    /**
-     * @Assert\NotNull(message = "The value of amount is not a valid MoneyEntity.")
-     */
+    #[Assert\NotNull(message: "The value of amount should not be null.")]
     protected MoneyEntity $amount;
 
-    /**
-     * @Assert\Url(message = "The value of href url is not a valid URL.")
-     * @Assert\NotBlank(message = "The value of href should not be blank.")
-     */
-    protected string $href;
+    #[Assert\Url(message: "The value of href url is not a valid URL.")]
+    #[Assert\NotBlank(message: "The value of href should not be blank.")]
+    #[Assert\NotNull(message: "The value of href should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of href - {{ value }} - is not a valid {{ type }}.")]
+    protected mixed $href;
 
-    /**
-     * @Assert\NotBlank(message = "The value of inv id should not be blank.")
-     */
-    protected string $invId;
+    #[Assert\NotBlank(message: "The value of inv id should not be blank.")]
+    #[Assert\NotNull(message: "The value of inv id should not be null.")]
+    #[Assert\Type(type: "string", message: "The value of inv id - {{ value }} - is not a valid {{ type }}.")]
+    protected mixed $invId;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
