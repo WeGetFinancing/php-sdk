@@ -4,7 +4,7 @@
   "minimum-stability": "stable",
   "prefer-stable": true,
   "license": "LGPL-3.0-only",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "authors": [
     {
       "name": "Riccardo De Leo",
@@ -15,8 +15,8 @@
     "php": ">=8.2",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^7.0",
-    "symfony/validator": "7.0.*",
-    "doctrine/annotations": "^1.14.3",
+    "symfony/validator": "7.1.4.0",
+    "doctrine/annotations": "^1.14.3|2.*",
     "symfony/serializer": "7.*.*",
     "symfony/cache": "7.*"
   },
