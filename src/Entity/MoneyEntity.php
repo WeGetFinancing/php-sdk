@@ -22,14 +22,13 @@ class MoneyEntity extends AbstractEntity
      *     type = "numeric",
      *     message = "value is not a valid {{ type }}."
      * )
-     * @Assert\PositiveOrZero(message = "value should be either positive or zero if allowed.")
      * @Assert\NotBlank(message = "value should not be blank.")
      */
     public string $value;
 
     protected string $name = "";
 
-    protected bool $isZeroAllowed = false;
+    protected bool $isZeroAllowed = true;
 
     /**
      * @param ValidatorInterface $validator
