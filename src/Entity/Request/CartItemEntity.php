@@ -12,9 +12,6 @@ use TypeError;
 
 class CartItemEntity extends AbstractRequestEntity
 {
-    /**
-     * @Assert\NotBlank(message = "The value of sku should not be blank.")
-     */
     public string $sku;
 
     /**
