@@ -4,7 +4,7 @@
   "minimum-stability": "stable",
   "prefer-stable": true,
   "license": "LGPL-3.0-only",
-  "version": "2.7",
+  "version": "2.8",
   "authors": [
     {
       "name": "Riccardo De Leo",

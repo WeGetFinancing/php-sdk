@@ -12,7 +12,7 @@ use TypeError;
 
 class CartItemEntity extends AbstractRequestEntity
 {
-    public string $sku;
+    public ?string $sku;
 
     /**
      * @Assert\Length(
@@ -48,7 +48,7 @@ class CartItemEntity extends AbstractRequestEntity
      */
     public MoneyEntity $unitTax;
 
-    public string $category;
+    public ?string $category;
 
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
